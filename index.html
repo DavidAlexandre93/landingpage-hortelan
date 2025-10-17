@@ -1,0 +1,230 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Hortelan • Cultivo com inteligência (IoT, automação, comunidade)</title>
+  <meta name="description" content="Hortelan integra IoT, automação por regras, dashboard em tempo real, comunidade e recompensas para simplificar a horticultura doméstica." />
+  <meta name="keywords" content="horta, IoT, automação, jardinagem, agricultura urbana, sensores, smart garden, dashboard" />
+  <link rel="canonical" href="https://example.com/hortelan" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Hortelan • Cultivo com inteligência" />
+  <meta property="og:description" content="Monitore, automatize e aprenda com a comunidade. Dashboard em tempo real + recompensas." />
+  <meta property="og:url" content="https://example.com/hortelan" />
+  <meta property="og:image" content="https://example.com/og-hortelan.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='32' fill='%23059669'/%3E%3Cpath d='M22 44c10 0 16-7 16-16-7 0-16 6-16 16Z' fill='%23b7f7d0'/%3E%3Cpath d='M42 40c0-9-6-16-16-16 0 9 6 16 16 16Z' fill='%2382e6c2'/%3E%3Cpath d='M47 21c0 0-3 6-9 9' stroke='%23023526' stroke-width='3' fill='none'/%3E%3C/svg%3E" />
+  <meta name="theme-color" content="#059669" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <a class="skip" href="#main">Pular para o conteúdo</a>
+  <header class="navbar" role="banner">
+    <div class="container nav-wrap" aria-label="Barra de navegação">
+      <div class="brandmark" aria-label="Marca">
+        <img class="brand-logo" src="assets/logo.png" alt="Logo Hortelan" width="44" height="44"><strong>Hortelan</strong>
+      </div>
+      <nav class="nav-links" aria-label="Navegação primária">
+        <a href="#features" data-i18n="nav.features">Recursos</a>
+        <a href="#about" data-i18n="nav.about">Sobre</a>
+        <a href="#how" data-i18n="nav.how">Como funciona</a>
+        <a href="#journeys" data-i18n="nav.journeys">Jornadas</a>
+        <a href="#pricing" data-i18n="nav.pricing">Planos</a>
+        <a href="#faq" data-i18n="nav.faq">FAQ</a>
+      </nav>
+      <div class="row" aria-label="Ações">
+        <div class="lang-switch" role="group" aria-label="Idioma">
+          <button type="button" id="btn-pt" class="active" aria-pressed="true">PT</button>
+          <button type="button" id="btn-en" aria-pressed="false">EN</button>
+        </div>
+        <a class="btn ghost" target="_blank" href="https://docs.google.com/presentation/d/1BpvxRFnMVgAnUO2XeYl6Q6Yads8sWMLKgpi-b2snJ1Y/edit?slide=id.p#slide=id.p" data-i18n="nav.docs">Docs</a>
+        <a class="btn primary" target="_blank" href="https://hortelan.vercel.app/dashboard/app" data-i18n="nav.demo">Abrir Demo</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="main" role="main">
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="container">
+        <div class="grid">
+          <div>
+            <span class="badge" data-i18n="hero.badge">IoT • Automação • Comunidade</span>
+            <h1 id="hero-title" data-i18n="hero.title">Cultive melhor com dados, automação e uma comunidade ativa</h1>
+            <p class="lead" data-i18n="hero.subtitle">Hortelan integra sensores, regras de automação e um painel em tempo real, com uma comunidade que ensina e recompensa boas práticas.</p>
+            <div class="row mt-4">
+              <a class="btn primary" target="_blank" href="https://hortelan.vercel.app/dashboard/app" data-i18n="hero.ctaPrimary">Explorar Demo</a>
+              <a class="btn ghost" href="#features" data-i18n="hero.ctaSecondary">Ver Recursos</a>
+            </div>
+            <div class="kpis mt-6" aria-label="Métricas de impacto">
+              <div class="card kpi"><div class="card-body center"><div class="value">−22%</div><div class="label" data-i18n="kpis.k1">Tempo p/ ação em alertas</div></div></div>
+              <div class="card kpi"><div class="card-body center"><div class="value">−35%</div><div class="label" data-i18n="kpis.k2">Relatórios manuais</div></div></div>
+              <div class="card kpi"><div class="card-body center"><div class="value">−40%</div><div class="label" data-i18n="kpis.k3">Chamados repetitivos</div></div></div>
+              <div class="card kpi"><div class="card-body center"><div class="value">&lt; 15 min</div><div class="label" data-i18n="kpis.k4">Onboarding c/ SSO</div></div></div>
+            </div>
+          </div>
+          <div>
+            <div class="mock card" aria-label="Dashboard do Hortelan">
+              <div class="card-body center"><img src="assets/dashboard.png" alt="Dashboard do Hortelan" loading="lazy" decoding="async"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="features" class="inset" aria-labelledby="features-title">
+      <div class="container">
+        <div class="center section-header">
+          <div class="title-xl" id="features-title" data-i18n="features.title">Recursos que fecham o ciclo de cuidado</div>
+          <p class="subtitle" data-i18n="features.subtitle">Do monitoramento ao aprendizado, da automação aos incentivos — tudo em um único produto.</p>
+        </div>
+        <div class="features mt-6">
+          <div class="card"><div class="card-body feature"><div class="icon" aria-hidden="true">📊</div><div><h3 data-i18n="features.f1.title">Dashboard em tempo real</h3><p data-i18n="features.f1.desc">KPIs, gráficos e histórico — do overview executivo ao detalhe operacional.</p></div></div></div>
+          <div class="card"><div class="card-body feature"><div class="icon" aria-hidden="true">⚙️</div><div><h3 data-i18n="features.f2.title">Automação por regras</h3><p data-i18n="features.f2.desc">Se temperatura &gt; X, ligue ventilação. Histerese, janelas e bloqueios de segurança.</p></div></div></div>
+          <div class="card"><div class="card-body feature"><div class="icon" aria-hidden="true">🔔</div><div><h3 data-i18n="features.f3.title">Alertas inteligentes</h3><p data-i18n="features.f3.desc">Você só é chamado quando importa — com contexto para agir rápido.</p></div></div></div>
+          <div class="card"><div class="card-body feature"><div class="icon" aria-hidden="true">👥</div><div><h3 data-i18n="features.f4.title">Comunidade</h3><p data-i18n="features.f4.desc">Aprenda, ensine e compartilhe cadernos de cultivo, dicas e resultados.</p></div></div></div>
+          <div class="card"><div class="card-body feature"><div class="icon" aria-hidden="true">🛒</div><div><h3 data-i18n="features.f5.title">Loja e kits</h3><p data-i18n="features.f5.desc">Sensores, atuadores e insumos recomendados para cada jornada de cultivo.</p></div></div></div>
+          <div class="card"><div class="card-body feature"><div class="icon" aria-hidden="true">⚡</div><div><h3 data-i18n="features.f6.title">Recompensas</h3><p data-i18n="features.f6.desc">Incentivos ao engajamento: guias, respostas úteis e boas práticas.</p></div></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="inset" aria-labelledby="about-title">
+      <div class="container">
+        <div class="center section-header">
+          <div class="title-xl" id="about-title" data-i18n="about.title">Sobre o Hortelan</div>
+          <p class="subtitle" data-i18n="about.subtitle">Nossa missão é simplificar o cultivo com tecnologia acessível, dados em tempo real e uma comunidade que aprende junto.</p>
+        </div>
+        <div class="grid-2">
+          <div class="video-wrap">
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/0C03b8YCrKk?si=8mWJ2Ni5Oi_TDxbo" title="Apresentação Hortelan" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+          </div>
+          <div class="card"><div class="card-body prose">
+            <p data-i18n="about.p1">Hortelan integra sensores, automação por regras e um painel web para acompanhar tudo de forma simples.</p>
+            <ul>
+              <li data-i18n="about.l1">Instalação rápida e segura com kits compatíveis.</li>
+              <li data-i18n="about.l2">Automatize irrigação, iluminação e ventilação com histerese e janelas de operação.</li>
+              <li data-i18n="about.l3">Alertas inteligentes para agir no tempo certo.</li>
+              <li data-i18n="about.l4">Comunidade para compartilhar resultados e aprender com outros cultivadores.</li>
+            </ul>
+          </div></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="how" aria-labelledby="how-title">
+      <div class="container">
+        <div class="cards">
+          <div class="card"><div class="card-body"><h3 id="how-title" data-i18n="how.c1.title">Telemetria & IoT</h3><p class="mt-2" data-i18n="how.c1.desc">Sensoriamento (temperatura, umidade, luz, solo) com envio seguro, buffer local e atualização OTA. Atores: bomba, iluminação, ventilação e mais.</p></div></div>
+          <div class="card"><div class="card-body"><h3 data-i18n="how.c2.title">Regras & Insights</h3><p class="mt-2" data-i18n="how.c2.desc">Automação com histerese, janelas e limites. Análises e comparativos por período, planta e local. Exportação de dados.</p></div></div>
+          <div class="card"><div class="card-body"><h3 data-i18n="how.c3.title">Segurança & Privacidade</h3><p class="mt-2" data-i18n="how.c3.desc">Criptografia em trânsito, RBAC, auditoria e proteção de dispositivos (chaves únicas e revogação).</p></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="journeys" class="inset" aria-labelledby="journeys-title">
+      <div class="container">
+        <div class="center">
+          <div class="title-xl" id="journeys-title" data-i18n="journeys.title">Jornadas que começam simples e escalam com você</div>
+          <p class="subtitle" data-i18n="journeys.subtitle">Templates prontos por cultura, desafios mensais e comunidade para tirar dúvidas reais.</p>
+        </div>
+        <div class="grid mt-6" style="grid-template-columns:1fr;gap:1rem">
+          <div class="card"><div class="card-body"><h3 data-i18n="journeys.j1.title">Primeira horta</h3><ul class="list"><li data-i18n="journeys.j1.i1">Instalação guiada do kit básico</li><li data-i18n="journeys.j1.i2">Template de regras recomendado para manjericão</li><li data-i18n="journeys.j1.i3">Alertas de sub/super irrigação com ajuste fino</li><li data-i18n="journeys.j1.i4">Compartilhe resultados e ganhe recompensas</li></ul></div></div>
+          <div class="card"><div class="card-body"><h3 data-i18n="journeys.j2.title">Otimização avançada</h3><ul class="list"><li data-i18n="journeys.j2.i1">Novos sensores (ex.: luz) e regras de iluminação/ventilação</li><li data-i18n="journeys.j2.i2">Comparativos semanais (p95 de temperatura, variação de umidade)</li><li data-i18n="journeys.j2.i3">Exportação CSV e relatórios</li><li data-i18n="journeys.j2.i4">Guia público: como estabilizar sua estufa</li></ul></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="pricing" aria-labelledby="pricing-title">
+      <div class="container">
+        <div class="center">
+          <div class="title-xl" id="pricing-title" data-i18n="pricing.title">Planos que evoluem com o seu cultivo</div>
+          <p class="subtitle" data-i18n="pricing.subtitle">Comece grátis e ative recursos avançados quando fizer sentido.</p>
+        </div>
+        <div class="pricing mt-6">
+          <div class="card"><div class="card-body"><div class="row" style="justify-content:space-between"><h3>Free</h3></div><div class="price">R$ 0</div><div class="mt-2"><div class="perk"><span class="dot" aria-hidden="true"></span><span data-i18n="pricing.free.p1">Dashboard básico</span></div><div class="perk"><span class="dot" aria-hidden="true"></span><span data-i18n="pricing.free.p2">Comunidade</span></div><div class="perk"><span class="dot" aria-hidden="true"></span><span data-i18n="pricing.free.p3">Regras essenciais</span></div><div class="perk"><span class="dot" aria-hidden="true"></span><span data-i18n="pricing.free.p4">Histórico 7 dias</span></div></div><a class="btn ghost mt-4" target="_blank" href="https://hortelan.vercel.app/dashboard/app" data-i18n="pricing.cta.try">Experimentar</a></div></div>
+          <div class="card" style="border-color:#10b981;box-shadow:0 0 0 3px #d1fae5 inset"><div class="card-body"><div class="row" style="justify-content:space-between"><h3>Plus</h3><span class="pill" data-i18n="pricing.popular">Mais popular</span></div><div class="price">R$ 29/mês</div><div class="mt-2"><div class="perk"><span class="dot" aria-hidden="true"></span><span data-i18n="pricing.plus.p1">Automação avançada</span></div><div class="perk"><span class="dot" aria-hidden="true"></span><span data-i18n="pricing.plus.p2">Histórico estendido</span></div><div class="perk"><span class="dot" aria-hidden="true"></span><span data-i18n="pricing.plus.p3">Exportação CSV</span></div><div class="perk"><span class="dot" aria-hidden="true"></span><span data-i18n="pricing.plus.p4">Templates por cultura</span></div></div><a class="btn primary mt-4" target="_blank" href="https://hortelan.vercel.app/dashboard/app" data-i18n="pricing.cta.subscribe">Assinar Plus</a></div></div>
+          <div class="card"><div class="card-body"><div class="row" style="justify-content:space-between"><h3>Premium</h3></div><div class="price">R$ 79/mês</div><div class="mt-2"><div class="perk"><span class="dot" aria-hidden="true"></span><span data-i18n="pricing.prem.p1">Insights e detecção de anomalias</span></div><div class="perk"><span class="dot" aria-hidden="true"></span><span data-i18n="pricing.prem.p2">Integrações (ex.: Home Assistant)</span></div><div class="perk"><span class="dot" aria-hidden="true"></span><span data-i18n="pricing.prem.p3">Suporte prioritário</span></div><div class="perk"><span class="dot" aria-hidden="true"></span><span data-i18n="pricing.prem.p4">Relatórios avançados</span></div></div><a class="btn ghost mt-4" target="_blank" href="https://hortelan.vercel.app/dashboard/app" data-i18n="pricing.cta.sales">Falar com vendas</a></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="inset" aria-labelledby="contact-title">
+      <div class="container">
+        <div class="center">
+          <div class="title-xl" id="contact-title" data-i18n="contact.title">Fale com a gente</div>
+          <p class="subtitle" data-i18n="contact.subtitle">Dúvidas, parcerias ou implantação em escolas/condomínios.</p>
+        </div>
+        <div class="card mt-6" role="form" aria-describedby="contact-note">
+          <div class="card-body">
+            <form class="grid" style="gap:1rem" action="mailto:davidalexandrefernandes@outlook.com" method="post" enctype="text/plain">
+              <label>
+                <span class="sr-only" data-i18n="contact.nameLabel">Nome</span>
+                <input aria-label="Nome" name="nome" required placeholder="Nome" class="input" />
+              </label>
+              <label>
+                <span class="sr-only" data-i18n="contact.emailLabel">E-mail</span>
+                <input aria-label="E-mail" type="email" name="email" required placeholder="E-mail" class="input" />
+              </label>
+              <label>
+                <span class="sr-only" data-i18n="contact.msgLabel">Mensagem</span>
+                <textarea aria-label="Mensagem" name="mensagem" required placeholder="Como podemos ajudar?" rows="4" class="textarea"></textarea>
+              </label>
+              <div class="row">
+                <button class="btn primary" type="submit" data-i18n="contact.send">Enviar</button>
+                <a class="btn ghost" href="mailto:davidalexandrefernandes@outlook.com" data-i18n="contact.email">Abrir e-mail</a>
+              </div>
+              <small id="contact-note" class="subtitle" data-i18n="contact.note">Dica: substitua o <em>mailto:</em> por um endpoint do Formspree/Formspark para capturar mensagens sem backend.</small>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="faq" aria-labelledby="faq-title">
+      <div class="container">
+        <div class="center section-header">
+          <div class="title-xl" id="faq-title">FAQ e Mural da Comunidade</div>
+          <p class="subtitle">Envie dúvidas, elogios e opiniões. As mensagens ficam salvas no seu navegador (localStorage). Para uso em produção, conecte a um serviço de formulários.</p>
+        </div>
+        <div class="grid" style="grid-template-columns:1fr;gap:1rem;margin-top:1rem">
+          <div class="card">
+            <div class="card-body">
+              <form id="faq-form" class="grid" style="gap:1rem">
+                <div class="row" style="gap:.75rem;flex-wrap:wrap">
+                  <input id="f-nome" required placeholder="Seu nome" class="input flex1" />
+                  <input id="f-email" type="email" placeholder="E-mail (opcional)" class="input flex1" />
+                  <select id="f-tipo" class="input">
+                    <option value="duvida">Dúvida</option>
+                    <option value="elogio">Elogio</option>
+                    <option value="opiniao">Opinião</option>
+                  </select>
+                </div>
+                <textarea id="f-msg" required rows="4" placeholder="Escreva sua mensagem" class="textarea"></textarea>
+                <div class="row">
+                  <button class="btn primary" type="submit">Publicar no mural</button>
+                  <button class="btn ghost" id="faq-export" type="button">Exportar JSON</button>
+                </div>
+                <small class="subtitle">Só você verá os envios salvos neste navegador. Para receber por e-mail, use o formulário de contato acima.</small>
+              </form>
+            </div>
+          </div>
+          <div class="faq-board" id="faq-list" aria-live="polite"></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer role="contentinfo">
+    <div class="container footer-wrap">
+      <div class="brandmark">
+        <img class="logo-footer" src="assets/logo.png" alt="Logo Hortelan">
+        <span>Hortelan • Cultivo com inteligência</span>
+      </div>
+      <div class="copy">© <span id="y"></span> Hortelan. <span data-i18n="footer.rights">Todos os direitos reservados.</span></div>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
