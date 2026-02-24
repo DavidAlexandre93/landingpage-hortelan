@@ -307,3 +307,114 @@ render();
     sections.forEach((section) => navObserver.observe(section));
   }
 })();
+
+// Immersive theme interactions: watering rain, IoT constellation and IA mood feedback
+(function hortelanImmersiveFX(){
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const hero = document.querySelector('.hero');
+  if(!hero) return;
+
+  const firstVisitKey = 'hortelan_first_visit_v2';
+  const isFirstVisit = !localStorage.getItem(firstVisitKey);
+  localStorage.setItem(firstVisitKey, String(Date.now()));
+
+  const overlay = document.createElement('div');
+  overlay.className = 'iot-sky';
+  overlay.setAttribute('aria-hidden', 'true');
+  document.body.appendChild(overlay);
+
+  if(!reduced){
+    for(let i=0;i<18;i++){
+      const node = document.createElement('span');
+      node.className = 'sat-node';
+      node.style.left = `${Math.random() * 100}%`;
+      node.style.top = `${Math.random() * 100}%`;
+      node.style.animationDelay = `${(Math.random() * 2.4).toFixed(2)}s`;
+      overlay.appendChild(node);
+    }
+  }
+
+  const rainLayer = document.createElement('div');
+  rainLayer.className = 'rain-layer';
+  rainLayer.setAttribute('aria-hidden', 'true');
+  document.body.appendChild(rainLayer);
+
+  const createDrop = (x, y) => {
+    const d = document.createElement('span');
+    d.className = 'rain-drop';
+    d.style.left = `${x}px`;
+    d.style.top = `${y}px`;
+    d.style.setProperty('--fall', `${200 + Math.random() * 220}px`);
+    d.style.animationDuration = `${450 + Math.random() * 350}ms`;
+    rainLayer.appendChild(d);
+    setTimeout(() => d.remove(), 900);
+  };
+
+  const rainBurst = (x, y, amount=22) => {
+    if(reduced) return;
+    for(let i=0;i<amount;i++){
+      createDrop(x + (Math.random() - .5) * 180, y - 20 - Math.random() * 60);
+    }
+  };
+
+  if(isFirstVisit){
+    setTimeout(() => {
+      const toast = document.createElement('div');
+      toast.className = 'grow-toast';
+      toast.innerHTML = '<strong>🌱 Bem-vindo(a) à estufa inteligente!</strong><span>Sistemas de irrigação, IA e satélite ativados.</span>';
+      document.body.appendChild(toast);
+
+      const box = hero.getBoundingClientRect();
+      rainBurst(box.left + box.width * .65, box.top + 90, 32);
+      spawnLeafBurst(15, box.left + box.width * .6, box.top + 110);
+      setTimeout(() => toast.classList.add('is-visible'), 80);
+      setTimeout(() => toast.classList.remove('is-visible'), 4500);
+      setTimeout(() => toast.remove(), 5200);
+    }, 550);
+  }
+
+  const trackSections = Array.from(document.querySelectorAll('main section'));
+  const updateMood = () => {
+    const ratio = Math.min(1, window.scrollY / Math.max(1, document.body.scrollHeight - innerHeight));
+    document.body.style.setProperty('--satellite-signal', (0.22 + ratio * .65).toFixed(2));
+    document.body.style.setProperty('--hydration', (0.35 + ratio * .45).toFixed(2));
+  };
+  updateMood();
+  window.addEventListener('scroll', updateMood, { passive: true });
+
+  if('IntersectionObserver' in window){
+    const secObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        entry.target.classList.toggle('section-live', entry.isIntersecting);
+        if(entry.isIntersecting && !reduced && Math.random() > .5){
+          const r = entry.target.getBoundingClientRect();
+          rainBurst(r.left + r.width * (0.35 + Math.random() * 0.3), r.top + 40, 8);
+        }
+      });
+    }, { threshold: 0.45 });
+    trackSections.forEach((sec) => secObserver.observe(sec));
+  }
+
+  document.querySelectorAll('.card, .btn, .feature').forEach((item) => {
+    item.addEventListener('click', (ev) => {
+      const rect = item.getBoundingClientRect();
+      const x = ev.clientX || rect.left + rect.width / 2;
+      const y = ev.clientY || rect.top + rect.height / 2;
+      rainBurst(x, y, 14);
+
+      const pulse = document.createElement('span');
+      pulse.className = 'water-pulse';
+      pulse.style.left = `${x}px`;
+      pulse.style.top = `${y}px`;
+      document.body.appendChild(pulse);
+      setTimeout(() => pulse.remove(), 850);
+    });
+  });
+
+  const nav = document.querySelector('.navbar');
+  if(nav){
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('is-irrigating', window.scrollY > 120);
+    }, { passive: true });
+  }
+})();

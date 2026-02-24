@@ -145,3 +145,28 @@ footer{border-top:1px solid #1b443a;padding:2rem 0;background:#081510}
 @media (prefers-reduced-motion: reduce){
   .cursor-spark,.soil-pop{display:none}
 }
+
+/* Immersive Hortelan effects */
+body{--satellite-signal:.35;--hydration:.4}
+.iot-sky{position:fixed;inset:0;pointer-events:none;z-index:1;opacity:var(--satellite-signal);background:
+radial-gradient(circle at 85% 10%, rgba(125,211,252,.08), transparent 28%),
+radial-gradient(circle at 10% 82%, rgba(52,211,153,.12), transparent 32%),
+linear-gradient(115deg, rgba(13,41,35,.15), rgba(8,27,23,.02));transition:opacity .35s ease}
+.sat-node{position:absolute;width:6px;height:6px;border-radius:999px;background:#7dd3fc;box-shadow:0 0 14px rgba(125,211,252,.8);animation:satPulse 2.6s ease-in-out infinite}
+@keyframes satPulse{0%,100%{transform:scale(.7);opacity:.2}50%{transform:scale(1.5);opacity:.95}}
+.rain-layer{position:fixed;inset:0;pointer-events:none;z-index:95}
+.rain-drop{position:fixed;width:2px;height:16px;border-radius:999px;background:linear-gradient(180deg,rgba(125,211,252,.1),rgba(125,211,252,.95));animation:rainFall .65s linear forwards;box-shadow:0 0 8px rgba(125,211,252,.6)}
+@keyframes rainFall{from{transform:translateY(0) scaleY(.8);opacity:0}20%{opacity:1}to{transform:translateY(var(--fall)) scaleY(1.15);opacity:0}}
+.water-pulse{position:fixed;width:18px;height:18px;border:2px solid rgba(125,211,252,.8);border-radius:999px;transform:translate(-50%,-50%);pointer-events:none;z-index:96;animation:waterPulse .85s ease-out forwards}
+@keyframes waterPulse{to{width:130px;height:130px;opacity:0;border-width:1px}}
+.grow-toast{position:fixed;right:1rem;bottom:1rem;display:grid;gap:.3rem;max-width:320px;padding:.85rem 1rem;border:1px solid #2d5d51;background:rgba(7,18,15,.94);border-radius:14px;box-shadow:0 14px 32px rgba(0,0,0,.35);z-index:140;opacity:0;transform:translateY(12px);transition:transform .35s ease,opacity .35s ease}
+.grow-toast strong{font-size:.94rem;color:#d1fae5}
+.grow-toast span{font-size:.82rem;color:#a6c2b9}
+.grow-toast.is-visible{opacity:1;transform:translateY(0)}
+.navbar.is-irrigating{box-shadow:0 8px 24px rgba(16,185,129,.16);border-bottom-color:rgba(110,231,183,.45)}
+main section{position:relative;z-index:2}
+main section.section-live::before{content:"";position:absolute;left:0;right:0;top:0;height:3px;background:linear-gradient(90deg,transparent, rgba(52,211,153,.7), transparent);opacity:calc(.35 + var(--hydration) * .6);pointer-events:none}
+
+@media (prefers-reduced-motion: reduce){
+  .iot-sky,.rain-layer,.water-pulse{display:none !important}
+}
