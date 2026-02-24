@@ -14,11 +14,11 @@
   <meta property="og:url" content="https://hortelan.vercel.app" />
   <meta property="og:image" content="https://hortelan.vercel.app/Assets/og-image.jpg" />
   <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" href="Assets/favicon.ico" sizes="any" />
   <link rel="icon" href="Assets/logo.svg" type="image/svg+xml" />
   <meta name="twitter:title" content="Hortelan Agtech Ltda. • Cultivo com inteligência" />
   <meta name="twitter:description" content="Monitore, automatize e aprenda com a comunidade. Dashboard em tempo real + recompensas." />
   <meta name="twitter:image" content="https://hortelan.vercel.app/Assets/og-image.jpg" />
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='32' fill='%23059669'/%3E%3Cpath d='M22 44c10 0 16-7 16-16-7 0-16 6-16 16Z' fill='%23b7f7d0'/%3E%3Cpath d='M42 40c0-9-6-16-16-16 0 9 6 16 16 16Z' fill='%2382e6c2'/%3E%3Cpath d='M47 21c0 0-3 6-9 9' stroke='%23023526' stroke-width='3' fill='none'/%3E%3C/svg%3E" />
   <meta name="theme-color" content="#059669" />
   <link rel="stylesheet" href="styles.css" />
   <script type="application/ld+json">
@@ -43,7 +43,6 @@
     <div class="container nav-wrap" aria-label="Barra de navegação">
       <div class="brandmark" aria-label="Marca">
         <img class="brand-logo" src="Assets/logo.svg" alt="Logo da Hortelan Agtech Ltda." width="44" height="44"><strong>Hortelan Agtech Ltda.</strong>
-        <img class="brand-logo" src="Assets/logo.png" alt="Logo da Hortelan Agtech Ltda." width="44" height="44"><strong>Hortelan Agtech Ltda.</strong>
       </div>
       <nav class="nav-links" aria-label="Navegação primária">
         <a href="#features" data-i18n="nav.features">Recursos</a>
@@ -61,8 +60,8 @@
           <button type="button" id="btn-es" data-lang="es" aria-label="Español" title="Español" aria-pressed="false">🇪🇸</button>
           <button type="button" id="btn-fr" data-lang="fr" aria-label="Français" title="Français" aria-pressed="false">🇫🇷</button>
         </div>
-        <a class="btn ghost" target="_blank" href="https://docs.google.com/presentation/d/1BpvxRFnMVgAnUO2XeYl6Q6Yads8sWMLKgpi-b2snJ1Y/edit?slide=id.p#slide=id.p" data-i18n="nav.docs">Docs</a>
-        <a class="btn primary" target="_blank" href="https://hortelan.vercel.app/dashboard/app" data-i18n="nav.demo">Abrir Demo</a>
+        <a class="btn ghost" target="_blank" rel="noopener noreferrer" href="https://docs.google.com/presentation/d/1BpvxRFnMVgAnUO2XeYl6Q6Yads8sWMLKgpi-b2snJ1Y/edit?slide=id.p#slide=id.p" data-i18n="nav.docs">Docs</a>
+        <a class="btn primary" target="_blank" rel="noopener noreferrer" href="https://hortelan.vercel.app/dashboard/app" data-i18n="nav.demo">Abrir Demo</a>
       </div>
     </div>
   </header>
@@ -77,7 +76,7 @@
             <h1 id="hero-title" data-i18n="hero.title">Cultive melhor com dados, automação e uma comunidade ativa</h1>
             <p class="lead" data-i18n="hero.subtitle">Hortelan Agtech Ltda. integra sensores, regras de automação e um painel em tempo real, com uma comunidade que ensina e recompensa boas práticas.</p>
             <div class="row mt-4">
-              <a class="btn primary" target="_blank" href="https://hortelan.vercel.app/dashboard/app" data-i18n="hero.ctaPrimary">Explorar Demo</a>
+              <a class="btn primary" target="_blank" rel="noopener noreferrer" href="https://hortelan.vercel.app/dashboard/app" data-i18n="hero.ctaPrimary">Explorar Demo</a>
               <a class="btn ghost" href="#features" data-i18n="hero.ctaSecondary">Ver Recursos</a>
             </div>
             <div class="kpis mt-6" aria-label="Métricas de impacto">
@@ -201,16 +200,10 @@
           <p class="subtitle" data-i18n="pricing.subtitle">Comece grátis e ative recursos avançados quando fizer sentido.</p>
         </div>
         <div class="pricing mt-6">
-          <div class="card"><div class="card-body"><div class="row" style="justify-content:space-between"><h3>Free</h3></div><div class="price">R$ 0</div><div class="mt-2"><div class="perk"><span class="dot" aria-hidden="true"></span><span data-i18n="pricing.free.p1">Dashboard básico</span></div><div class="perk"><span class="dot" aria-hidden="true"></span><span data-i18n="pricing.free.p2">Comunidade</span></div><div class="perk"><span class="dot" aria-hidden="true"></span><span data-i18n="pricing.free.p3">Regras essenciais</span></div><div class="perk"><span class="dot" aria-hidden="true"></span><span data-i18n="pricing.free.p4">Histórico 7 dias</span></div></div><a class="btn ghost mt-4" target="_blank" href="https://hortelan.vercel.app/dashboard/app" data-i18n="pricing.cta.try">Experimentar</a></div></div>
-          <div class="card" style="border-color:#2f705f;box-shadow:0 0 0 3px rgba(52,211,153,.18) inset"><div class="card-body"><div class="row" style="justify-content:space-between"><h3>Plus</h3><span class="pill" data-i18n="pricing.popular">Mais popular</span></div><div class="price">R$ 29/mês</div><div class="mt-2"><div class="perk"><span class="dot" aria-hidden="true"></span><span data-i18n="pricing.plus.p1">Automação avançada</span></div><div class="perk"><span class="dot" aria-hidden="true"></span><span data-i18n="pricing.plus.p2">Histórico estendido</span></div><div class="perk"><span class="dot" aria-hidden="true"></span><span data-i18n="pricing.plus.p3">Exportação CSV</span></div><div class="perk"><span class="dot" aria-hidden="true"></span><span data-i18n="pricing.plus.p4">Templates por cultura</span></div></div><a class="btn primary mt-4" target="_blank" href="https://hortelan.vercel.app/dashboard/app" data-i18n="pricing.cta.subscribe">Assinar Plus</a></div></div>
-          <div class="card"><div class="card-body"><div class="row" style="justify-content:space-between"><h3>Premium</h3></div><div class="price">R$ 79/mês</div><div class="mt-2"><div class="perk"><span class="dot" aria-hidden="true"></span><span data-i18n="pricing.prem.p1">Insights e detecção de anomalias</span></div><div class="perk"><span class="dot" aria-hidden="true"></span><span data-i18n="pricing.prem.p2">Integrações (ex.: Home Assistant)</span></div><div class="perk"><span class="dot" aria-hidden="true"></span><span data-i18n="pricing.prem.p3">Suporte prioritário</span></div><div class="perk"><span class="dot" aria-hidden="true"></span><span data-i18n="pricing.prem.p4">Relatórios avançados</span></div></div><a class="btn ghost mt-4" target="_blank" href="https://hortelan.vercel.app/dashboard/app" data-i18n="pricing.cta.sales">Falar com vendas</a></div></div>
+          <div class="card"><div class="card-body"><div class="row" style="justify-content:space-between"><h3>Free</h3></div><div class="price">R$ 0</div><div class="mt-2"><div class="perk"><span class="dot" aria-hidden="true"></span><span data-i18n="pricing.free.p1">Dashboard básico</span></div><div class="perk"><span class="dot" aria-hidden="true"></span><span data-i18n="pricing.free.p2">Comunidade</span></div><div class="perk"><span class="dot" aria-hidden="true"></span><span data-i18n="pricing.free.p3">Regras essenciais</span></div><div class="perk"><span class="dot" aria-hidden="true"></span><span data-i18n="pricing.free.p4">Histórico 7 dias</span></div></div><a class="btn ghost mt-4" target="_blank" rel="noopener noreferrer" href="https://hortelan.vercel.app/dashboard/app" data-i18n="pricing.cta.try">Experimentar</a></div></div>
+          <div class="card" style="border-color:#2f705f;box-shadow:0 0 0 3px rgba(52,211,153,.18) inset"><div class="card-body"><div class="row" style="justify-content:space-between"><h3>Plus</h3><span class="pill" data-i18n="pricing.popular">Mais popular</span></div><div class="price">R$ 29/mês</div><div class="mt-2"><div class="perk"><span class="dot" aria-hidden="true"></span><span data-i18n="pricing.plus.p1">Automação avançada</span></div><div class="perk"><span class="dot" aria-hidden="true"></span><span data-i18n="pricing.plus.p2">Histórico estendido</span></div><div class="perk"><span class="dot" aria-hidden="true"></span><span data-i18n="pricing.plus.p3">Exportação CSV</span></div><div class="perk"><span class="dot" aria-hidden="true"></span><span data-i18n="pricing.plus.p4">Templates por cultura</span></div></div><a class="btn primary mt-4" target="_blank" rel="noopener noreferrer" href="https://hortelan.vercel.app/dashboard/app" data-i18n="pricing.cta.subscribe">Assinar Plus</a></div></div>
+          <div class="card"><div class="card-body"><div class="row" style="justify-content:space-between"><h3>Premium</h3></div><div class="price">R$ 79/mês</div><div class="mt-2"><div class="perk"><span class="dot" aria-hidden="true"></span><span data-i18n="pricing.prem.p1">Insights e detecção de anomalias</span></div><div class="perk"><span class="dot" aria-hidden="true"></span><span data-i18n="pricing.prem.p2">Integrações (ex.: Home Assistant)</span></div><div class="perk"><span class="dot" aria-hidden="true"></span><span data-i18n="pricing.prem.p3">Suporte prioritário</span></div><div class="perk"><span class="dot" aria-hidden="true"></span><span data-i18n="pricing.prem.p4">Relatórios avançados</span></div></div><a class="btn ghost mt-4" target="_blank" rel="noopener noreferrer" href="https://hortelan.vercel.app/dashboard/app" data-i18n="pricing.cta.sales">Falar com vendas</a></div></div>
         </div>
-      </div>
-    </section>
-
-    <section class="banner-strip banner-strip-soft" aria-label="Banner Hortelan">
-      <div class="container">
-        <img class="promo-banner" src="Assets/og-image.jpg" alt="Banner da Hortelan com identidade visual em verde" loading="lazy" decoding="async">
       </div>
     </section>
 
@@ -285,7 +278,6 @@
     <div class="container footer-wrap">
       <div class="brandmark">
         <img class="logo-footer" src="Assets/logo.svg" alt="Logo da Hortelan Agtech Ltda.">
-        <img class="logo-footer" src="Assets/logo.png" alt="Logo da Hortelan Agtech Ltda.">
         <span>Hortelan Agtech Ltda. • Cultivo com inteligência</span>
       </div>
       <div class="row" style="gap:.5rem;flex-wrap:wrap">

@@ -10,7 +10,7 @@ Uma landing page leve, estática e responsiva para apresentar o Hortelan Agtech 
 
 🎬 Seção “Sobre” com embed do YouTube (16:9, lazy).
 
-🌐 PT/EN com switch estilizado (segmentado com animação).
+🌐 PT/EN/ES/FR com switch estilizado (segmentado com animação).
 
 💬 FAQ/Mural (localStorage): publicar, remover e exportar JSON.
 
@@ -28,7 +28,7 @@ hortelan/
 ├─ styles.css            # estilos (tema claro/escuro via prefers-color-scheme)
 ├─ app.js                # i18n + lógica do FAQ/Mural
 ├─ index.min.html        # single-file minificado (CSS/JS inline)
-└─ assets/
+└─ Assets/
    ├─ logo.png           # logo do Hortelan Agtech Ltda.
    ├─ dashboard.png      # screenshot do dashboard
    ├─ favicon.ico        # gerado (16–256px)
@@ -69,15 +69,15 @@ No styles.css, ajuste os tokens do tema:
 
 2) Logo, Dashboard e OG
 
-Substitua os arquivos em assets/:
+Substitua os arquivos em Assets/:
 
-logo.png (usado na navbar, rodapé, favicon e JSON-LD)
+logo.png (usado no JSON-LD e materiais sociais)
 
 dashboard.png (imagem do hero)
 
 og-image.jpg (thumbnail ao compartilhar)
 
-Favicon: já está em assets/favicon.ico (gerado a partir da logo). Se trocar a logo, recomendo regenerar; posso automatizar via script se quiser.
+Favicon: já está em Assets/favicon.ico (gerado a partir da logo). Se trocar a logo, recomendo regenerar; posso automatizar via script se quiser.
 
 3) Fonte (Inter)
 
