@@ -258,6 +258,23 @@ linear-gradient(115deg, rgba(13,41,35,.15), rgba(8,27,23,.02));transition:opacit
 .grow-toast span{font-size:.82rem;color:#a6c2b9}
 .grow-toast.is-visible{opacity:1;transform:translateY(0)}
 .navbar.is-irrigating{box-shadow:0 8px 24px rgba(16,185,129,.16);border-bottom-color:rgba(110,231,183,.45)}
+
+.weather-command{position:fixed;inset:0;pointer-events:none;z-index:2;opacity:0;--weather-cycle:.2;--weather-mist:.2;background:
+radial-gradient(circle at 82% 14%, rgba(251,191,36,calc(.06 + var(--weather-cycle) * .28)), transparent 23%),
+radial-gradient(circle at 16% 18%, rgba(186,230,253,calc(.3 - var(--weather-cycle) * .18)), transparent 32%),
+radial-gradient(circle at 50% 0%, rgba(16,185,129,var(--weather-mist)), transparent 60%);
+mix-blend-mode:screen}
+.sun-core,.moon-core{position:absolute;border-radius:999px;filter:blur(.2px)}
+.sun-core{width:84px;height:84px;right:11%;top:10%;background:radial-gradient(circle,#fde68a,#fbbf24 68%,rgba(251,191,36,0));box-shadow:0 0 40px rgba(251,191,36,.55);transform:scale(calc(.45 + var(--weather-cycle) * .65));opacity:calc(.2 + var(--weather-cycle) * .7)}
+.moon-core{width:64px;height:64px;left:14%;top:10%;background:radial-gradient(circle,#f8fafc,#bfdbfe 75%,rgba(191,219,254,0));box-shadow:0 0 24px rgba(191,219,254,.45);transform:scale(calc(1 - var(--weather-cycle) * .75));opacity:calc(.7 - var(--weather-cycle) * .6)}
+.cloud-belt{position:absolute;inset:0}
+.cloud-fragment{position:absolute;height:24px;border-radius:999px;background:linear-gradient(90deg,rgba(226,232,240,.1),rgba(226,232,240,.35),rgba(226,232,240,.05));filter:blur(.2px)}
+
+.card{transform-style:preserve-3d;will-change:transform}
+.hero .mock{position:relative;overflow:hidden}
+.hero-telemetry{position:absolute;left:1rem;bottom:1rem;display:grid;gap:.4rem;z-index:3}
+.hero-telemetry span{display:inline-flex;align-items:center;gap:.5rem;padding:.32rem .55rem;border-radius:999px;border:1px solid rgba(167,243,208,.28);background:rgba(7,18,15,.65);color:#d1fae5;font-size:.7rem;letter-spacing:.01em;backdrop-filter:blur(5px)}
+.hero-telemetry span::before{content:attr(data-label);font-size:.62rem;color:#99f6e4;text-transform:uppercase;letter-spacing:.07em}
 main section{position:relative;z-index:2}
 main section.section-live::before{content:"";position:absolute;left:0;right:0;top:0;height:3px;background:linear-gradient(90deg,transparent, rgba(52,211,153,.7), transparent);opacity:calc(.35 + var(--hydration) * .6);pointer-events:none}
 

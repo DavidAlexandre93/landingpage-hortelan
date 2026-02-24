@@ -446,6 +446,8 @@ createRoot(gsapRoot).render(React.createElement(SpecialSectionsMotion));
 function setupImmersiveMotionSystem(){
   if(prefersReducedMotion) return;
 
+  setupWeatherCommandCenter();
+
   const sky=document.createElement('div');
   sky.className='iot-sky';
   sky.setAttribute('aria-hidden','true');
@@ -590,6 +592,171 @@ function setupImmersiveMotionSystem(){
 }
 
 setupImmersiveMotionSystem();
+
+function setupWeatherCommandCenter(){
+  const layer=document.createElement('div');
+  layer.className='weather-command';
+  layer.setAttribute('aria-hidden','true');
+  layer.innerHTML=`
+    <span class="sun-core"></span>
+    <span class="moon-core"></span>
+    <div class="cloud-belt"></div>
+  `;
+  document.body.appendChild(layer);
+
+  const cloudBelt=layer.querySelector('.cloud-belt');
+  [...Array(10)].forEach((_,index)=>{
+    const cloud=document.createElement('span');
+    cloud.className='cloud-fragment';
+    cloud.style.setProperty('--seed',String(index));
+    cloud.style.top=`${6 + Math.random()*45}%`;
+    cloud.style.left=`${-10 + Math.random()*120}%`;
+    cloud.style.width=`${48 + Math.random()*90}px`;
+    cloud.style.opacity=String(0.15 + Math.random()*0.3);
+    cloudBelt.appendChild(cloud);
+    gsap.to(cloud,{ x:()=>gsap.utils.random(-90,140), yoyo:true, repeat:-1, duration:8 + Math.random()*8, ease:'sine.inOut' });
+  });
+
+  const weatherState={ cycle:0, mist:0.2 };
+  gsap.to(weatherState,{
+    cycle:1,
+    duration:26,
+    repeat:-1,
+    yoyo:true,
+    ease:'sine.inOut',
+    onUpdate:()=>{
+      layer.style.setProperty('--weather-cycle',weatherState.cycle.toFixed(3));
+      weatherState.mist=0.18 + (1-weatherState.cycle)*0.35;
+      layer.style.setProperty('--weather-mist',weatherState.mist.toFixed(3));
+    }
+  });
+
+  gsap.to(layer,{ 
+    opacity:0.95,
+    duration:1.2,
+    ease:'power2.out'
+  });
+
+  gsap.to(layer,{
+    yPercent:8,
+    ease:'none',
+    scrollTrigger:{ trigger:'main', start:'top top', end:'bottom bottom', scrub:1 }
+  });
+}
+
+setupRealityMotionEnhancers();
+
+function setupRealityMotionEnhancers(){
+  setupHeroMicroTelemetry();
+  setupParallaxImagePressure();
+  setupCardGyroMotion();
+  setupFaqRainEvents();
+}
+
+function setupHeroMicroTelemetry(){
+  const mock=document.querySelector('.hero .mock');
+  if(!mock || prefersReducedMotion) return;
+
+  const telemetry=document.createElement('div');
+  telemetry.className='hero-telemetry';
+  telemetry.innerHTML=[
+    '<span data-label="Umidade">74%</span>',
+    '<span data-label="Temperatura">24.1°C</span>',
+    '<span data-label="EC">1.9 mS/cm</span>'
+  ].join('');
+  mock.appendChild(telemetry);
+
+  gsap.fromTo(telemetry.querySelectorAll('span'),
+    { y:20, opacity:0 },
+    { y:0, opacity:1, duration:0.6, stagger:0.1, ease:'power3.out', delay:0.4 }
+  );
+
+  telemetry.querySelectorAll('span').forEach((node,index)=>{
+    gsap.to(node,{ 
+      backgroundColor:index % 2 === 0 ? 'rgba(74, 222, 128, 0.2)' : 'rgba(125, 211, 252, 0.22)',
+      repeat:-1,
+      yoyo:true,
+      duration:1.2 + index * 0.3,
+      ease:'sine.inOut'
+    });
+  });
+}
+
+function setupParallaxImagePressure(){
+  const mediaNodes=document.querySelectorAll('img, .promo-banner, .mock');
+  if(!mediaNodes.length || prefersReducedMotion) return;
+
+  mediaNodes.forEach((node,index)=>{
+    const state={ hue:0 };
+    gsap.to(state,{ 
+      hue:1,
+      duration:5 + index * 0.2,
+      repeat:-1,
+      yoyo:true,
+      ease:'sine.inOut',
+      onUpdate:()=>{
+        const sat=1.02 + state.hue * 0.1;
+        const brightness=0.96 + state.hue * 0.06;
+        node.style.filter=`saturate(${sat.toFixed(2)}) brightness(${brightness.toFixed(2)})`;
+      }
+    });
+
+    motionInView(node,(element)=>{
+      gsap.fromTo(element,
+        { scale:1.06, clipPath:'inset(2% 2% 2% 2% round 16px)' },
+        { scale:1, clipPath:'inset(0% 0% 0% 0% round 16px)', duration:1.1, ease:'power2.out' }
+      );
+    },{ amount:0.45, once:true });
+  });
+}
+
+function setupCardGyroMotion(){
+  const cards=document.querySelectorAll('.card');
+  if(!cards.length || prefersReducedMotion) return;
+
+  cards.forEach((card)=>{
+    const rotateXTo=gsap.quickTo(card,'rotateX',{ duration:0.35, ease:'power3.out' });
+    const rotateYTo=gsap.quickTo(card,'rotateY',{ duration:0.35, ease:'power3.out' });
+    const yTo=gsap.quickTo(card,'y',{ duration:0.3, ease:'power3.out' });
+
+    card.addEventListener('pointermove',(event)=>{
+      const rect=card.getBoundingClientRect();
+      const x=((event.clientX - rect.left) / rect.width) - 0.5;
+      const y=((event.clientY - rect.top) / rect.height) - 0.5;
+      rotateYTo(x*10);
+      rotateXTo(-y*8);
+      yTo(-6);
+    });
+
+    card.addEventListener('pointerleave',()=>{
+      rotateXTo(0);
+      rotateYTo(0);
+      yTo(0);
+    });
+  });
+}
+
+function setupFaqRainEvents(){
+  const faqBoard=document.getElementById('faq-list');
+  if(!faqBoard || prefersReducedMotion) return;
+
+  const emitRainFromPointer=(event)=>{
+    const rainLayer=document.querySelector('.rain-layer');
+    if(!rainLayer) return;
+    [...Array(6)].forEach((_,index)=>{
+      const drop=document.createElement('span');
+      drop.className='rain-drop';
+      drop.style.left=`${event.clientX + gsap.utils.random(-80,80)}px`;
+      drop.style.top=`${event.clientY - 30 - index*12}px`;
+      drop.style.setProperty('--fall',`${80 + Math.random()*160}px`);
+      rainLayer.appendChild(drop);
+      drop.addEventListener('animationend',()=>drop.remove(),{ once:true });
+    });
+  };
+
+  faqBoard.addEventListener('pointerenter',emitRainFromPointer);
+  faqBoard.addEventListener('pointerdown',emitRainFromPointer);
+}
 
 function setupSensorHud(){
   const hud=document.getElementById('sensor-hud');
