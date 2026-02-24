@@ -65,6 +65,30 @@ document.querySelectorAll('.lang-switch button').forEach(btn=>{
 
 detectLanguage();
 
+
+// Hero interaction: leaves sway with scroll and network cable plugs in on entry
+const heroSection = document.querySelector('.hero');
+const heroLeaves = Array.from(document.querySelectorAll('.hero-visual .leaf'));
+if(heroSection && heroLeaves.length){
+  requestAnimationFrame(() => heroSection.classList.add('hero-ready'));
+
+  const updateLeavesFromScroll = () => {
+    const max = document.documentElement.scrollHeight - window.innerHeight;
+    const scrollRatio = max > 0 ? Math.min(window.scrollY / max, 1) : 0;
+    const intensity = scrollRatio * 16;
+
+    heroLeaves.forEach((leaf, idx) => {
+      const direction = idx % 2 === 0 ? 1 : -1;
+      const x = (window.scrollY * 0.05 + intensity) * direction;
+      const y = (window.scrollY * 0.03) * (idx + 1);
+      const rotate = (8 + intensity * 0.5) * direction;
+      leaf.style.transform = `translate(${x.toFixed(1)}px, ${(y % 24).toFixed(1)}px) rotate(${rotate.toFixed(1)}deg)`;
+    });
+  };
+
+  window.addEventListener('scroll', updateLeavesFromScroll, { passive: true });
+}
+
 // FAQ board logic (localStorage)
 const LIST_KEY='hortelan_faq';
 const form=document.getElementById('faq-form');
