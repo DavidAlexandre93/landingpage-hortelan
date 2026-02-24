@@ -64,6 +64,35 @@ p.lead{font-size:1.12rem;color:var(--muted)}
 .mock{aspect-ratio:4/3;border:1px dashed #2f705f;border-radius:16px;background:linear-gradient(135deg,#123228, #0c211b);display:flex;align-items:center;justify-content:center;padding:1rem;transition:transform .25s ease}
 .mock .hint{font-size:.9rem;color:#9ff3cd;text-align:center}
 .mock img{max-width:100%;height:auto;border-radius:12px}
+.cultivo-scene{position:relative;isolation:isolate;width:min(100%,500px);aspect-ratio:5/4;border-radius:14px;overflow:hidden;background:linear-gradient(180deg,#85d8ff 0%,#a8e9ff 62%,#f4f0dc 100%);box-shadow:inset 0 0 0 1px rgba(255,255,255,.14)}
+.cultivo-scene.night{background:linear-gradient(180deg,#091537 0%,#12245a 60%,#25356e 100%)}
+.sky-glow{position:absolute;inset:0;background:radial-gradient(circle at 20% 25%,rgba(255,244,199,.55),transparent 42%)}
+.cultivo-scene.night .sky-glow{background:radial-gradient(circle at 56% 20%,rgba(199,214,255,.35),transparent 46%)}
+.stars{position:absolute;inset:0;opacity:0;transition:opacity .45s ease;background-image:radial-gradient(circle,#fff 1.2px,transparent 1.2px);background-size:54px 54px;background-position:8px 12px}
+.cultivo-scene.night .stars{opacity:.9}
+.astro{position:absolute;border-radius:999px;z-index:2;transition:opacity .45s ease,transform .45s ease}
+.astro-sun{left:12%;top:10%;width:88px;height:88px;background:#fff9c4;box-shadow:0 0 0 18px rgba(255,244,181,.22),0 0 48px rgba(255,245,190,.75)}
+.astro-moon{right:15%;top:13%;width:78px;height:78px;background:#edf2ff;box-shadow:0 0 0 16px rgba(222,232,255,.17),0 0 36px rgba(219,230,255,.6);opacity:0;transform:translateY(8px)}
+.cultivo-scene.night .astro-sun{opacity:0;transform:translateY(-12px)}
+.cultivo-scene.night .astro-moon{opacity:1;transform:translateY(0)}
+.cloud{position:absolute;z-index:2;background:rgba(250,254,255,.62);filter:blur(.2px);border-radius:50px}
+.cloud::before,.cloud::after{content:"";position:absolute;background:inherit;border-radius:50px}
+.cloud-a{left:58%;top:18%;width:132px;height:40px}
+.cloud-a::before{left:18px;top:-16px;width:54px;height:46px}
+.cloud-a::after{right:20px;top:-13px;width:48px;height:40px}
+.cloud-b{left:6%;top:30%;width:90px;height:30px;opacity:.7}
+.cloud-b::before{left:12px;top:-12px;width:40px;height:34px}
+.cloud-b::after{right:9px;top:-10px;width:34px;height:30px}
+.cultivo-scene.night .cloud{background:rgba(136,161,215,.34)}
+.rain-field{position:absolute;inset:0;z-index:3;overflow:hidden;pointer-events:none}
+.rain-drop-mini{position:absolute;top:-24px;width:2px;height:24px;border-radius:99px;background:linear-gradient(180deg,rgba(147,197,253,.1),rgba(56,189,248,.95));opacity:.84;transform:rotate(16deg)}
+.soil{position:absolute;left:0;right:0;bottom:0;height:24%;background:linear-gradient(180deg,#6d4323 0%,#4a2e18 58%,#301d11 100%);box-shadow:0 -10px 24px rgba(39,21,11,.45) inset;z-index:4}
+.plant-bed{position:absolute;left:0;right:0;bottom:11%;height:34%;display:flex;justify-content:space-evenly;align-items:flex-end;z-index:5}
+.plant{--stem:#2f8f42;position:relative;width:6px;height:42px;border-radius:12px;background:linear-gradient(180deg,#58be58,#2f8f42);transform-origin:bottom center;transform:scaleY(.25)}
+.plant::before,.plant::after{content:"";position:absolute;top:10px;width:20px;height:11px;background:linear-gradient(120deg,#8be06f,#49a655);border-radius:12px 12px 12px 1px}
+.plant::before{left:-17px;transform:rotate(-30deg)}
+.plant::after{right:-17px;transform:scaleX(-1) rotate(-30deg)}
+.cultivo-scene.night .plant{transform:scaleY(1)}
 section{padding:4rem 0}
 .banner-strip{padding:2rem 0 1rem;background:linear-gradient(180deg,#07120f 0%, #0a1814 100%)}
 .banner-strip-soft{background:linear-gradient(180deg,#0a1814 0%, #07120f 100%)}
