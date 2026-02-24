@@ -133,3 +133,15 @@ footer{border-top:1px solid #1b443a;padding:2rem 0;background:#081510}
   .leaf,.burst-leaf{animation:none !important}
   .network-cable,.reveal,.card,.mock,.btn,.click-ripple{transition:none !important;animation:none !important}
 }
+
+.scroll-grow{position:fixed;left:0;top:0;height:4px;width:100%;transform-origin:left center;transform:scaleX(0);background:linear-gradient(90deg,#6ee7b7,#34d399,#10b981);z-index:120;box-shadow:0 0 16px rgba(16,185,129,.55)}
+.cursor-spark{position:fixed;width:18px;height:18px;border-radius:999px;pointer-events:none;background:radial-gradient(circle,rgba(187,247,208,.8),rgba(187,247,208,0) 70%);transform:translate(-50%,-50%);mix-blend-mode:screen;z-index:90}
+.soil-pop{position:fixed;pointer-events:none;transform:translate(-50%,-50%);font-size:1.3rem;z-index:99;animation:soilPop .9s cubic-bezier(.2,.8,.25,1) forwards}
+@keyframes soilPop{0%{opacity:0;transform:translate(-50%,-45%) scale(.7)}20%{opacity:1}100%{opacity:0;transform:translate(calc(-50% + var(--x,0px)),calc(-140% - 40px)) scale(1.35)}}
+.nav-links a{position:relative;transition:color .25s ease}
+.nav-links a.is-active{color:#a7f3d0}
+.nav-links a.is-active::after{content:"";position:absolute;left:0;right:0;bottom:-8px;height:2px;border-radius:999px;background:#6ee7b7;box-shadow:0 0 8px rgba(110,231,183,.6)}
+
+@media (prefers-reduced-motion: reduce){
+  .cursor-spark,.soil-pop{display:none}
+}

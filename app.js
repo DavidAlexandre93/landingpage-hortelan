@@ -207,3 +207,103 @@ form?.addEventListener('submit',e=>{ e.preventDefault(); const item={id:Math.ran
 btnExport?.addEventListener('click',()=>{ const blob=new Blob([JSON.stringify(loadItems(),null,2)],{type:'application/json'}); const url=URL.createObjectURL(blob); const a=document.createElement('a'); a.href=url; a.download='faq-hortelan.json'; a.click(); URL.revokeObjectURL(url); });
 if(location.search.includes('clearFaq')){ localStorage.removeItem(LIST_KEY); }
 render();
+
+// Extra playful effects across the full page
+(function playfulGardenFX(){
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  const progress = document.createElement('div');
+  progress.className = 'scroll-grow';
+  document.body.appendChild(progress);
+
+  const updateProgress = () => {
+    const total = document.documentElement.scrollHeight - window.innerHeight;
+    const ratio = total > 0 ? window.scrollY / total : 0;
+    progress.style.transform = `scaleX(${Math.max(0, Math.min(1, ratio))})`;
+  };
+  updateProgress();
+  window.addEventListener('scroll', updateProgress, { passive: true });
+
+  if(!reduced){
+    const sparkle = document.createElement('div');
+    sparkle.className = 'cursor-spark';
+    document.body.appendChild(sparkle);
+
+    window.addEventListener('pointermove', (ev) => {
+      sparkle.style.left = `${ev.clientX}px`;
+      sparkle.style.top = `${ev.clientY}px`;
+    }, { passive: true });
+
+    document.addEventListener('click', (ev) => {
+      const pop = document.createElement('span');
+      pop.className = 'soil-pop';
+      pop.textContent = ['🌱', '🍀', '🌿', '💧'][Math.floor(Math.random() * 4)];
+      pop.style.left = `${ev.clientX}px`;
+      pop.style.top = `${ev.clientY}px`;
+      document.body.appendChild(pop);
+      setTimeout(() => pop.remove(), 900);
+    });
+  }
+
+  const kpis = document.querySelectorAll('.kpi .value');
+  if('IntersectionObserver' in window){
+    const animateKPI = (el) => {
+      const raw = el.textContent.trim();
+      const match = raw.match(/^([−-]?)(\d+)(.*)$/);
+      if(!match) return;
+      const sign = match[1] || '';
+      const target = Number(match[2]);
+      const suffix = match[3] || '';
+      const duration = reduced ? 0 : 1100;
+      const start = performance.now();
+
+      const tick = (now) => {
+        const p = duration === 0 ? 1 : Math.min(1, (now - start) / duration);
+        const eased = 1 - Math.pow(1 - p, 3);
+        const value = Math.round(target * eased);
+        el.textContent = `${sign}${value}${suffix}`;
+        if(p < 1) requestAnimationFrame(tick);
+      };
+      requestAnimationFrame(tick);
+    };
+
+    const kpiObserver = new IntersectionObserver((entries, obs) => {
+      entries.forEach((entry) => {
+        if(entry.isIntersecting){
+          animateKPI(entry.target);
+          obs.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.6 });
+
+    kpis.forEach((item) => kpiObserver.observe(item));
+  }
+
+  document.querySelectorAll('.btn').forEach((btn) => {
+    if(reduced) return;
+    btn.addEventListener('pointermove', (ev) => {
+      const rect = btn.getBoundingClientRect();
+      const x = ev.clientX - rect.left - rect.width / 2;
+      const y = ev.clientY - rect.top - rect.height / 2;
+      btn.style.transform = `translate(${x * 0.07}px, ${y * 0.08}px)`;
+    });
+    btn.addEventListener('pointerleave', () => {
+      btn.style.transform = '';
+    });
+  });
+
+  const sections = Array.from(document.querySelectorAll('main section[id]'));
+  const navLinks = Array.from(document.querySelectorAll('.nav-links a[href^="#"]'));
+  if(sections.length && navLinks.length && 'IntersectionObserver' in window){
+    const navObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if(!entry.isIntersecting) return;
+        navLinks.forEach((link) => {
+          const active = link.getAttribute('href') === `#${entry.target.id}`;
+          link.classList.toggle('is-active', active);
+        });
+      });
+    }, { threshold: 0.4 });
+    sections.forEach((section) => navObserver.observe(section));
+  }
+})();
