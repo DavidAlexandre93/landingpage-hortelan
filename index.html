@@ -34,9 +34,11 @@
         <a href="#faq" data-i18n="nav.faq">FAQ</a>
       </nav>
       <div class="row" aria-label="Ações">
-        <div class="lang-switch" role="group" aria-label="Idioma">
-          <button type="button" id="btn-pt" class="active" aria-pressed="true">PT</button>
-          <button type="button" id="btn-en" aria-pressed="false">EN</button>
+        <div class="lang-switch" role="group" aria-label="Escolher idioma">
+          <button type="button" id="btn-en" data-lang="en" aria-label="English" title="English" aria-pressed="false">🇺🇸</button>
+          <button type="button" id="btn-pt" data-lang="pt" class="active" aria-label="Português" title="Português" aria-pressed="true">🇧🇷</button>
+          <button type="button" id="btn-es" data-lang="es" aria-label="Español" title="Español" aria-pressed="false">🇪🇸</button>
+          <button type="button" id="btn-fr" data-lang="fr" aria-label="Français" title="Français" aria-pressed="false">🇫🇷</button>
         </div>
         <a class="btn ghost" target="_blank" href="https://docs.google.com/presentation/d/1BpvxRFnMVgAnUO2XeYl6Q6Yads8sWMLKgpi-b2snJ1Y/edit?slide=id.p#slide=id.p" data-i18n="nav.docs">Docs</a>
         <a class="btn primary" target="_blank" href="https://hortelan.vercel.app/dashboard/app" data-i18n="nav.demo">Abrir Demo</a>
