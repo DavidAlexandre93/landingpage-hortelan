@@ -15,10 +15,21 @@ a:hover{color:#a7f3d0}
 .btn:focus{outline:2px solid var(--focus);outline-offset:2px}
 .badge{display:inline-flex;align-items:center;gap:.4rem;font-size:.75rem;padding:.35rem .6rem;border-radius:999px;background:#123228;color:#9ff3cd;border:1px solid #2e6a58}
 .navbar{position:sticky;top:0;z-index:50;background:#07120fcc;backdrop-filter:saturate(180%) blur(10px);border-bottom:1px solid #1b443a}
-.nav-wrap{display:flex;align-items:center;justify-content:space-between;height:72px}
+.nav-wrap{display:flex;align-items:center;justify-content:space-between;min-height:72px;position:relative;gap:1rem;flex-wrap:wrap;padding: .65rem 0}
+.nav-collapse{display:flex;align-items:center;justify-content:space-between;gap:1rem;flex:1}
 .nav-links{display:none;gap:1.25rem}
 .nav-links a{font-size:.95rem;color:var(--fg)}.nav-links a:hover{color:#86efac}
-@media(min-width:768px){.nav-links{display:flex}}
+.nav-actions{justify-content:flex-end}
+.menu-toggle{display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;border-radius:12px;border:1px solid #2d5d51;background:#0f2e27;color:#d1fae5;cursor:pointer}
+.menu-toggle span,.menu-toggle span::before,.menu-toggle span::after{content:"";display:block;width:18px;height:2px;background:currentColor;border-radius:999px;transition:transform .2s ease,opacity .2s ease}
+.menu-toggle span{position:relative}
+.menu-toggle span::before,.menu-toggle span::after{position:absolute;left:0}
+.menu-toggle span::before{top:-6px}
+.menu-toggle span::after{top:6px}
+.menu-open .menu-toggle span{background:transparent}
+.menu-open .menu-toggle span::before{transform:translateY(6px) rotate(45deg)}
+.menu-open .menu-toggle span::after{transform:translateY(-6px) rotate(-45deg)}
+@media(min-width:768px){.menu-toggle{display:none}.nav-collapse{position:static;display:flex !important;opacity:1;visibility:visible;transform:none;padding:0;border:0;background:transparent;box-shadow:none}.nav-links{display:flex}}
 .skip{position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden}
 .skip:focus{left:1rem;top:1rem;width:auto;height:auto;background:#102722;padding:.5rem .75rem;border-radius:8px;box-shadow:var(--shadow)}
 .hero{padding:5rem 0 2rem;background:linear-gradient(180deg,#0f2e27,#07120f 50%)}
@@ -103,6 +114,31 @@ footer{border-top:1px solid #1b443a;padding:2rem 0;background:#081510}
 .instagram-link{display:inline-flex;align-items:center;gap:.45rem;padding:.45rem .75rem;border:1px solid #2d5d51;border-radius:999px;background:rgba(16,39,34,.45);color:#9ff3cd;font-weight:600}
 .instagram-link:hover{background:#15362e;color:#c7f9e4}
 .flex1{flex:1;min-width:220px}
+
+@media(max-width:767px){
+  .nav-collapse{position:absolute;left:0;right:0;top:100%;display:grid;gap:1rem;padding:1rem;background:rgba(7,18,15,.98);border:1px solid #1f443b;border-radius:16px;box-shadow:var(--shadow);opacity:0;visibility:hidden;transform:translateY(-8px);pointer-events:none;transition:opacity .2s ease,transform .2s ease,visibility .2s ease}
+  .menu-open .nav-collapse{opacity:1;visibility:visible;transform:translateY(0);pointer-events:auto}
+  .nav-links{display:grid;gap:.65rem}
+  .nav-links a{padding:.55rem .35rem;border-bottom:1px solid rgba(47,112,95,.35)}
+  .nav-actions{display:grid;width:100%}
+  .nav-actions .btn{width:100%}
+  .lang-switch{justify-content:center}
+  h1{font-size:2rem}
+  .title-xl{font-size:1.6rem}
+  p.lead{font-size:1rem}
+  section{padding:3rem 0}
+  .hero{padding:4rem 0 1.5rem}
+  .kpis{grid-template-columns:1fr}
+  .card-body{padding:1rem}
+  .grow-toast{left:1rem;right:1rem;max-width:none}
+}
+
+@media(max-width:480px){
+  .container{padding:0 .75rem}
+  .btn{width:100%}
+  .row{gap:.6rem}
+  .input,.textarea{font-size:16px}
+}
 
 .lang-switch{display:inline-flex;gap:.25rem;border:1px solid var(--line);border-radius:999px;padding:.2rem;background:#fff;box-shadow:var(--shadow)}
 .lang-switch button{min-width:40px;min-height:40px;background:none;border:none;border-radius:999px;cursor:pointer;font-size:1.1rem;line-height:1;opacity:.8;transition:transform .2s ease,opacity .2s ease,background-color .2s ease}

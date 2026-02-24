@@ -44,24 +44,29 @@
       <div class="brandmark" aria-label="Marca">
         <img class="brand-logo" src="Assets/logo.svg" alt="Logo da Hortelan Agtech Ltda." width="44" height="44">
       </div>
-      <nav class="nav-links" aria-label="Navegação primária">
-        <a href="#features" data-i18n="nav.features">Recursos</a>
-        <a href="#about" data-i18n="nav.about">Sobre</a>
-        <a href="#how" data-i18n="nav.how">Como funciona</a>
-        <a href="#implemented">No Demo</a>
-        <a href="#journeys" data-i18n="nav.journeys">Jornadas</a>
-        <a href="#pricing" data-i18n="nav.pricing">Planos</a>
-        <a href="#faq" data-i18n="nav.faq">FAQ</a>
-      </nav>
-      <div class="row" aria-label="Ações">
-        <div class="lang-switch" role="group" aria-label="Escolher idioma">
-          <button type="button" id="btn-en" data-lang="en" aria-label="English" title="English" aria-pressed="false">🇺🇸</button>
-          <button type="button" id="btn-pt" data-lang="pt" class="active" aria-label="Português" title="Português" aria-pressed="true">🇧🇷</button>
-          <button type="button" id="btn-es" data-lang="es" aria-label="Español" title="Español" aria-pressed="false">🇪🇸</button>
-          <button type="button" id="btn-fr" data-lang="fr" aria-label="Français" title="Français" aria-pressed="false">🇫🇷</button>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="nav-collapse" aria-label="Abrir menu de navegação">
+        <span aria-hidden="true"></span>
+      </button>
+      <div class="nav-collapse" id="nav-collapse">
+        <nav class="nav-links" aria-label="Navegação primária">
+          <a href="#features" data-i18n="nav.features">Recursos</a>
+          <a href="#about" data-i18n="nav.about">Sobre</a>
+          <a href="#how" data-i18n="nav.how">Como funciona</a>
+          <a href="#implemented">No Demo</a>
+          <a href="#journeys" data-i18n="nav.journeys">Jornadas</a>
+          <a href="#pricing" data-i18n="nav.pricing">Planos</a>
+          <a href="#faq" data-i18n="nav.faq">FAQ</a>
+        </nav>
+        <div class="row nav-actions" aria-label="Ações">
+          <div class="lang-switch" role="group" aria-label="Escolher idioma">
+            <button type="button" id="btn-en" data-lang="en" aria-label="English" title="English" aria-pressed="false">🇺🇸</button>
+            <button type="button" id="btn-pt" data-lang="pt" class="active" aria-label="Português" title="Português" aria-pressed="true">🇧🇷</button>
+            <button type="button" id="btn-es" data-lang="es" aria-label="Español" title="Español" aria-pressed="false">🇪🇸</button>
+            <button type="button" id="btn-fr" data-lang="fr" aria-label="Français" title="Français" aria-pressed="false">🇫🇷</button>
+          </div>
+          <a class="btn ghost" target="_blank" rel="noopener noreferrer" href="https://docs.google.com/presentation/d/1BpvxRFnMVgAnUO2XeYl6Q6Yads8sWMLKgpi-b2snJ1Y/edit?slide=id.p#slide=id.p" data-i18n="nav.docs">Docs</a>
+          <a class="btn primary" target="_blank" rel="noopener noreferrer" href="https://hortelan.vercel.app/dashboard/app" data-i18n="nav.demo">Abrir Demo</a>
         </div>
-        <a class="btn ghost" target="_blank" rel="noopener noreferrer" href="https://docs.google.com/presentation/d/1BpvxRFnMVgAnUO2XeYl6Q6Yads8sWMLKgpi-b2snJ1Y/edit?slide=id.p#slide=id.p" data-i18n="nav.docs">Docs</a>
-        <a class="btn primary" target="_blank" rel="noopener noreferrer" href="https://hortelan.vercel.app/dashboard/app" data-i18n="nav.demo">Abrir Demo</a>
       </div>
     </div>
   </header>
