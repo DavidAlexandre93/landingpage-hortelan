@@ -262,6 +262,21 @@ linear-gradient(115deg, rgba(13,41,35,.15), rgba(8,27,23,.02));transition:opacit
 main section{position:relative;z-index:2}
 main section.section-live::before{content:"";position:absolute;left:0;right:0;top:0;height:3px;background:linear-gradient(90deg,transparent, rgba(52,211,153,.7), transparent);opacity:calc(.35 + var(--hydration) * .6);pointer-events:none}
 
+.sensor-hud{margin-top:1rem;border:1px solid rgba(134,239,172,.24);background:linear-gradient(145deg,rgba(7,18,15,.88),rgba(13,41,35,.78));padding:.8rem;border-radius:14px;box-shadow:0 18px 32px rgba(0,0,0,.28);backdrop-filter:blur(8px)}
+.sensor-header{display:flex;align-items:center;gap:.45rem;font-size:.75rem;color:#bbf7d0;letter-spacing:.05em;text-transform:uppercase}
+.sensor-dot{width:8px;height:8px;border-radius:999px;background:#4ade80;box-shadow:0 0 12px rgba(74,222,128,.85)}
+.sensor-grid{display:grid;gap:.55rem;margin-top:.65rem}
+.sensor-item{display:grid;grid-template-columns:1fr auto;gap:.25rem .6rem;align-items:center}
+.sensor-item>span{font-size:.77rem;color:#a6c2b9}
+.sensor-value{font-size:.88rem;color:#dcfce7;font-variant-numeric:tabular-nums}
+.sensor-bar{grid-column:1 / -1;height:7px;border-radius:999px;background:rgba(110,231,183,.16);overflow:hidden;border:1px solid rgba(187,247,208,.16)}
+.sensor-bar span{display:block;height:100%;width:42%;background:linear-gradient(90deg,#34d399,#22d3ee);box-shadow:0 0 12px rgba(52,211,153,.7)}
+
+.firefly-layer{position:fixed;inset:0;pointer-events:none;z-index:2}
+.firefly{position:absolute;width:7px;height:7px;border-radius:999px;background:radial-gradient(circle,#fef08a 0%,rgba(254,240,138,.1) 68%,transparent 100%);filter:blur(.2px);box-shadow:0 0 14px rgba(254,240,138,.7)}
+
+body::after{content:"";position:fixed;inset:-2px;pointer-events:none;z-index:1;background:radial-gradient(circle at var(--light-x,50%) var(--light-y,30%),rgba(187,247,208,.14),transparent 45%);mix-blend-mode:screen;transition:background-position .12s linear}
+
 @media (prefers-reduced-motion: reduce){
-  .iot-sky,.rain-layer,.water-pulse{display:none !important}
+  .iot-sky,.rain-layer,.water-pulse,.firefly-layer{display:none !important}
 }

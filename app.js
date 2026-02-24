@@ -286,6 +286,7 @@ function setupCultivoScene(){
 }
 
 setupCultivoScene();
+setupSensorHud();
 
 const revealTargets = Array.from(document.querySelectorAll('section, .card, .faq-item, .title-xl, .subtitle'));
 revealTargets.forEach((el) => {
@@ -575,9 +576,116 @@ function setupImmersiveMotionSystem(){
     gsap.delayedCall(3.2,()=>gsap.to(toast,{ y:10, opacity:0, duration:0.4, onComplete:()=>toast.classList.remove('is-visible') }));
   };
   gsap.delayedCall(1.8,showToast);
+
+  setupAmbientLightTracking();
+  setupFireflies();
 }
 
 setupImmersiveMotionSystem();
+
+function setupSensorHud(){
+  const hud=document.getElementById('sensor-hud');
+  if(!hud) return;
+
+  const sensorItems=Array.from(hud.querySelectorAll('.sensor-item'));
+  if(!sensorItems.length) return;
+
+  const registerItem=(item,index)=>{
+    const valueEl=item.querySelector('.sensor-value');
+    const barEl=item.querySelector('.sensor-bar span');
+    const min=Number(item.dataset.min || 0);
+    const max=Number(item.dataset.max || 100);
+    const unit=item.dataset.unit || '';
+    const state={ value:min + ((max-min)*0.5) };
+
+    const render=()=>{
+      const ratio=(state.value-min)/(max-min || 1);
+      const precision=max > 2000 ? 0 : 1;
+      valueEl.textContent=`${state.value.toFixed(precision)}${unit}`;
+      barEl.style.width=`${Math.max(6,Math.min(100,ratio*100))}%`;
+    };
+
+    render();
+
+    if(prefersReducedMotion) return;
+
+    gsap.timeline({ repeat:-1, repeatRefresh:true, delay:index*0.18 })
+      .to(state,{ value:()=>gsap.utils.random(min,max), duration:2.4 + index*0.3, ease:'sine.inOut', onUpdate:render })
+      .to(state,{ value:()=>gsap.utils.random(min,max), duration:2 + index*0.25, ease:'sine.inOut', onUpdate:render });
+  };
+
+  sensorItems.forEach(registerItem);
+
+  motionInView(hud,(element)=>{
+    gsap.fromTo(element,
+      { y:20, opacity:0, rotateX:-7 },
+      { y:0, opacity:1, rotateX:0, duration:0.8, ease:'power3.out' }
+    );
+  },{ amount:0.5, once:true });
+}
+
+function setupAmbientLightTracking(){
+  const updateLight=(x,y)=>{
+    document.body.style.setProperty('--light-x',`${(x/window.innerWidth)*100}%`);
+    document.body.style.setProperty('--light-y',`${(y/window.innerHeight)*100}%`);
+  };
+
+  updateLight(window.innerWidth*0.5,window.innerHeight*0.3);
+  window.addEventListener('pointermove',(event)=>{
+    gsap.to({}, {
+      duration:0.3,
+      onUpdate:()=>updateLight(event.clientX,event.clientY)
+    });
+  },{ passive:true });
+
+  const orbit={ progress:0 };
+  gsap.to(orbit, {
+    progress:1,
+    duration:18,
+    repeat:-1,
+    yoyo:true,
+    ease:'sine.inOut',
+    onUpdate:()=>{
+      const cycleX=window.innerWidth*(0.2 + orbit.progress*0.6);
+      const cycleY=window.innerHeight*(0.18 + orbit.progress*0.22);
+      updateLight(cycleX,cycleY);
+    }
+  });
+}
+
+function setupFireflies(){
+  const layer=document.createElement('div');
+  layer.className='firefly-layer';
+  document.body.appendChild(layer);
+
+  const flies=[...Array(16)].map((_,index)=>{
+    const fly=document.createElement('span');
+    fly.className='firefly';
+    fly.style.left=`${Math.random()*100}%`;
+    fly.style.top=`${22 + Math.random()*65}%`;
+    layer.appendChild(fly);
+    motionAnimate(fly,{ opacity:[0.15,0.95], scale:[0.4,1.35] },{
+      duration:1.8 + Math.random()*1.8,
+      easing:'ease-in-out',
+      direction:'alternate',
+      repeat:Infinity,
+      delay:index*0.14
+    });
+    return fly;
+  });
+
+  flies.forEach((fly,index)=>{
+    gsap.to(fly,{
+      x:()=>gsap.utils.random(-120,120),
+      y:()=>gsap.utils.random(-100,100),
+      duration:4 + Math.random()*3,
+      ease:'sine.inOut',
+      repeat:-1,
+      yoyo:true,
+      delay:index*0.1
+    });
+  });
+}
 
 // FAQ board logic (localStorage)
 const LIST_KEY='hortelan_faq';
