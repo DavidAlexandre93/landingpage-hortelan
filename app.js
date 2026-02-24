@@ -127,12 +127,20 @@ initSplashScene();
 function initSplashScene(){
   const splash = document.getElementById('splash-screen');
   const rainLayer = document.getElementById('splash-rain');
-  if(!splash || prefersReducedMotion){
-    splash?.remove();
+  if(!splash){
     return;
   }
 
   document.body.classList.add('splash-active');
+
+  if(prefersReducedMotion){
+    gsap.fromTo('.splash-content',{ opacity:0, y:12 },{ opacity:1, y:0, duration:0.45, ease:'power2.out' });
+    gsap.delayedCall(1.8,()=>{
+      document.body.classList.remove('splash-active');
+      splash.remove();
+    });
+    return;
+  }
 
   for(let i=0;i<34;i++){
     const drop=document.createElement('span');
