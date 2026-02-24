@@ -50,6 +50,7 @@ import { createRoot } from 'https://esm.sh/react-dom@18.3.1/client';
 import gsap from 'https://esm.sh/gsap@3.12.5';
 import { ScrollTrigger } from 'https://esm.sh/gsap@3.12.5/ScrollTrigger';
 import { useGSAP } from 'https://esm.sh/@gsap/react@2.1.1';
+import { animate as motionAnimate } from 'https://esm.sh/motion@11.11.13';
 import { inView as motionInView, hover, press } from 'https://esm.sh/motion-dom@11.11.13';
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
@@ -105,6 +106,77 @@ if(navWrap&&menuToggle&&navCollapse){
 
 press(document.querySelectorAll('.lang-switch button'),(element)=>setLang(element.dataset.lang));
 detectLanguage();
+
+
+function setupCultivoScene(){
+  const scene=document.getElementById('cultivo-scene');
+  if(!scene) return;
+
+  const isNight=(()=>{
+    const hour=new Date().getHours();
+    return hour>=18 || hour<6;
+  })();
+
+  scene.classList.toggle('night',isNight);
+
+  const plants=Array.from(scene.querySelectorAll('.plant'));
+  const rainField=scene.querySelector('#rain-field');
+  let hydration=isNight ? 1 : 0;
+
+  gsap.set(plants,{
+    scaleY:isNight ? 1 : 0.25,
+    transformOrigin:'bottom center'
+  });
+
+  if(!prefersReducedMotion){
+    plants.forEach((plant,index)=>{
+      motionAnimate(plant,{ rotate:[-2,2,-2] },{
+        duration:2.2 + index * 0.1,
+        repeat:Infinity,
+        easing:'ease-in-out',
+        delay:index * 0.08,
+        direction:'alternate'
+      });
+    });
+  }
+
+  const spawnRain=(burst=8)=>{
+    if(!rainField || prefersReducedMotion) return;
+    for(let i=0;i<burst;i+=1){
+      const drop=document.createElement('span');
+      drop.className='rain-drop-mini';
+      drop.style.left=`${Math.random()*100}%`;
+      drop.style.opacity=String(0.45 + Math.random()*0.45);
+      rainField.appendChild(drop);
+      gsap.fromTo(drop,{ y:-20, x:0 },{ y:250 + Math.random()*60, x:-22, duration:0.45 + Math.random()*0.45, ease:'none', onComplete:()=>drop.remove() });
+    }
+  };
+
+  const growPlants=()=>{
+    hydration=Math.min(1,hydration+0.12);
+    gsap.to(plants,{
+      scaleY:0.25 + hydration*0.75,
+      duration:0.45,
+      stagger:0.04,
+      ease:'back.out(1.4)'
+    });
+  };
+
+  if(isNight){
+    spawnRain(10);
+    return;
+  }
+
+  const interact=()=>{
+    spawnRain(12);
+    growPlants();
+  };
+
+  scene.addEventListener('pointermove',interact);
+  scene.addEventListener('click',interact);
+}
+
+setupCultivoScene();
 
 const revealTargets = Array.from(document.querySelectorAll('section, .card, .faq-item, .title-xl, .subtitle'));
 revealTargets.forEach((el) => {
