@@ -9,7 +9,7 @@ a{color:#6ee7b7;text-decoration:none}
 a:hover{color:#a7f3d0}
 .container{max-width:1152px;margin:0 auto;padding:0 1rem}
 .row{display:flex;gap:.75rem;flex-wrap:wrap}
-.btn{display:inline-flex;align-items:center;justify-content:center;padding:.9rem 1.2rem;border-radius:14px;font-weight:600;border:1px solid transparent;transition:.2s;cursor:pointer}
+.btn{display:inline-flex;align-items:center;justify-content:center;padding:.9rem 1.2rem;border-radius:14px;font-weight:600;border:1px solid transparent;transition:.2s;cursor:pointer;position:relative;overflow:hidden}
 .btn.primary{background:var(--brand);color:#052e23}.btn.primary:hover{background:var(--brand-700);color:#ecfdf5}
 .btn.ghost{border-color:#2d5d51;color:#9ff3cd;background:rgba(16,39,34,.45)}.btn.ghost:hover{background:#15362e}
 .btn:focus{outline:2px solid var(--focus);outline-offset:2px}
@@ -39,11 +39,12 @@ h1{font-size:2.6rem;line-height:1.15;margin:.6rem 0;font-weight:800}
 p.lead{font-size:1.12rem;color:var(--muted)}
 .kpis{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem;margin-top:1.25rem}
 @media(min-width:640px){.kpis{grid-template-columns:repeat(4,1fr)}}
-.card{background:var(--surface);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow)}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);transition:transform .28s ease,box-shadow .28s ease}
+.card:hover{transform:translateY(-4px);box-shadow:0 14px 34px rgba(10,185,129,.18)}
 .card-body{padding:1.25rem}
 .kpi .value{font-size:1.4rem;font-weight:800;color:#6ee7b7}
 .kpi .label{font-size:.75rem;color:#8eb3a8;margin-top:.25rem}
-.mock{aspect-ratio:4/3;border:1px dashed #2f705f;border-radius:16px;background:linear-gradient(135deg,#123228, #0c211b);display:flex;align-items:center;justify-content:center;padding:1rem}
+.mock{aspect-ratio:4/3;border:1px dashed #2f705f;border-radius:16px;background:linear-gradient(135deg,#123228, #0c211b);display:flex;align-items:center;justify-content:center;padding:1rem;transition:transform .25s ease}
 .mock .hint{font-size:.9rem;color:#9ff3cd;text-align:center}
 .mock img{max-width:100%;height:auto;border-radius:12px}
 section{padding:4rem 0}
@@ -64,7 +65,7 @@ section.inset{background:var(--bg-soft)}
 .pricing{display:grid;gap:1rem}
 @media(min-width:768px){.pricing{grid-template-columns:repeat(3,1fr)}}
 .price{font-size:1.8rem;font-weight:800;margin-top:.25rem}
-.pill{display:inline-flex;border:1px solid #2f705f;background:#123228;color:#9ff3cd;padding:.2rem .5rem;border-radius:999px;font-size:.75rem}
+.pill{display:inline-flex;border:1px solid #2f705f;background:#123228;color:#9ff3cd;padding:.2rem .5rem;border-radius:999px;font-size:.75rem;position:relative;overflow:hidden}
 .dot{display:inline-block;width:6px;height:6px;background:#6ee7b7;border-radius:999px;margin-right:.45rem;margin-top:.45rem}
 .perk{display:flex;align-items:flex-start;font-size:.92rem;color:var(--muted)}
 .faq-board{display:grid;gap:1rem}
@@ -108,7 +109,22 @@ footer{border-top:1px solid #1b443a;padding:2rem 0;background:#081510}
 .brand-logo{width:44px;height:44px;object-fit:contain;filter: drop-shadow(0 2px 4px rgba(0,0,0,.3));}
 .logo-footer{width:32px;height:32px;object-fit:contain}
 
+.reveal{opacity:0;transform:translateY(20px) scale(.99);transition:opacity .55s ease var(--reveal-delay,0ms),transform .55s ease var(--reveal-delay,0ms)}
+.reveal.is-visible{opacity:1;transform:translateY(0) scale(1)}
+
+.leaf-burst{position:fixed;inset:0;pointer-events:none;z-index:100}
+.burst-leaf{position:fixed;font-size:1.4rem;will-change:transform,opacity;animation:leafBurst 1.7s cubic-bezier(.18,.74,.26,.99) forwards;filter:drop-shadow(0 8px 12px rgba(16,185,129,.25))}
+@keyframes leafBurst{
+  0%{transform:translate3d(0,0,0) rotate(0deg) scale(.8);opacity:0}
+  10%{opacity:1}
+  100%{transform:translate3d(var(--tx),var(--ty),0) rotate(var(--rot)) scale(1.35);opacity:0}
+}
+
+.is-ripple-host{position:relative;overflow:hidden}
+.click-ripple{position:absolute;width:12px;height:12px;border-radius:999px;pointer-events:none;background:radial-gradient(circle,#bbf7d0 0%,rgba(187,247,208,.4) 45%,rgba(187,247,208,0) 80%);transform:translate(-50%,-50%) scale(0);animation:ripple .65s ease-out forwards}
+@keyframes ripple{to{transform:translate(-50%,-50%) scale(15);opacity:0}}
+
 @media (prefers-reduced-motion: reduce){
-  .leaf{animation:none !important}
-  .network-cable{transition:none}
+  .leaf,.burst-leaf{animation:none !important}
+  .network-cable,.reveal,.card,.mock,.btn,.click-ripple{transition:none !important;animation:none !important}
 }
