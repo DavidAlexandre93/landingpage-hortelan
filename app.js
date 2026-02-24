@@ -50,10 +50,54 @@ import { createRoot } from 'https://esm.sh/react-dom@18.3.1/client';
 import gsap from 'https://esm.sh/gsap@3.12.5';
 import { ScrollTrigger } from 'https://esm.sh/gsap@3.12.5/ScrollTrigger';
 import { useGSAP } from 'https://esm.sh/@gsap/react@2.1.1';
+import { animate as motionAnimate, inView as motionInView, hover, press } from 'https://esm.sh/motion@11.11.13';
 import { animate as motionAnimate } from 'https://esm.sh/motion@11.11.13';
 import { inView as motionInView, hover, press } from 'https://esm.sh/motion-dom@11.11.13';
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
+
+initSplashScene();
+
+
+function initSplashScene(){
+  const splash = document.getElementById('splash-screen');
+  const rainLayer = document.getElementById('splash-rain');
+  if(!splash || prefersReducedMotion){
+    splash?.remove();
+    return;
+  }
+
+  document.body.classList.add('splash-active');
+
+  for(let i=0;i<34;i++){
+    const drop=document.createElement('span');
+    drop.className='splash-rain-drop';
+    drop.style.left=`${Math.random()*100}%`;
+    drop.style.animationDelay=`${Math.random()*0.6}s`;
+    rainLayer.appendChild(drop);
+  }
+
+  motionAnimate('.splash-rain-drop',
+    { y:[-30, window.innerHeight*0.85], opacity:[0,1,0] },
+    { duration:0.95, easing:'linear', repeat:5, delay:(i)=>i*0.04 }
+  );
+
+  motionAnimate('.splash-plant .plant-leaf',
+    { rotate:[-7,7,-5] },
+    { duration:2.1, easing:'ease-in-out', repeat:Infinity, delay:(i)=>i*0.1 }
+  );
+
+  const tl = gsap.timeline({ defaults:{ ease:'power2.out' }, onComplete:()=>{
+    document.body.classList.remove('splash-active');
+    splash.remove();
+  }});
+
+  tl.to(splash,{ '--day-progress':1, duration:2.5, ease:'sine.inOut' })
+    .to('.plant-stem',{ scaleY:1, duration:1, stagger:0.16 },0.45)
+    .to('.plant-leaf',{ opacity:1, scale:1, duration:0.7, stagger:0.08 },1.12)
+    .to('.splash-content',{ y:-16, duration:0.55 },1.7)
+    .to(splash,{ clipPath:'circle(0% at 50% 100%)', opacity:0, duration:1 },2.7);
+}
 
 const animateWithGsap=(target,vars,options={})=>{
   const fromVars={};
