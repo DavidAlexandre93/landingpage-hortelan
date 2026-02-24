@@ -104,13 +104,6 @@ footer{border-top:1px solid #1b443a;padding:2rem 0;background:#081510}
 .instagram-link:hover{background:#15362e;color:#c7f9e4}
 .flex1{flex:1;min-width:220px}
 
-.lang-switch{display:inline-flex;position:relative;gap:0;border:1px solid var(--line);border-radius:999px;padding:.2rem;background:#0b1f19;box-shadow:var(--shadow)}
-.lang-switch button{position:relative;background:none;border:none;padding:.5rem .9rem;border-radius:999px;cursor:pointer;color:var(--muted);font-weight:700;letter-spacing:.3px}
-.lang-switch button:hover{color:var(--fg)}
-.lang-switch .active{color:#052e23}
-.lang-switch::after{content:"";position:absolute;top:4px;bottom:4px;width:48%;border-radius:999px;background:linear-gradient(90deg,#9ff3cd,#6ee7b7);border:1px solid #34d399;transition:transform .25s ease;transform:translateX(2px)}
-.lang-switch[data-active="en"]::after{transform:translateX(calc(100% + 2px))}
-
 .lang-switch{display:inline-flex;gap:.25rem;border:1px solid var(--line);border-radius:999px;padding:.2rem;background:#fff;box-shadow:var(--shadow)}
 .lang-switch button{min-width:40px;min-height:40px;background:none;border:none;border-radius:999px;cursor:pointer;font-size:1.1rem;line-height:1;opacity:.8;transition:transform .2s ease,opacity .2s ease,background-color .2s ease}
 .lang-switch button:hover{opacity:1;transform:translateY(-1px)}
