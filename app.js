@@ -98,8 +98,49 @@ detectLanguage();
 
 const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-const motionModule = await import('https://cdn.jsdelivr.net/npm/motion@11.11.13/+esm');
-const { animate, inView, scroll } = motionModule;
+import React, { useRef } from 'https://esm.sh/react@18.3.1';
+import { createRoot } from 'https://esm.sh/react-dom@18.3.1/client';
+import gsap from 'https://esm.sh/gsap@3.12.5';
+import { ScrollTrigger } from 'https://esm.sh/gsap@3.12.5/ScrollTrigger';
+import { useGSAP } from 'https://esm.sh/@gsap/react@2.1.1';
+
+gsap.registerPlugin(ScrollTrigger, useGSAP);
+
+const animate=(target,vars,options={})=>{
+  const fromVars={};
+  const toVars={...options,...vars};
+  if(Array.isArray(vars.opacity)){
+    fromVars.opacity=vars.opacity[0];
+    toVars.opacity=vars.opacity[1];
+  }
+  if(Array.isArray(vars.y)){
+    fromVars.y=vars.y[0];
+    toVars.y=vars.y[1];
+  }
+  if(Array.isArray(vars.scale)){
+    fromVars.scale=vars.scale[0];
+    toVars.scale=vars.scale[vars.scale.length-1];
+  }
+  if(Array.isArray(vars.transform)){
+    fromVars.transform=vars.transform[0];
+    toVars.transform=vars.transform[1];
+  }
+  if(Object.keys(fromVars).length) return gsap.fromTo(target,fromVars,toVars);
+  return gsap.to(target,toVars);
+};
+
+const inView=(targets,handler,{amount=0.2}={})=>{
+  const list=Array.from(targets||[]);
+  if(!list.length) return;
+  const io=new IntersectionObserver((entries)=>{
+    entries.forEach((entry)=>{
+      if(!entry.isIntersecting) return;
+      handler(entry.target);
+      io.unobserve(entry.target);
+    });
+  },{threshold:amount});
+  list.forEach((el)=>io.observe(el));
+};
 
 const revealTargets = Array.from(document.querySelectorAll('section, .card, .faq-item, .title-xl, .subtitle'));
 revealTargets.forEach((el) => {
@@ -111,29 +152,31 @@ inView(revealTargets, (element) => {
   animate(
     element,
     { opacity: [0, 1], transform: ['translateY(20px)', 'translateY(0px)'] },
-    { duration: prefersReducedMotion ? 0 : 0.6, easing: [0.22, 1, 0.36, 1], delay: prefersReducedMotion ? 0 : 0.05 }
+    { duration: prefersReducedMotion ? 0 : 0.6, ease: 'power3.out', delay: prefersReducedMotion ? 0 : 0.05 }
   );
 });
 
-const heroMock = document.querySelector('.mock');
-if(heroMock && !prefersReducedMotion){
-  heroMock.addEventListener('pointermove', (ev) => {
-    const rect = heroMock.getBoundingClientRect();
-    const x = (ev.clientX - rect.left) / rect.width - 0.5;
-    const y = (ev.clientY - rect.top) / rect.height - 0.5;
-    animate(heroMock, {
-      transform: `perspective(900px) rotateX(${(-y * 8).toFixed(2)}deg) rotateY(${(x * 10).toFixed(2)}deg) scale(1.02)`
-    }, { duration: 0.2 });
-  });
-  heroMock.addEventListener('pointerleave', () => {
-    animate(heroMock, { transform: 'perspective(900px) rotateX(0deg) rotateY(0deg) scale(1)' }, { duration: 0.35 });
-  });
+const nav = document.querySelector('.navbar');
+if(nav){
+  const onScroll=()=>nav.classList.toggle('is-irrigating', window.scrollY>120);
+  onScroll();
+  window.addEventListener('scroll', onScroll, { passive:true });
 }
 
-const progress = document.createElement('div');
-progress.className = 'scroll-grow';
-document.body.appendChild(progress);
-scroll(animate(progress, { scaleX: [0, 1] }, { easing: 'linear' }));
+const sections = Array.from(document.querySelectorAll('main section[id]'));
+const navLinks = Array.from(document.querySelectorAll('.nav-links a[href^="#"]'));
+if(sections.length && navLinks.length){
+  const io=new IntersectionObserver((entries)=>{
+    entries.forEach((entry)=>{
+      if(!entry.isIntersecting) return;
+      navLinks.forEach((link) => {
+        const active = link.getAttribute('href') === `#${entry.target.id}`;
+        link.classList.toggle('is-active', active);
+      });
+    });
+  },{threshold:0.45});
+  sections.forEach((section)=>io.observe(section));
+}
 
 const kpiValues = Array.from(document.querySelectorAll('.kpi .value'));
 inView(kpiValues, (element) => {
@@ -146,11 +189,12 @@ inView(kpiValues, (element) => {
   const suffix = match[3] || '';
   const state = { value: 0 };
 
-  animate(state, { value: target }, {
+  gsap.to(state, {
+    value: target,
     duration: 1.1,
-    easing: 'ease-out',
-    onUpdate: (latest) => {
-      element.textContent = `${sign}${Math.round(latest.value)}${suffix}`;
+    ease: 'power1.out',
+    onUpdate: () => {
+      element.textContent = `${sign}${Math.round(state.value)}${suffix}`;
     }
   });
 });
@@ -159,35 +203,87 @@ const actionTargets = document.querySelectorAll('.btn, .pill, .brand-logo, .logo
 actionTargets.forEach((el) => {
   el.addEventListener('pointerenter', () => {
     if(prefersReducedMotion) return;
-    animate(el, { y: [-1, -3], scale: [1, 1.02] }, { duration: 0.2, easing: 'ease-out' });
+    gsap.to(el, { y: -3, scale: 1.02, duration: 0.2, ease: 'power1.out' });
   });
   el.addEventListener('pointerleave', () => {
-    animate(el, { y: 0, scale: 1 }, { duration: 0.2, easing: 'ease-out' });
+    gsap.to(el, { y: 0, scale: 1, duration: 0.2, ease: 'power1.out' });
   });
   el.addEventListener('click', () => {
     if(prefersReducedMotion) return;
-    animate(el, { scale: [1, 0.97, 1.02, 1] }, { duration: 0.35, easing: 'ease-out' });
+    gsap.fromTo(el, { scale: 1 }, { scale: 1.03, yoyo: true, repeat: 1, duration: 0.16, ease: 'power1.out' });
   });
 });
 
-const nav = document.querySelector('.navbar');
-if(nav){
-  scroll(({ y }) => {
-    const on = y.current > 120;
-    nav.classList.toggle('is-irrigating', on);
-  });
+function SpecialSectionsMotion(){
+  const scopeRef=useRef(null);
+
+  useGSAP(()=>{
+    if(prefersReducedMotion) return;
+
+    const hero = document.querySelector('.hero');
+    const heroMock = hero?.querySelector('.mock');
+    const heroBadge = hero?.querySelector('.badge');
+    const heroTitle = hero?.querySelector('#hero-title');
+    const heroLead = hero?.querySelector('.lead');
+    const heroCtas = hero?.querySelectorAll('.hero .row .btn');
+
+    if(hero){
+      const tl=gsap.timeline({ defaults:{ ease:'power3.out' } });
+      tl.from([heroBadge,heroTitle,heroLead],{ y:26, opacity:0, stagger:0.08, duration:0.7 })
+        .from(heroCtas||[],{ y:18, opacity:0, stagger:0.08, duration:0.45 },'-=0.3');
+    }
+
+    if(heroMock){
+      const onMove=(ev)=>{
+        const rect = heroMock.getBoundingClientRect();
+        const x = (ev.clientX - rect.left) / rect.width - 0.5;
+        const y = (ev.clientY - rect.top) / rect.height - 0.5;
+        gsap.to(heroMock,{ rotateX:-y*8, rotateY:x*10, scale:1.02, transformPerspective:900, transformOrigin:'center', duration:0.22, overwrite:true });
+      };
+      const onLeave=()=>gsap.to(heroMock,{ rotateX:0, rotateY:0, scale:1, duration:0.35 });
+      heroMock.addEventListener('pointermove',onMove);
+      heroMock.addEventListener('pointerleave',onLeave);
+    }
+
+    gsap.to('.mock',{
+      yPercent:-8,
+      ease:'none',
+      scrollTrigger:{ trigger:'.hero', start:'top top', end:'bottom top', scrub:0.6 }
+    });
+
+    const storyCards=gsap.utils.toArray('#journeys .card');
+    storyCards.forEach((card,index)=>{
+      gsap.from(card,{ y:60, opacity:0, duration:0.65, ease:'power3.out',
+        scrollTrigger:{ trigger:card, start:'top 82%', toggleActions:'play none none reverse' },
+        delay:index*0.08
+      });
+    });
+
+    gsap.to('#how .card',{ 
+      yPercent:(i)=> i % 2 === 0 ? -6 : 6,
+      ease:'none',
+      scrollTrigger:{ trigger:'#how', start:'top bottom', end:'bottom top', scrub:0.8 }
+    });
+
+    gsap.from('.scroll-grow',{ 
+      scaleX:0,
+      transformOrigin:'left center',
+      ease:'none',
+      scrollTrigger:{ start:0, end:'max', scrub:true }
+    });
+  },{scope:scopeRef});
+
+  return React.createElement('div',{ref:scopeRef,'aria-hidden':'true',style:{display:'none'}});
 }
 
-const sections = Array.from(document.querySelectorAll('main section[id]'));
-const navLinks = Array.from(document.querySelectorAll('.nav-links a[href^="#"]'));
-if(sections.length && navLinks.length){
-  inView(sections, (section) => {
-    navLinks.forEach((link) => {
-      const active = link.getAttribute('href') === `#${section.id}`;
-      link.classList.toggle('is-active', active);
-    });
-  }, { amount: 0.45 });
-}
+const progress = document.createElement('div');
+progress.className = 'scroll-grow';
+document.body.appendChild(progress);
+
+const gsapRoot = document.createElement('div');
+gsapRoot.id='gsap-motion-root';
+document.body.appendChild(gsapRoot);
+createRoot(gsapRoot).render(React.createElement(SpecialSectionsMotion));
 
 // FAQ board logic (localStorage)
 const LIST_KEY='hortelan_faq';
