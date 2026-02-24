@@ -52,6 +52,10 @@ a:hover{color:#a7f3d0}
 @keyframes leafFloatLeft{0%,100%{transform:rotate(-10deg) translateY(0)}50%{transform:rotate(7deg) translateY(-8px)}}
 @keyframes leafFloatRight{0%,100%{transform:rotate(10deg) translateY(0)}50%{transform:rotate(-8deg) translateY(-9px)}}
 h1{font-size:2.6rem;line-height:1.15;margin:.6rem 0;font-weight:800}
+.typing-highlight{position:relative;display:inline-flex;align-items:flex-end;gap:.1rem}
+.typing-text{display:inline}
+.typing-caret{display:inline-block;width:2px;height:1em;background:linear-gradient(180deg,#6ee7b7,#34d399);border-radius:999px;box-shadow:0 0 10px rgba(52,211,153,.75);transform:translateY(.06em)}
+.typing-active{filter:drop-shadow(0 0 10px rgba(52,211,153,.24))}
 @media(min-width:640px){h1{font-size:3.1rem}}
 p.lead{font-size:1.12rem;color:var(--muted)}
 .kpis{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem;margin-top:1.25rem}
@@ -234,6 +238,7 @@ transition:filter .5s ease}
 @media (prefers-reduced-motion: reduce){
   .cursor-spark,.soil-pop{display:none}
   .splash-screen{display:none !important}
+  .typing-caret{display:none}
 }
 
 /* Immersive Hortelan effects */

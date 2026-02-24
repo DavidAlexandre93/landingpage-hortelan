@@ -3,6 +3,7 @@ document.getElementById('y') && (document.getElementById('y').textContent = new 
 const navWrap = document.querySelector('.nav-wrap');
 const menuToggle = document.querySelector('.menu-toggle');
 const navCollapse = document.getElementById('nav-collapse');
+const typingRegistry = new WeakMap();
 
 // i18n dictionaries (kept short for demo)
 const dict={pt:{'nav.features':'Recursos','nav.how':'Como funciona','nav.journeys':'Jornadas','nav.pricing':'Planos','nav.faq':'FAQ','nav.docs':'Docs','nav.demo':'Abrir Demo','nav.about':'Sobre','hero.badge':'IoT • Automação • Comunidade','hero.title':'Cultive melhor com dados, automação e uma comunidade ativa','hero.subtitle':'Hortelan Agtech Ltda. integra sensores, regras de automação e um painel em tempo real, com uma comunidade que ensina e recompensa boas práticas.','hero.ctaPrimary':'Explorar Demo','hero.ctaSecondary':'Ver Recursos','kpis.k1':'Tempo p/ ação em alertas','kpis.k2':'Relatórios manuais','kpis.k3':'Chamados repetitivos','kpis.k4':'Onboarding c/ SSO','features.title':'Recursos que fecham o ciclo de cuidado','features.subtitle':'Do monitoramento ao aprendizado, da automação aos incentivos — tudo em um único produto.','about.title':'Sobre a Hortelan Agtech Ltda.','about.subtitle':'Nossa missão é simplificar o cultivo com tecnologia acessível, dados em tempo real e uma comunidade que aprende junto.','about.p1':'Hortelan Agtech Ltda. integra sensores, automação por regras e um painel web para acompanhar tudo de forma simples.','about.l1':'Instalação rápida e segura com kits compatíveis.','about.l2':'Automatize irrigação, iluminação e ventilação com histerese e janelas de operação.','about.l3':'Alertas inteligentes para agir no tempo certo.','about.l4':'Comunidade para compartilhar resultados e aprender com outros cultivadores.','cta.title':'Pronto para cultivar com inteligência?','cta.subtitle':'Abra o demo, explore os recursos e conte para a comunidade como foram seus primeiros resultados.','cta.demo':'Abrir Demo','cta.docs':'Ver Apresentação','footer.rights':'Todos os direitos reservados.'},en:{'nav.features':'Features','nav.how':'How it works','nav.journeys':'Journeys','nav.pricing':'Pricing','nav.faq':'FAQ','nav.docs':'Docs','nav.demo':'Open Demo','nav.about':'About','hero.badge':'IoT • Automation • Community','hero.title':'Grow better with data, automation and an active community','hero.subtitle':'Hortelan Agtech Ltda. brings sensors, rule-based automation and a realtime dashboard together with a community that teaches and rewards good practices.','hero.ctaPrimary':'Explore Demo','hero.ctaSecondary':'See Features','kpis.k1':'Time to act on alerts','kpis.k2':'Manual reports','kpis.k3':'Repeat tickets','kpis.k4':'SSO onboarding','features.title':'Features that close the care loop','features.subtitle':'From monitoring to learning, from automation to incentives — in a single product.','about.title':'About Hortelan Agtech Ltda.','about.subtitle':'Our mission is to make growing simple with accessible tech, realtime data and a community that learns together.','about.p1':'Hortelan Agtech Ltda. brings sensors, rule-based automation and a web dashboard to keep everything simple.','about.l1':'Quick, secure setup with compatible kits.','about.l2':'Automate watering, lighting and ventilation with hysteresis and time windows.','about.l3':'Smart alerts so you act at the right time.','about.l4':'Community to share results and learn from other growers.','cta.title':'Ready to grow smart?','cta.subtitle':'Open the demo, explore the features and tell the community about your first results.','cta.demo':'Open Demo','cta.docs':'View Slides','footer.rights':'All rights reserved.'},es:{'nav.features':'Funciones','nav.how':'Cómo funciona','nav.journeys':'Jornadas','nav.pricing':'Planes','nav.faq':'FAQ','nav.docs':'Docs','nav.demo':'Abrir demo','nav.about':'Sobre','hero.badge':'IoT • Automatización • Comunidad','hero.title':'Cultiva mejor con datos, automatización y una comunidad activa','hero.subtitle':'Hortelan Agtech Ltda. integra sensores, reglas de automatización y un panel en tiempo real con una comunidad que enseña y recompensa buenas prácticas.','hero.ctaPrimary':'Explorar demo','hero.ctaSecondary':'Ver funciones','kpis.k1':'Tiempo para actuar en alertas','kpis.k2':'Reportes manuales','kpis.k3':'Tickets repetitivos','kpis.k4':'Onboarding con SSO','features.title':'Funciones que cierran el ciclo de cuidado','features.subtitle':'Del monitoreo al aprendizaje, de la automatización a los incentivos, en un único producto.','about.title':'Sobre Hortelan Agtech Ltda.','about.subtitle':'Nuestra misión es simplificar el cultivo con tecnología accesible, datos en tiempo real y una comunidad que aprende unida.','about.p1':'Hortelan Agtech Ltda. integra sensores, automatización por reglas y un panel web para acompañar todo de forma simple.','about.l1':'Instalación rápida y segura con kits compatibles.','about.l2':'Automatiza riego, iluminación y ventilación con histéresis y ventanas de operación.','about.l3':'Alertas inteligentes para actuar en el momento correcto.','about.l4':'Comunidad para compartir resultados y aprender con otros cultivadores.','cta.title':'¿Listo para cultivar con inteligencia?','cta.subtitle':'Abre el demo, explora funciones y cuéntale a la comunidad tus primeros resultados.','cta.demo':'Abrir demo','cta.docs':'Ver presentación','footer.rights':'Todos los derechos reservados.'},fr:{'nav.features':'Fonctionnalités','nav.how':'Comment ça marche','nav.journeys':'Parcours','nav.pricing':'Tarifs','nav.faq':'FAQ','nav.docs':'Docs','nav.demo':'Ouvrir la démo','nav.about':'À propos','hero.badge':'IoT • Automatisation • Communauté','hero.title':'Cultivez mieux avec les données, l’automatisation et une communauté active','hero.subtitle':'Hortelan Agtech Ltda. réunit capteurs, automatisation par règles et tableau de bord temps réel avec une communauté qui enseigne et récompense les bonnes pratiques.','hero.ctaPrimary':'Explorer la démo','hero.ctaSecondary':'Voir les fonctionnalités','kpis.k1':'Temps d’action sur alertes','kpis.k2':'Rapports manuels','kpis.k3':'Tickets répétitifs','kpis.k4':'Onboarding SSO','features.title':'Des fonctionnalités qui bouclent le cycle du soin','features.subtitle':'Du suivi à l’apprentissage, de l’automatisation aux incitations — dans un seul produit.','about.title':'À propos de Hortelan Agtech Ltda.','about.subtitle':'Notre mission: simplifier la culture avec une technologie accessible, des données temps réel et une communauté qui apprend ensemble.','about.p1':'Hortelan Agtech Ltda. intègre capteurs, automatisation par règles et un tableau de bord web pour tout suivre simplement.','about.l1':'Installation rapide et sécurisée avec kits compatibles.','about.l2':'Automatisez arrosage, éclairage et ventilation avec hystérésis et fenêtres d’opération.','about.l3':'Alertes intelligentes pour agir au bon moment.','about.l4':'Communauté pour partager des résultats et apprendre des autres cultivateurs.','cta.title':'Prêt à cultiver intelligemment ?','cta.subtitle':'Ouvrez la démo, explorez les fonctionnalités et partagez vos premiers résultats avec la communauté.','cta.demo':'Ouvrir la démo','cta.docs':'Voir la présentation','footer.rights':'Tous droits réservés.'}};
@@ -20,6 +21,7 @@ function setLang(lang){
     btn.setAttribute('aria-pressed',String(active));
   });
   localStorage.setItem('lang',lang);
+  requestAnimationFrame(()=>initTypingEffects({ restart:true }));
 }
 
 function getLangFromCountry(countryCode){
@@ -45,14 +47,77 @@ async function detectLanguage(){
 
 const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+function initTypingEffects({ restart=false }={}){
+  const typingElements=Array.from(document.querySelectorAll('[data-typing]'));
+  if(!typingElements.length) return;
+
+  typingElements.forEach((element,index)=>{
+    const latestText=element.textContent.replace(/\s+/g,' ').trim();
+    if(latestText) element.dataset.typingSource=latestText;
+
+    const source=element.dataset.typingSource||'';
+    const existing=typingRegistry.get(element);
+    if(existing){
+      existing.kill();
+      typingRegistry.delete(element);
+    }
+
+    if(!source){
+      return;
+    }
+
+    if(prefersReducedMotion){
+      element.textContent=source;
+      return;
+    }
+
+    element.innerHTML='<span class="typing-text"></span><span class="typing-caret" aria-hidden="true"></span>';
+    element.classList.remove('typing-active');
+
+    const textNode=element.querySelector('.typing-text');
+    const speed=Math.max(Number(element.dataset.typingSpeed||0.026),0.008);
+
+    const run=()=>{
+      const state={count:0};
+      element.classList.add('typing-active');
+      const tween=gsap.to(state,{
+        count:source.length,
+        duration:Math.max(source.length*speed,0.75),
+        ease:'none',
+        onUpdate:()=>{
+          textNode.textContent=source.slice(0,Math.round(state.count));
+        },
+        onComplete:()=>{
+          textNode.textContent=source;
+          element.classList.remove('typing-active');
+        }
+      });
+      gsap.to(element.querySelector('.typing-caret'),{ opacity:0.2, duration:0.45, repeat:-1, yoyo:true, ease:'power1.inOut' });
+      typingRegistry.set(element,tween);
+    };
+
+    const startMode=element.dataset.typingStart||'view';
+    if(startMode==='load'){
+      gsap.delayedCall(0.25 + index*0.08,run);
+      return;
+    }
+
+    ScrollTrigger.create({
+      trigger:element,
+      start:'top 82%',
+      once:true,
+      onEnter:run
+    });
+  });
+}
+
+
 import React, { useRef } from 'https://esm.sh/react@18.3.1';
 import { createRoot } from 'https://esm.sh/react-dom@18.3.1/client';
 import gsap from 'https://esm.sh/gsap@3.12.5';
 import { ScrollTrigger } from 'https://esm.sh/gsap@3.12.5/ScrollTrigger';
 import { useGSAP } from 'https://esm.sh/@gsap/react@2.1.1';
 import { animate as motionAnimate, inView as motionInView, hover, press } from 'https://esm.sh/motion@11.11.13';
-import { animate as motionAnimate } from 'https://esm.sh/motion@11.11.13';
-import { inView as motionInView, hover, press } from 'https://esm.sh/motion-dom@11.11.13';
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
@@ -150,7 +215,7 @@ if(navWrap&&menuToggle&&navCollapse){
 
 press(document.querySelectorAll('.lang-switch button'),(element)=>setLang(element.dataset.lang));
 detectLanguage();
-
+initTypingEffects();
 
 function setupCultivoScene(){
   const scene=document.getElementById('cultivo-scene');
