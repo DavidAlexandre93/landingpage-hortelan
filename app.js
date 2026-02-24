@@ -434,6 +434,151 @@ gsapRoot.id='gsap-motion-root';
 document.body.appendChild(gsapRoot);
 createRoot(gsapRoot).render(React.createElement(SpecialSectionsMotion));
 
+function setupImmersiveMotionSystem(){
+  if(prefersReducedMotion) return;
+
+  const sky=document.createElement('div');
+  sky.className='iot-sky';
+  sky.setAttribute('aria-hidden','true');
+  document.body.appendChild(sky);
+
+  const skyNodes=[...Array(8)].map(()=>{
+    const node=document.createElement('span');
+    node.className='sat-node';
+    node.style.left=`${6 + Math.random()*88}%`;
+    node.style.top=`${8 + Math.random()*84}%`;
+    sky.appendChild(node);
+    return node;
+  });
+
+  motionAnimate(skyNodes,{ opacity:[0.24,0.95], scale:[0.65,1.5] },{
+    duration:2.8,
+    easing:'ease-in-out',
+    direction:'alternate',
+    repeat:Infinity,
+    delay:(i)=>i*0.18
+  });
+
+  gsap.to(sky,{
+    opacity:0.18,
+    ease:'none',
+    scrollTrigger:{ trigger:'main', start:'top top', end:'bottom bottom', scrub:0.8 }
+  });
+
+  const rainLayer=document.createElement('div');
+  rainLayer.className='rain-layer';
+  rainLayer.setAttribute('aria-hidden','true');
+  document.body.appendChild(rainLayer);
+
+  const spawnGlobalRain=(amount=4)=>{
+    for(let i=0;i<amount;i+=1){
+      const drop=document.createElement('span');
+      drop.className='rain-drop';
+      drop.style.left=`${Math.random()*100}vw`;
+      drop.style.top=`${-20 - Math.random()*120}px`;
+      drop.style.setProperty('--fall',`${window.innerHeight*(0.35 + Math.random()*0.65)}px`);
+      rainLayer.appendChild(drop);
+      drop.addEventListener('animationend',()=>drop.remove(),{ once:true });
+    }
+  };
+
+  gsap.delayedCall(0.45,()=>spawnGlobalRain(12));
+  gsap.ticker.add(()=>{
+    if(document.visibilityState!=='visible') return;
+    if(Math.random()<0.22) spawnGlobalRain(2);
+  });
+
+  const spotlight=document.createElement('span');
+  spotlight.className='cursor-spark';
+  spotlight.setAttribute('aria-hidden','true');
+  document.body.appendChild(spotlight);
+  gsap.set(spotlight,{ x:window.innerWidth*0.5, y:window.innerHeight*0.35, opacity:0 });
+
+  const pointer={ x:window.innerWidth*0.5, y:window.innerHeight*0.35 };
+  window.addEventListener('pointermove',(event)=>{
+    pointer.x=event.clientX;
+    pointer.y=event.clientY;
+    gsap.to(spotlight,{ x:pointer.x, y:pointer.y, opacity:0.95, duration:0.2, ease:'power2.out' });
+  },{ passive:true });
+
+  const dynamicTargets=document.querySelectorAll('.hero .badge, .hero h1, .hero .lead, .promo-banner, .logo-footer, .brand-logo, .card, .btn');
+  dynamicTargets.forEach((element)=>{
+    hover(element,()=>{
+      gsap.to(element,{ rotateX:-3, rotateY:4, z:18, duration:0.25, ease:'power2.out', transformPerspective:850, transformOrigin:'center center' });
+      return ()=>gsap.to(element,{ rotateX:0, rotateY:0, z:0, duration:0.35, ease:'power3.out' });
+    });
+  });
+
+  const realisticImages=document.querySelectorAll('img, .mock, .cultivo-scene');
+  realisticImages.forEach((media,index)=>{
+    gsap.fromTo(media,
+      { filter:'saturate(0.82) contrast(0.92)', y:18, opacity:0.24 },
+      {
+        filter:'saturate(1.05) contrast(1)',
+        y:0,
+        opacity:1,
+        duration:0.9,
+        ease:'power2.out',
+        delay:index*0.05,
+        scrollTrigger:{ trigger:media, start:'top 88%', once:true }
+      }
+    );
+
+    gsap.to(media,{ yPercent:index%2===0 ? -4 : 4, ease:'none',
+      scrollTrigger:{ trigger:media, start:'top bottom', end:'bottom top', scrub:0.7 }
+    });
+  });
+
+  const sectionsForAmbient=gsap.utils.toArray('main section');
+  sectionsForAmbient.forEach((section,index)=>{
+    gsap.fromTo(section,
+      { backgroundPosition:'50% 0%' },
+      {
+        backgroundPosition:'50% 100%',
+        ease:'none',
+        scrollTrigger:{ trigger:section, start:'top bottom', end:'bottom top', scrub:1 }
+      }
+    );
+
+    ScrollTrigger.create({
+      trigger:section,
+      start:'top 45%',
+      end:'bottom 55%',
+      onToggle:({ isActive })=>{
+        if(!isActive) return;
+        const strength=(index%3)*0.25 + 0.35;
+        document.body.style.setProperty('--satellite-signal',String(strength));
+      }
+    });
+  });
+
+  const faqBoard=document.getElementById('faq-list');
+  if(faqBoard){
+    press(faqBoard,(_,startEvent)=>{
+      const pulse=document.createElement('span');
+      pulse.className='water-pulse';
+      pulse.style.left=`${startEvent.clientX}px`;
+      pulse.style.top=`${startEvent.clientY}px`;
+      document.body.appendChild(pulse);
+      pulse.addEventListener('animationend',()=>pulse.remove(),{ once:true });
+    });
+  }
+
+  const toast=document.createElement('div');
+  toast.className='grow-toast';
+  toast.innerHTML='<strong>Rega inteligente ativa</strong><span>As automações da sua horta se ajustam em tempo real ao clima.</span>';
+  document.body.appendChild(toast);
+
+  const showToast=()=>{
+    toast.classList.add('is-visible');
+    gsap.fromTo(toast,{ y:20, opacity:0 },{ y:0, opacity:1, duration:0.35, ease:'power2.out' });
+    gsap.delayedCall(3.2,()=>gsap.to(toast,{ y:10, opacity:0, duration:0.4, onComplete:()=>toast.classList.remove('is-visible') }));
+  };
+  gsap.delayedCall(1.8,showToast);
+}
+
+setupImmersiveMotionSystem();
+
 // FAQ board logic (localStorage)
 const LIST_KEY='hortelan_faq';
 const form=document.getElementById('faq-form');
