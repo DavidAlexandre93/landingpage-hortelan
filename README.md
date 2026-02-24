@@ -1,6 +1,6 @@
-Hortelan — Landing Page
+Hortelan Agtech Ltda. — Landing Page
 
-Uma landing page leve, estática e responsiva para apresentar o Hortelan (IoT + automação + comunidade). O projeto inclui versão particionada (HTML/CSS/JS) e versão minificada single-file, integração de fonte Inter, favicon e Open Graph gerados a partir da logo, seção “Sobre” com vídeo e um FAQ/Mural com persistência local.
+Uma landing page leve, estática e responsiva para apresentar o Hortelan Agtech Ltda. (IoT + automação + comunidade). O projeto inclui versão particionada (HTML/CSS/JS) e versão minificada single-file, integração de fonte Inter, favicon e Open Graph gerados a partir da logo, seção “Sobre” com vídeo e um FAQ/Mural com persistência local.
 
 ✨ Destaques
 
@@ -29,7 +29,7 @@ hortelan/
 ├─ app.js                # i18n + lógica do FAQ/Mural
 ├─ index.min.html        # single-file minificado (CSS/JS inline)
 └─ assets/
-   ├─ logo.png           # logo do Hortelan
+   ├─ logo.png           # logo do Hortelan Agtech Ltda.
    ├─ dashboard.png      # screenshot do dashboard
    ├─ favicon.ico        # gerado (16–256px)
    └─ og-image.jpg       # imagem Open Graph (1200×630)
@@ -105,7 +105,7 @@ JSON-LD:
 {
   "@context":"https://schema.org",
   "@type":"Organization",
-  "name":"Hortelan",
+  "name":"Hortelan Agtech Ltda.",
   "url":"https://SEU-DOMINIO",
   "logo":"assets/logo.png",
   "sameAs":["https://www.linkedin.com/company/hortelan"]
