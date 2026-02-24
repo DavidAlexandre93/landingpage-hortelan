@@ -48,6 +48,9 @@ p.lead{font-size:1.12rem;color:var(--muted)}
 .mock .hint{font-size:.9rem;color:#9ff3cd;text-align:center}
 .mock img{max-width:100%;height:auto;border-radius:12px}
 section{padding:4rem 0}
+.banner-strip{padding:2rem 0 1rem;background:linear-gradient(180deg,#07120f 0%, #0a1814 100%)}
+.banner-strip-soft{background:linear-gradient(180deg,#0a1814 0%, #07120f 100%)}
+.promo-banner{display:block;width:100%;height:auto;border-radius:18px;border:1px solid #2d5d51;box-shadow:0 14px 34px rgba(10,185,129,.16)}
 section.inset{background:var(--bg-soft)}
 .title-xl{font-size:2rem;font-weight:800}
 .subtitle{color:var(--muted);margin-top:.5rem}
