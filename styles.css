@@ -237,7 +237,6 @@ transition:filter .5s ease}
 
 @media (prefers-reduced-motion: reduce){
   .cursor-spark,.soil-pop{display:none}
-  .splash-screen{display:none !important}
   .typing-caret{display:none}
 }
 
