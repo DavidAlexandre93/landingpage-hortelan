@@ -36,17 +36,16 @@ export default function NightSplash({ onDone }) {
 
   return (
     <div className="splashRoot night">
-      <div className="splashCard">
-        <div className="splashHeader">
-          <div className="brandDot" />
-          <div>
-            <div className="brandTitle">Bem-vindo!</div>
-            <div className="brandSub">Carregando a experiência da noite 🌙</div>
-          </div>
+      <div className="splashHeader">
+        <div className="brandDot" />
+        <div>
+          <div className="brandTitle">Bem-vindo!</div>
+          <div className="brandSub">Carregando a experiência da noite 🌙</div>
         </div>
+      </div>
 
-        <div className="scene">
-          <div className="sky nightSky" />
+      <div className="scene">
+        <div className="sky nightSky" />
 
           <div className="stars">
             {stars.map((st) => (
@@ -89,15 +88,14 @@ export default function NightSplash({ onDone }) {
             ))}
           </div>
 
-          <AnimatePresence>
-            {phase === "exit" && <motion.div className="fadeOut" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: EXIT_FADE }} />}
-          </AnimatePresence>
-        </div>
+        <AnimatePresence>
+          {phase === "exit" && <motion.div className="fadeOut" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: EXIT_FADE }} />}
+        </AnimatePresence>
+      </div>
 
-        <div className="hint">
-          {phase === "night" && "Cuidando da plantação sob a lua…"}
-          {phase === "exit" && "A lua está se pondo — abrindo a homepage…"}
-        </div>
+      <div className="hint">
+        {phase === "night" && "Cuidando da plantação sob a lua…"}
+        {phase === "exit" && "A lua está se pondo — abrindo a homepage…"}
       </div>
     </div>
   );

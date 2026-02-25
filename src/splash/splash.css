@@ -15,10 +15,9 @@ body {
 }
 
 .splashRoot {
+  position: relative;
   min-height: 100vh;
-  display: grid;
-  place-items: center;
-  padding: 18px;
+  overflow: hidden;
 }
 
 .splashRoot.day {
@@ -29,18 +28,12 @@ body {
   background: radial-gradient(1200px 700px at 50% 10%, #111a33 0%, #060812 70%);
 }
 
-.splashCard {
-  width: min(980px, 96vw);
-  border-radius: var(--card-radius);
-  box-shadow: var(--shadow);
-  overflow: hidden;
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  backdrop-filter: blur(10px);
-}
 
 .splashHeader {
-  padding: 16px 18px;
+  position: absolute;
+  top: 16px;
+  left: 18px;
+  z-index: 20;
   display: flex;
   gap: 12px;
   align-items: center;
@@ -69,7 +62,8 @@ body {
 
 .scene {
   position: relative;
-  height: min(560px, 70vh);
+  width: 100vw;
+  height: 100vh;
   overflow: hidden;
 }
 
@@ -312,7 +306,22 @@ body {
 }
 
 .hint {
-  padding: 14px 18px 18px;
+  position: absolute;
+  left: 18px;
+  bottom: 16px;
+  z-index: 20;
   color: rgba(255, 255, 255, 0.78);
   font-size: 13px;
+}
+
+@media (max-width: 640px) {
+  .splashHeader {
+    top: 12px;
+    left: 12px;
+  }
+
+  .hint {
+    left: 12px;
+    bottom: 12px;
+  }
 }
