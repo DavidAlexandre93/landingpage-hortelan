@@ -65,9 +65,9 @@ p.lead{font-size:1.12rem;color:var(--muted)}
 .card-body{padding:1.25rem}
 .kpi .value{font-size:1.4rem;font-weight:800;color:#6ee7b7}
 .kpi .label{font-size:.75rem;color:#8eb3a8;margin-top:.25rem}
-.mock{aspect-ratio:4/3;border:1px dashed #2f705f;border-radius:16px;background:linear-gradient(135deg,#123228, #0c211b);display:flex;align-items:center;justify-content:center;padding:1rem;transition:transform .25s ease}
+.mock{aspect-ratio:4/3;border:1px solid rgba(110,231,183,.35);border-radius:16px;background:linear-gradient(135deg,#123228, #0c211b);display:flex;align-items:center;justify-content:center;padding:.12rem;transition:transform .25s ease}
 .mock .hint{font-size:.9rem;color:#9ff3cd;text-align:center}
-.mock img{max-width:100%;height:auto;border-radius:12px}
+.mock img{width:100%;height:100%;object-fit:cover;border-radius:15px;display:block}
 .cultivo-scene{position:relative;isolation:isolate;width:min(100%,500px);aspect-ratio:5/4;border-radius:14px;overflow:hidden;background:linear-gradient(180deg,#85d8ff 0%,#a8e9ff 62%,#f4f0dc 100%);box-shadow:inset 0 0 0 1px rgba(255,255,255,.14)}
 .cultivo-scene.night{background:linear-gradient(180deg,#091537 0%,#12245a 60%,#25356e 100%)}
 .sky-glow{position:absolute;inset:0;background:radial-gradient(circle at 20% 25%,rgba(255,244,199,.55),transparent 42%)}
