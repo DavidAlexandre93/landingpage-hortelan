@@ -38,68 +38,66 @@ export default function DaySplash({ onDone }) {
 
   return (
     <div className="splashRoot day">
-      <div className="splashCard">
-        <div className="splashHeader">
-          <div className="brandDot" />
-          <div>
-            <div className="brandTitle">Bem-vindo!</div>
-            <div className="brandSub">Carregando a experiência do dia 🌤️</div>
-          </div>
+      <div className="splashHeader">
+        <div className="brandDot" />
+        <div>
+          <div className="brandTitle">Bem-vindo!</div>
+          <div className="brandSub">Carregando a experiência do dia 🌤️</div>
+        </div>
+      </div>
+
+      <div className="scene">
+        <div className="sky daySky" />
+
+        <motion.div
+          className="sun"
+          initial={{ y: 16, scale: 0.9, opacity: 0 }}
+          animate={{ y: 0, scale: 1, opacity: 1 }}
+          transition={{ duration: 1.0, ease: "easeOut" }}
+        >
+          <div className="sunGlow" />
+        </motion.div>
+
+        <motion.div className="cloud cloud1" animate={{ x: [0, 18, 0] }} transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }} />
+        <motion.div className="cloud cloud2" animate={{ x: [0, -22, 0] }} transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }} />
+
+        <AnimatePresence>
+          {phase === "rain" && (
+            <motion.div className="rainLayer" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.5 }}>
+              {raindrops.map((d) => (
+                <motion.div
+                  key={d.id}
+                  className="drop"
+                  style={{ left: `${d.x}vw`, opacity: d.opacity }}
+                  initial={{ y: "-10vh" }}
+                  animate={{ y: ["-10vh", "85vh"] }}
+                  transition={{ duration: d.dur, delay: d.delay, repeat: Infinity, ease: "linear" }}
+                />
+              ))}
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        <div className="ground" />
+        <div className="fieldGradient" />
+
+        <div className="plantsRow">
+          {range(8).map((i) => (
+            <Plant key={i} index={i} grow={phase === "grow" || phase === "exit"} />
+          ))}
         </div>
 
-        <div className="scene">
-          <div className="sky daySky" />
+        <AnimatePresence>
+          {phase === "exit" && (
+            <motion.div className="fadeOut" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 1 }} transition={{ duration: EXIT_FADE }} />
+          )}
+        </AnimatePresence>
+      </div>
 
-          <motion.div
-            className="sun"
-            initial={{ y: 16, scale: 0.9, opacity: 0 }}
-            animate={{ y: 0, scale: 1, opacity: 1 }}
-            transition={{ duration: 1.0, ease: "easeOut" }}
-          >
-            <div className="sunGlow" />
-          </motion.div>
-
-          <motion.div className="cloud cloud1" animate={{ x: [0, 18, 0] }} transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }} />
-          <motion.div className="cloud cloud2" animate={{ x: [0, -22, 0] }} transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }} />
-
-          <AnimatePresence>
-            {phase === "rain" && (
-              <motion.div className="rainLayer" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.5 }}>
-                {raindrops.map((d) => (
-                  <motion.div
-                    key={d.id}
-                    className="drop"
-                    style={{ left: `${d.x}vw`, opacity: d.opacity }}
-                    initial={{ y: "-10vh" }}
-                    animate={{ y: ["-10vh", "85vh"] }}
-                    transition={{ duration: d.dur, delay: d.delay, repeat: Infinity, ease: "linear" }}
-                  />
-                ))}
-              </motion.div>
-            )}
-          </AnimatePresence>
-
-          <div className="ground" />
-          <div className="fieldGradient" />
-
-          <div className="plantsRow">
-            {range(8).map((i) => (
-              <Plant key={i} index={i} grow={phase === "grow" || phase === "exit"} />
-            ))}
-          </div>
-
-          <AnimatePresence>
-            {phase === "exit" && (
-              <motion.div className="fadeOut" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 1 }} transition={{ duration: EXIT_FADE }} />
-            )}
-          </AnimatePresence>
-        </div>
-
-        <div className="hint">
-          {phase === "rain" && "Regando a plantação…"}
-          {phase === "grow" && "A chuva parou — crescimento em andamento…"}
-          {phase === "exit" && "Abrindo a homepage…"}
-        </div>
+      <div className="hint">
+        {phase === "rain" && "Regando a plantação…"}
+        {phase === "grow" && "A chuva parou — crescimento em andamento…"}
+        {phase === "exit" && "Abrindo a homepage…"}
       </div>
     </div>
   );
