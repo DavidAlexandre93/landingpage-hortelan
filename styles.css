@@ -129,7 +129,7 @@ section.inset{background:var(--bg-soft)}
 footer{border-top:1px solid #1b443a;padding:2rem 0;background:#081510}
 .brandmark{display:flex;align-items:center;gap:.6rem;color:#9ff3cd}
 .logo-svg{width:44px;height:44px;display:block}
-.logo-footer{width:28px;height:28px}
+.logo-footer{width:72px;height:72px}
 .section-header{margin-bottom:1.25rem}
 .section-header .title-xl{position:relative;display:inline-block}
 .section-header .title-xl::after{content:"";position:absolute;left:0;right:0;bottom:-6px;height:6px;background:linear-gradient(90deg,#34d399,#059669);opacity:.3;border-radius:6px}
@@ -180,7 +180,7 @@ footer{border-top:1px solid #1b443a;padding:2rem 0;background:#081510}
 @media(prefers-color-scheme:dark){.lang-switch{background:#0f172a}.lang-switch button.active{background:#052e23;box-shadow:inset 0 0 0 1px #14532d}}
 
 .brand-logo{width:44px;height:44px;object-fit:contain;filter: drop-shadow(0 2px 4px rgba(0,0,0,.3));}
-.logo-footer{width:32px;height:32px;object-fit:contain}
+.logo-footer{width:72px;height:72px;object-fit:contain}
 
 .reveal{opacity:0;transform:translateY(20px) scale(.99);transition:opacity .55s ease var(--reveal-delay,0ms),transform .55s ease var(--reveal-delay,0ms)}
 .reveal.is-visible{opacity:1;transform:translateY(0) scale(1)}
