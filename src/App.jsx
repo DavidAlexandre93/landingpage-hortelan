@@ -6,7 +6,7 @@ export default function App() {
   return (
     <Routes>
       <Route path="/" element={<SplashGate />} />
-      <Route path="/home" element={<Navigate to="/" replace />} />
+      <Route path="/home" element={<Navigate to="/index.min.html" replace />} />
     </Routes>
   );
 }
