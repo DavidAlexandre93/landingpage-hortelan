@@ -8,7 +8,7 @@ function getTimeMode(date = new Date()) {
 }
 
 function redirectToCorrectHome() {
-  window.location.assign("/home");
+  window.location.assign("/index.min.html");
 }
 
 export default function SplashGate() {
