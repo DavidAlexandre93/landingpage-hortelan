@@ -1,0 +1,318 @@
+:root {
+  --card-radius: 22px;
+  --shadow: 0 16px 40px rgba(0, 0, 0, 0.25);
+  --text: rgba(255, 255, 255, 0.92);
+  --muted: rgba(255, 255, 255, 0.72);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
+}
+
+.splashRoot {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 18px;
+}
+
+.splashRoot.day {
+  background: radial-gradient(1200px 700px at 50% 10%, #3b82f6 0%, #0b1220 70%);
+}
+
+.splashRoot.night {
+  background: radial-gradient(1200px 700px at 50% 10%, #111a33 0%, #060812 70%);
+}
+
+.splashCard {
+  width: min(980px, 96vw);
+  border-radius: var(--card-radius);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(10px);
+}
+
+.splashHeader {
+  padding: 16px 18px;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.brandDot {
+  width: 12px;
+  height: 12px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.8);
+  box-shadow: 0 0 24px rgba(255, 255, 255, 0.35);
+}
+
+.brandTitle {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.1;
+}
+
+.brandSub {
+  margin-top: 2px;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.scene {
+  position: relative;
+  height: min(560px, 70vh);
+  overflow: hidden;
+}
+
+.sky {
+  position: absolute;
+  inset: 0;
+}
+
+.daySky {
+  background: linear-gradient(#55b6ff 0%, #d9f3ff 55%, #dff5ff 100%);
+}
+
+.nightSky {
+  background: radial-gradient(900px 500px at 50% 10%, #1b2a57 0%, #070815 65%);
+}
+
+.sun {
+  position: absolute;
+  left: 50%;
+  top: 70px;
+  transform: translateX(-50%);
+  width: 124px;
+  height: 124px;
+  border-radius: 999px;
+  background: #ffe48a;
+  box-shadow: 0 0 40px rgba(255, 228, 138, 0.55);
+}
+
+.sunGlow {
+  position: absolute;
+  inset: -26px;
+  border-radius: 999px;
+  background: radial-gradient(circle, rgba(255, 228, 138, 0.55), rgba(255, 228, 138, 0) 70%);
+}
+
+.moonWrap {
+  position: absolute;
+  right: 90px;
+  top: 70px;
+}
+
+.moon {
+  position: relative;
+  width: 120px;
+  height: 120px;
+  border-radius: 999px;
+  background: #f1f5f9;
+  box-shadow: 0 0 40px rgba(241, 245, 249, 0.35);
+  overflow: hidden;
+}
+
+.moonGlow {
+  position: absolute;
+  inset: -30px;
+  border-radius: 999px;
+  background: radial-gradient(circle, rgba(241, 245, 249, 0.35), rgba(241, 245, 249, 0) 70%);
+}
+
+.moonShadow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 120px;
+  height: 120px;
+  border-radius: 999px;
+  background: rgba(7, 8, 21, 0.92);
+  filter: blur(0.2px);
+  mix-blend-mode: multiply;
+}
+
+.cloud {
+  position: absolute;
+  top: 120px;
+  width: 260px;
+  height: 90px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.85);
+  filter: blur(0.2px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+}
+
+.cloud::before,
+.cloud::after {
+  content: "";
+  position: absolute;
+  background: inherit;
+  border-radius: 999px;
+}
+
+.cloud::before {
+  width: 120px;
+  height: 120px;
+  left: 26px;
+  top: -46px;
+}
+
+.cloud::after {
+  width: 160px;
+  height: 160px;
+  right: 26px;
+  top: -70px;
+}
+
+.cloud1 {
+  left: 6vw;
+  opacity: 0.92;
+}
+
+.cloud2 {
+  right: 8vw;
+  top: 150px;
+  opacity: 0.85;
+  width: 300px;
+}
+
+.nightCloud1 {
+  left: 8vw;
+  top: 120px;
+  opacity: 0.2;
+  background: rgba(255, 255, 255, 0.75);
+}
+
+.nightCloud2 {
+  right: 10vw;
+  top: 160px;
+  opacity: 0.14;
+  background: rgba(255, 255, 255, 0.75);
+}
+
+.rainLayer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.drop {
+  position: absolute;
+  top: 0;
+  width: 2px;
+  height: 26px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.9);
+  filter: blur(0.1px);
+}
+
+.ground {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 24%;
+  background: linear-gradient(#3a2b1f 0%, #1f140c 100%);
+}
+
+.nightGround {
+  background: linear-gradient(#241b14 0%, #130c08 100%);
+}
+
+.fieldGradient {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 18%;
+  height: 26%;
+  background: linear-gradient(to top, rgba(34, 197, 94, 0.28), rgba(34, 197, 94, 0));
+}
+
+.nightField {
+  background: linear-gradient(to top, rgba(34, 197, 94, 0.18), rgba(34, 197, 94, 0));
+}
+
+.plantsRow {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 12%;
+  display: flex;
+  justify-content: center;
+  gap: clamp(10px, 2.2vw, 18px);
+  padding: 0 16px;
+}
+
+.plant {
+  position: relative;
+  width: 54px;
+  height: 150px;
+  display: grid;
+  place-items: end center;
+  filter: drop-shadow(0 10px 10px rgba(0, 0, 0, 0.18));
+}
+
+.stem {
+  width: 8px;
+  height: 110px;
+  border-radius: 999px;
+  background: linear-gradient(#22c55e, #15803d);
+}
+
+.leaf {
+  position: absolute;
+  width: 34px;
+  height: 22px;
+  border-radius: 999px;
+  background: linear-gradient(#4ade80, #16a34a);
+  top: 58px;
+}
+
+.leaf.left {
+  left: 2px;
+  transform-origin: 100% 50%;
+  transform: rotate(-18deg);
+}
+
+.leaf.right {
+  right: 2px;
+  transform-origin: 0% 50%;
+  transform: rotate(18deg);
+}
+
+.stars {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.star {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 0 14px rgba(255, 255, 255, 0.35);
+}
+
+.fadeOut {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(1px);
+}
+
+.hint {
+  padding: 14px 18px 18px;
+  color: rgba(255, 255, 255, 0.78);
+  font-size: 13px;
+}
