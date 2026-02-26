@@ -17,6 +17,7 @@ body {
 .splashRoot {
   position: relative;
   min-height: 100vh;
+  min-height: 100dvh;
   overflow: hidden;
 }
 
@@ -28,15 +29,15 @@ body {
   background: radial-gradient(1200px 700px at 50% 10%, #111a33 0%, #060812 70%);
 }
 
-
 .splashHeader {
   position: absolute;
-  top: 16px;
-  left: 18px;
+  top: clamp(12px, 2vw, 18px);
+  left: clamp(12px, 2vw, 18px);
   z-index: 20;
   display: flex;
   gap: 12px;
   align-items: center;
+  max-width: min(92vw, 520px);
 }
 
 .brandDot {
@@ -48,7 +49,7 @@ body {
 }
 
 .brandTitle {
-  font-size: 18px;
+  font-size: clamp(15px, 3.6vw, 18px);
   font-weight: 700;
   color: var(--text);
   line-height: 1.1;
@@ -56,7 +57,7 @@ body {
 
 .brandSub {
   margin-top: 2px;
-  font-size: 13px;
+  font-size: clamp(12px, 2.8vw, 13px);
   color: var(--muted);
 }
 
@@ -64,6 +65,7 @@ body {
   position: relative;
   width: 100vw;
   height: 100vh;
+  height: 100dvh;
   overflow: hidden;
 }
 
@@ -83,10 +85,10 @@ body {
 .sun {
   position: absolute;
   left: 50%;
-  top: 70px;
+  top: clamp(56px, 10vh, 76px);
   transform: translateX(-50%);
-  width: 124px;
-  height: 124px;
+  width: clamp(84px, 17vw, 124px);
+  height: clamp(84px, 17vw, 124px);
   border-radius: 999px;
   background: #ffe48a;
   box-shadow: 0 0 40px rgba(255, 228, 138, 0.55);
@@ -101,14 +103,14 @@ body {
 
 .moonWrap {
   position: absolute;
-  right: 90px;
-  top: 70px;
+  right: clamp(22px, 8vw, 90px);
+  top: clamp(54px, 9vh, 70px);
 }
 
 .moon {
   position: relative;
-  width: 120px;
-  height: 120px;
+  width: clamp(84px, 17vw, 120px);
+  height: clamp(84px, 17vw, 120px);
   border-radius: 999px;
   background: #f1f5f9;
   box-shadow: 0 0 40px rgba(241, 245, 249, 0.35);
@@ -136,9 +138,9 @@ body {
 
 .cloud {
   position: absolute;
-  top: 120px;
-  width: 260px;
-  height: 90px;
+  top: clamp(96px, 18vh, 120px);
+  width: clamp(160px, 28vw, 260px);
+  height: clamp(56px, 10vw, 90px);
   border-radius: 999px;
   background: rgba(255, 255, 255, 0.85);
   filter: blur(0.2px);
@@ -154,17 +156,17 @@ body {
 }
 
 .cloud::before {
-  width: 120px;
-  height: 120px;
-  left: 26px;
-  top: -46px;
+  width: clamp(72px, 13vw, 120px);
+  height: clamp(72px, 13vw, 120px);
+  left: clamp(18px, 2.5vw, 26px);
+  top: clamp(-26px, -5.4vw, -46px);
 }
 
 .cloud::after {
-  width: 160px;
-  height: 160px;
-  right: 26px;
-  top: -70px;
+  width: clamp(96px, 17vw, 160px);
+  height: clamp(96px, 17vw, 160px);
+  right: clamp(12px, 2.5vw, 26px);
+  top: clamp(-42px, -7.2vw, -70px);
 }
 
 .cloud1 {
@@ -174,21 +176,21 @@ body {
 
 .cloud2 {
   right: 8vw;
-  top: 150px;
+  top: clamp(118px, 24vh, 150px);
   opacity: 0.85;
-  width: 300px;
+  width: clamp(190px, 32vw, 300px);
 }
 
 .nightCloud1 {
   left: 8vw;
-  top: 120px;
+  top: clamp(98px, 18vh, 120px);
   opacity: 0.2;
   background: rgba(255, 255, 255, 0.75);
 }
 
 .nightCloud2 {
   right: 10vw;
-  top: 160px;
+  top: clamp(124px, 25vh, 160px);
   opacity: 0.14;
   background: rgba(255, 255, 255, 0.75);
 }
@@ -203,7 +205,7 @@ body {
   position: absolute;
   top: 0;
   width: 2px;
-  height: 26px;
+  height: clamp(16px, 3vw, 26px);
   border-radius: 999px;
   background: rgba(255, 255, 255, 0.9);
   filter: blur(0.1px);
@@ -214,7 +216,7 @@ body {
   left: 0;
   right: 0;
   bottom: 0;
-  height: 24%;
+  height: clamp(20%, 24vh, 24%);
   background: linear-gradient(#3a2b1f 0%, #1f140c 100%);
 }
 
@@ -242,33 +244,33 @@ body {
   bottom: 12%;
   display: flex;
   justify-content: center;
-  gap: clamp(10px, 2.2vw, 18px);
-  padding: 0 16px;
+  gap: clamp(6px, 2.2vw, 18px);
+  padding: 0 clamp(8px, 2.6vw, 20px);
 }
 
 .plant {
   position: relative;
-  width: 54px;
-  height: 150px;
+  width: clamp(28px, 7vw, 54px);
+  height: clamp(92px, 20vw, 150px);
   display: grid;
   place-items: end center;
   filter: drop-shadow(0 10px 10px rgba(0, 0, 0, 0.18));
 }
 
 .stem {
-  width: 8px;
-  height: 110px;
+  width: clamp(5px, 1.1vw, 8px);
+  height: clamp(66px, 14vw, 110px);
   border-radius: 999px;
   background: linear-gradient(#22c55e, #15803d);
 }
 
 .leaf {
   position: absolute;
-  width: 34px;
-  height: 22px;
+  width: clamp(18px, 4.6vw, 34px);
+  height: clamp(12px, 2.8vw, 22px);
   border-radius: 999px;
   background: linear-gradient(#4ade80, #16a34a);
-  top: 58px;
+  top: clamp(34px, 7.4vw, 58px);
 }
 
 .leaf.left {
@@ -291,8 +293,8 @@ body {
 
 .star {
   position: absolute;
-  width: 3px;
-  height: 3px;
+  width: clamp(2px, 0.4vw, 3px);
+  height: clamp(2px, 0.4vw, 3px);
   border-radius: 999px;
   background: rgba(255, 255, 255, 0.95);
   box-shadow: 0 0 14px rgba(255, 255, 255, 0.35);
@@ -307,21 +309,56 @@ body {
 
 .hint {
   position: absolute;
-  left: 18px;
-  bottom: 16px;
+  left: clamp(10px, 2vw, 18px);
+  bottom: clamp(10px, 2vw, 16px);
   z-index: 20;
   color: rgba(255, 255, 255, 0.78);
-  font-size: 13px;
+  font-size: clamp(11px, 2.6vw, 13px);
 }
 
 @media (max-width: 640px) {
   .splashHeader {
-    top: 12px;
-    left: 12px;
+    gap: 8px;
+    max-width: calc(100vw - 24px);
+  }
+
+  .brandDot {
+    width: 10px;
+    height: 10px;
+  }
+
+  .cloud2,
+  .nightCloud2 {
+    right: 2vw;
+  }
+
+  .plantsRow {
+    bottom: 10%;
+  }
+}
+
+@media (max-height: 620px) {
+  .splashHeader {
+    top: 8px;
   }
 
   .hint {
-    left: 12px;
-    bottom: 12px;
+    bottom: 6px;
+  }
+
+  .sun,
+  .moonWrap {
+    top: 34px;
+  }
+
+  .cloud,
+  .nightCloud1,
+  .nightCloud2 {
+    top: 72px;
+  }
+
+  .cloud2,
+  .nightCloud2 {
+    top: 92px;
   }
 }
