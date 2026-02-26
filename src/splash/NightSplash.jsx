@@ -1,5 +1,6 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { getMessages } from "../i18n.js";
 
 const DURATION_NIGHT = 4.6;
 const EXIT_FADE = 0.6;
@@ -10,6 +11,7 @@ function range(n) {
 
 export default function NightSplash({ onDone }) {
   const [phase, setPhase] = useState("night");
+  const copy = useMemo(() => getMessages(), []);
 
   useEffect(() => {
     const t1 = setTimeout(() => setPhase("exit"), DURATION_NIGHT * 1000);
@@ -39,8 +41,8 @@ export default function NightSplash({ onDone }) {
       <div className="splashHeader">
         <div className="brandDot" />
         <div>
-          <div className="brandTitle">Bem-vindo!</div>
-          <div className="brandSub">Carregando a experiência da noite 🌙</div>
+          <div className="brandTitle">{copy.welcome}</div>
+          <div className="brandSub">{copy.nightLoad}</div>
         </div>
       </div>
 
@@ -94,8 +96,8 @@ export default function NightSplash({ onDone }) {
       </div>
 
       <div className="hint">
-        {phase === "night" && "Cuidando da plantação sob a lua…"}
-        {phase === "exit" && "A lua está se pondo — abrindo a homepage…"}
+        {phase === "night" && copy.nightCare}
+        {phase === "exit" && copy.moonSet}
       </div>
     </div>
   );
