@@ -1,5 +1,6 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { getMessages } from "../i18n.js";
 
 const DURATION_RAIN = 2.6;
 const DURATION_GROW = 2.4;
@@ -11,6 +12,7 @@ function range(n) {
 
 export default function DaySplash({ onDone }) {
   const [phase, setPhase] = useState("rain");
+  const copy = useMemo(() => getMessages(), []);
 
   useEffect(() => {
     const t1 = setTimeout(() => setPhase("grow"), DURATION_RAIN * 1000);
@@ -41,8 +43,8 @@ export default function DaySplash({ onDone }) {
       <div className="splashHeader">
         <div className="brandDot" />
         <div>
-          <div className="brandTitle">Bem-vindo!</div>
-          <div className="brandSub">Carregando a experiência do dia 🌤️</div>
+          <div className="brandTitle">{copy.welcome}</div>
+          <div className="brandSub">{copy.dayLoad}</div>
         </div>
       </div>
 
@@ -95,9 +97,9 @@ export default function DaySplash({ onDone }) {
       </div>
 
       <div className="hint">
-        {phase === "rain" && "Regando a plantação…"}
-        {phase === "grow" && "A chuva parou — crescimento em andamento…"}
-        {phase === "exit" && "Abrindo a homepage…"}
+        {phase === "rain" && copy.dayRain}
+        {phase === "grow" && copy.dayGrow}
+        {phase === "exit" && copy.opening}
       </div>
     </div>
   );
