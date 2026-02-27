@@ -98,7 +98,7 @@ footer{border-top:1px solid #1b443a;padding:2rem 0;background:#081510}
 
 .lang-switch button{position:relative;background:none;border:none;padding:.5rem .9rem;border-radius:999px;cursor:pointer;color:var(--muted);font-weight:700;letter-spacing:.3px}
 .lang-switch button:hover{color:var(--fg)}
-.lang-switch .active{color:#052e23}
+.lang-switch .active{color:#052e23;font-weight:800;text-shadow:0 0 0 transparent}
 .lang-switch::after{content:"";position:absolute;top:4px;height:calc(100% - 8px);left:var(--indicator-left,4px);width:var(--indicator-width,calc((100% - 8px)/4));border-radius:999px;background:linear-gradient(90deg,#9ff3cd,#6ee7b7);border:1px solid #34d399;transition:left .25s ease,width .25s ease;pointer-events:none}.lang-switch button{z-index:1}
 
 .brand-logo{width:clamp(240px,30vw,420px);height:auto;object-fit:contain;filter:drop-shadow(0 2px 4px rgba(0,0,0,.3));flex-shrink:0}
@@ -199,6 +199,43 @@ function applyLanguage(lang){
   localStorage.setItem('hortelan_lang', selected);
 }
 
+function mapCountryToLang(countryCode){
+  const country = (countryCode || '').toUpperCase();
+  if(['BR','PT','AO','MZ','CV','GW','ST','TL'].includes(country)) return 'pt';
+  if(['FR','BE','CH','CA','LU','MC'].includes(country)) return 'fr';
+  if(['ES','MX','AR','CO','CL','PE','UY','PY','BO','VE','EC','DO','GT','HN','SV','NI','CR','PA','CU'].includes(country)) return 'es';
+  return 'en';
+}
+
+function mapBrowserLangToLang(browserLang){
+  const normalized = (browserLang || '').toLowerCase();
+  if(normalized.startsWith('fr')) return 'fr';
+  if(normalized.startsWith('es')) return 'es';
+  if(normalized.startsWith('en')) return 'en';
+  return 'pt';
+}
+
+async function detectInitialLanguage(){
+  const savedLang = localStorage.getItem('hortelan_lang');
+  if(dict[savedLang]) return savedLang;
+
+  const browserLang = mapBrowserLangToLang(navigator.language);
+
+  try{
+    const response = await fetch('https://ipapi.co/json/', { cache: 'no-store' });
+    if(!response.ok) throw new Error('geo lookup failed');
+    const data = await response.json();
+    return mapCountryToLang(data?.country) || browserLang;
+  }catch(_error){
+    return browserLang;
+  }
+}
+
+function refreshActiveLanguageIndicator(){
+  const activeLang = document.querySelector('.lang-switch button.active')?.dataset.lang || localStorage.getItem('hortelan_lang') || 'pt';
+  requestAnimationFrame(()=>updateLanguageButtons(activeLang));
+}
+
 document.querySelectorAll('.lang-switch button').forEach((button)=>{
   const id = button.id;
   if(id==='btn-pt') button.dataset.lang='pt';
@@ -228,6 +265,9 @@ if(navWrap && menuToggle && navLinks && navActions){
     syncBodyMenuState(isOpen);
     menuToggle.setAttribute('aria-expanded', String(isOpen));
     menuToggle.setAttribute('aria-label', isOpen ? 'Fechar menu' : 'Abrir menu');
+    if(isOpen){
+      refreshActiveLanguageIndicator();
+    }
   };
 
   menuToggle.addEventListener('click', toggleMenu);
@@ -263,23 +303,13 @@ if(navWrap && menuToggle && navLinks && navActions){
 }
 
 window.addEventListener('resize', ()=>{
-  const current = document.querySelector('.lang-switch button.active')?.dataset.lang || 'pt';
-  updateLanguageButtons(current);
+  refreshActiveLanguageIndicator();
 });
 
-const savedLang = localStorage.getItem('hortelan_lang');
-const browserLang = (navigator.language || '').toLowerCase();
-if(dict[savedLang]){
-  applyLanguage(savedLang);
-}else if(browserLang.startsWith('fr')){
-  applyLanguage('fr');
-}else if(browserLang.startsWith('es')){
-  applyLanguage('es');
-}else if(browserLang.startsWith('en')){
-  applyLanguage('en');
-}else{
-  applyLanguage('pt');
-}
+detectInitialLanguage().then((lang)=>{
+  applyLanguage(lang);
+  refreshActiveLanguageIndicator();
+});
 
 // FAQ board logic (localStorage)
 const LIST_KEY='hortelan_faq';
