@@ -150,7 +150,7 @@ footer{border-top:1px solid #1b443a;padding:2rem 0;background:#081510}
 .flex1{flex:1;min-width:220px}
 
 @media(max-width:767px){
-  .nav-collapse{position:absolute;left:0;right:0;top:100%;display:grid;gap:1rem;padding:1rem;background:rgba(7,18,15,.98);border:1px solid #1f443b;border-radius:16px;box-shadow:var(--shadow);opacity:0;visibility:hidden;transform:translateY(-8px);pointer-events:none;transition:opacity .2s ease,transform .2s ease,visibility .2s ease}
+  .nav-collapse{position:absolute;left:.35rem;right:.35rem;top:calc(100% + .35rem);max-width:calc(100vw - 1.5rem);display:grid;gap:1rem;padding:.9rem;background:rgba(7,18,15,.98);border:1px solid #1f443b;border-radius:14px;box-shadow:var(--shadow);opacity:0;visibility:hidden;transform:translateY(-8px);pointer-events:none;transition:opacity .2s ease,transform .2s ease,visibility .2s ease}
   .menu-open .nav-collapse{opacity:1;visibility:visible;transform:translateY(0);pointer-events:auto}
   .nav-links{display:grid;gap:.65rem}
   .nav-links a{padding:.55rem .35rem;border-bottom:1px solid rgba(47,112,95,.35)}
