@@ -219,6 +219,8 @@ if(navWrap&&menuToggle&&navCollapse){
     if(navWrap.contains(target)) return;
     closeMenu();
   });
+
+  closeMenu();
 }
 
 press(document.querySelectorAll('.lang-switch button'),(element)=>setLang(element.dataset.lang));
