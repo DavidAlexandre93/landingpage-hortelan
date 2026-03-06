@@ -259,6 +259,41 @@
     </div>
   </footer>
 
-  <script src="app.js"></script>
+  <script>
+    (function () {
+      const switchEl = document.querySelector('.lang-switch');
+      if (!switchEl) return;
+
+      const updateIndicator = () => {
+        const activeButton = switchEl.querySelector('button.active');
+        if (!activeButton) return;
+        switchEl.style.setProperty('--indicator-left', `${activeButton.offsetLeft}px`);
+        switchEl.style.setProperty('--indicator-width', `${activeButton.offsetWidth}px`);
+      };
+
+      const applyLangState = (lang) => {
+        const resolved = lang || localStorage.getItem('lang') || localStorage.getItem('hortelan_lang') || 'pt';
+        document.documentElement.lang = resolved;
+
+        switchEl.querySelectorAll('button[data-lang]').forEach((button) => {
+          const active = button.dataset.lang === resolved;
+          button.classList.toggle('active', active);
+          button.setAttribute('aria-pressed', String(active));
+        });
+
+        localStorage.setItem('lang', resolved);
+        localStorage.setItem('hortelan_lang', resolved);
+        requestAnimationFrame(updateIndicator);
+      };
+
+      switchEl.querySelectorAll('button[data-lang]').forEach((button) => {
+        button.addEventListener('click', () => applyLangState(button.dataset.lang));
+      });
+
+      window.addEventListener('resize', updateIndicator);
+      applyLangState();
+    })();
+  </script>
+  <script type="module" src="app.js"></script>
 </body>
 </html>
