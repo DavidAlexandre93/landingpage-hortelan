@@ -233,23 +233,35 @@ if(navWrap&&menuToggle&&navCollapse){
     menuToggle.setAttribute('aria-expanded','false');
   };
 
-  press(menuToggle,()=>{
+  const toggleMenu=()=>{
     const opening=!navWrap.classList.contains('menu-open');
     navWrap.classList.toggle('menu-open',opening);
     menuToggle.setAttribute('aria-expanded',String(opening));
+  };
+
+  menuToggle.addEventListener('click',(event)=>{
+    event.preventDefault();
+    event.stopPropagation();
+    toggleMenu();
   });
 
-  press(navCollapse.querySelectorAll('a[href]'),()=>closeMenu());
+  navCollapse.querySelectorAll('a[href]').forEach((link)=>{
+    link.addEventListener('click',()=>closeMenu());
+  });
 
   ScrollTrigger.matchMedia({
     '(min-width: 768px)': ()=>closeMenu()
   });
 
-  press(document,(_, startEvent)=>{
-    const target = startEvent.target;
+  document.addEventListener('click',(event)=>{
+    const target = event.target;
     if(!navWrap.classList.contains('menu-open')) return;
     if(navWrap.contains(target)) return;
     closeMenu();
+  });
+
+  document.addEventListener('keydown',(event)=>{
+    if(event.key==='Escape') closeMenu();
   });
 
   closeMenu();
