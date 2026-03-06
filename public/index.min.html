@@ -1,406 +1,322 @@
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Hortelan AgTech Ltda. (IoT, automação, comunidade)</title>
+  <meta name="description" content="Hortelan integra IoT, automação por regras, dashboard em tempo real, comunidade e recompensas para simplificar a horticultura doméstica." />
+  <meta name="keywords" content="horta, IoT, automação, jardinagem, agricultura urbana, sensores, smart garden, dashboard" />
+  <link rel="canonical" href="https://example.com/hortelan" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Hortelan • Cultivo com inteligência" />
+  <meta property="og:description" content="Monitore, automatize e aprenda com a comunidade. Dashboard em tempo real + recompensas." />
+  <meta property="og:url" content="https://example.com/hortelan" />
+  <meta property="og:image" content="https://example.com/og-hortelan.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" href="Assets/favicon.svg" type="image/svg+xml" />
+  <meta name="theme-color" content="#059669" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <a class="skip" href="#main">Pular para o conteúdo</a>
+  <header class="navbar" role="banner">
+    <div class="container nav-wrap" aria-label="Barra de navegação">
+      <div class="brandmark" aria-label="Marca">
+        <img class="brand-logo" src="Assets/logo.png" alt="Logo Hortelan" width="72" height="72">
+      </div>
+      <button type="button" class="menu-toggle" aria-controls="nav-collapse" aria-expanded="false" aria-label="Abrir menu de navegação">
+        <span aria-hidden="true"></span>
+      </button>
+      <div class="nav-collapse" id="nav-collapse">
+        <nav class="nav-links" aria-label="Navegação primária">
+          <a href="#features" data-i18n="nav.features">Recursos</a>
+          <a href="#about" data-i18n="nav.about">Sobre</a>
+          <a href="#how" data-i18n="nav.how">Como funciona</a>
+          <a href="#journeys" data-i18n="nav.journeys">Jornadas</a>
+          <a href="#pricing" data-i18n="nav.pricing">Planos</a>
+          <a href="#faq" data-i18n="nav.faq">FAQ</a>
+        </nav>
+        <div class="row nav-actions" aria-label="Ações">
+          <div class="lang-switch" role="group" aria-label="Escolher idioma">
+            <button type="button" id="btn-en" data-lang="en" aria-label="English" title="English" aria-pressed="false">EN</button>
+            <button type="button" id="btn-pt" data-lang="pt" class="active" aria-label="Português" title="Português" aria-pressed="true">BR</button>
+            <button type="button" id="btn-es" data-lang="es" aria-label="Español" title="Español" aria-pressed="false">ES</button>
+            <button type="button" id="btn-fr" data-lang="fr" aria-label="Français" title="Français" aria-pressed="false">FR</button>
+          </div>
+          <a class="btn ghost" target="_blank" href="https://docs.google.com/presentation/d/1BpvxRFnMVgAnUO2XeYl6Q6Yads8sWMLKgpi-b2snJ1Y/edit?slide=id.p#slide=id.p" data-i18n="nav.docs">Docs</a>
+          <a class="btn primary" target="_blank" href="https://hortelan.vercel.app/dashboard/app" data-i18n="nav.demo">Abrir Demo</a>
+        </div>
+      </div>
+    </div>
+  </header>
 
-<!DOCTYPE html>
+  <main id="main" role="main">
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="container">
+        <div class="grid">
+          <div>
+            <span class="badge" data-i18n="hero.badge">IoT • Automação • Comunidade</span>
+            <h1 id="hero-title" data-i18n="hero.title">Cultive melhor com dados, automação e uma comunidade ativa</h1>
+            <p class="lead" data-i18n="hero.subtitle">Hortelan integra sensores, regras de automação e um painel em tempo real, com uma comunidade que ensina e recompensa boas práticas.</p>
+            <div class="row mt-4">
+              <a class="btn ghost" href="#features" data-i18n="hero.ctaSecondary">Ver Recursos</a>
+            </div>
+            <div class="kpis mt-6" aria-label="Métricas de impacto">
+              <div class="card kpi"><div class="card-body center"><div class="value">−22%</div><div class="label" data-i18n="kpis.k1">Tempo p/ ação em alertas</div></div></div>
+              <div class="card kpi"><div class="card-body center"><div class="value">−35%</div><div class="label" data-i18n="kpis.k2">Relatórios manuais</div></div></div>
+              <div class="card kpi"><div class="card-body center"><div class="value">−40%</div><div class="label" data-i18n="kpis.k3">Chamados repetitivos</div></div></div>
+              <div class="card kpi"><div class="card-body center"><div class="value">&lt; 15 min</div><div class="label" data-i18n="kpis.k4">Onboarding c/ SSO</div></div></div>
+            </div>
+          </div>
+          <div>
+            <div class="hero-visual" aria-hidden="true">
+              <div class="leaf leaf-left">🍃</div>
+              <div class="leaf leaf-right">🌿</div>
+              <div class="network-cable"><span class="cable-plug"></span></div>
+            </div>
+            <div class="mock card" aria-label="Dashboard do Hortelan">
+              <span class="promo-leaf promo-leaf-top-left" aria-hidden="true">🍃</span>
+              <span class="promo-leaf promo-leaf-top-right" aria-hidden="true">🌿</span>
+              <span class="promo-leaf promo-leaf-bottom-left" aria-hidden="true">🍀</span>
+              <span class="promo-leaf promo-leaf-bottom-right" aria-hidden="true">🌱</span>
+              <div class="card-body center"><img src="Assets/dashboard.png" alt="Dashboard do Hortelan" loading="lazy" decoding="async"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-<html lang="pt-BR"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1" name="viewport"/><title>Hortelan Agtech Ltda. • Cultivo com inteligência (IoT, automação, comunidade)</title><meta content="Hortelan Agtech Ltda. integra IoT, automação por regras, dashboard em tempo real, comunidade e recompensas para simplificar a horticultura doméstica." name="description"/><meta content="horta, IoT, automação, jardinagem, agricultura urbana, sensores, smart garden, dashboard" name="keywords"/><link href="https://example.com/hortelan" rel="canonical"/><meta content="website" property="og:type"/><meta content="Hortelan Agtech Ltda. • Cultivo com inteligência" property="og:title"/><meta content="Monitore, automatize e aprenda com a comunidade. Dashboard em tempo real + recompensas." property="og:description"/><meta content="https://example.com/hortelan" property="og:url"/><meta content="https://example.com/og-hortelan.jpg" property="og:image"/><meta content="summary_large_image" name="twitter:card"/><link href="Assets/logo.svg" type="image/svg+xml" rel="icon"/><meta content="#059669" name="theme-color"/><style>:root{--bg:#07120f;--bg-soft:#0b1c18;--surface:#102722;--surface-2:#14322c;--fg:#e6f4ef;--muted:#a6c2b9;--line:#1f443b;--brand:#34d399;--brand-700:#10b981;--brand-50:#0f2e27;--focus:#6ee7b7;--shadow:0 10px 24px rgba(0,0,0,.28)}
-@media(prefers-color-scheme:dark){
-  :root{--bg:#07120f;--bg-soft:#0b1c18;--surface:#102722;--surface-2:#14322c;--fg:#e6f4ef;--muted:#a6c2b9;--line:#1f443b;--brand:#34d399;--brand-700:#10b981;--brand-50:#0f2e27;--focus:#6ee7b7}
-}
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,sans-serif;color:var(--fg);background:linear-gradient(180deg,#07120f 0%, #0a1814 45%, #07120f 100%)}
-a{color:#6ee7b7;text-decoration:none}
-a:hover{color:#a7f3d0}
-.container{max-width:1152px;margin:0 auto;padding:0 1rem}
-.row{display:flex;gap:.75rem;flex-wrap:wrap}
-.btn{display:inline-flex;align-items:center;justify-content:center;padding:.9rem 1.2rem;border-radius:14px;font-weight:600;border:1px solid transparent;transition:.2s;cursor:pointer}
-.btn.primary{background:var(--brand);color:#052e23}.btn.primary:hover{background:var(--brand-700);color:#ecfdf5}
-.btn.ghost{border-color:#2d5d51;color:#9ff3cd;background:rgba(16,39,34,.45)}.btn.ghost:hover{background:#15362e}
-.btn:focus{outline:2px solid var(--focus);outline-offset:2px}
-.badge{display:inline-flex;align-items:center;gap:.4rem;font-size:.75rem;padding:.35rem .6rem;border-radius:999px;background:#123228;color:#9ff3cd;border:1px solid #2e6a58}
-.navbar{position:sticky;top:0;z-index:50;background:#07120fcc;backdrop-filter:saturate(180%) blur(10px);border-bottom:1px solid #1b443a}.navbar .container.nav-wrap{max-width:100%;padding-left:0;padding-right:var(--space-fluid,1rem)}
+    <section id="features" class="inset" aria-labelledby="features-title">
+      <div class="container">
+        <div class="center section-header">
+          <div class="title-xl" id="features-title" data-i18n="features.title">Recursos que fecham o ciclo de cuidado</div>
+          <p class="subtitle" data-i18n="features.subtitle">Do monitoramento ao aprendizado, da automação aos incentivos — tudo em um único produto.</p>
+        </div>
+        <div class="features mt-6">
+          <div class="card"><div class="card-body feature"><div class="icon" aria-hidden="true">📊</div><div><h3 data-i18n="features.f1.title">Dashboard em tempo real</h3><p data-i18n="features.f1.desc">KPIs, gráficos e histórico — do overview executivo ao detalhe operacional.</p></div></div></div>
+          <div class="card"><div class="card-body feature"><div class="icon" aria-hidden="true">⚙️</div><div><h3 data-i18n="features.f2.title">Automação por regras</h3><p data-i18n="features.f2.desc">Se temperatura &gt; X, ligue ventilação. Histerese, janelas e bloqueios de segurança.</p></div></div></div>
+          <div class="card"><div class="card-body feature"><div class="icon" aria-hidden="true">🔔</div><div><h3 data-i18n="features.f3.title">Alertas inteligentes</h3><p data-i18n="features.f3.desc">Você só é chamado quando importa — com contexto para agir rápido.</p></div></div></div>
+          <div class="card"><div class="card-body feature"><div class="icon" aria-hidden="true">👥</div><div><h3 data-i18n="features.f4.title">Comunidade</h3><p data-i18n="features.f4.desc">Aprenda, ensine e compartilhe cadernos de cultivo, dicas e resultados.</p></div></div></div>
+          <div class="card"><div class="card-body feature"><div class="icon" aria-hidden="true">🛒</div><div><h3 data-i18n="features.f5.title">Loja e kits</h3><p data-i18n="features.f5.desc">Sensores, atuadores e insumos recomendados para cada jornada de cultivo.</p></div></div></div>
+          <div class="card"><div class="card-body feature"><div class="icon" aria-hidden="true">⚡</div><div><h3 data-i18n="features.f6.title">Recompensas</h3><p data-i18n="features.f6.desc">Incentivos ao engajamento: guias, respostas úteis e boas práticas.</p></div></div></div>
+        </div>
+      </div>
+    </section>
 
-.nav-wrap{display:grid;grid-template-columns:auto minmax(0,1fr) auto;grid-template-areas:"brand nav actions";align-items:center;min-height:96px;gap:1rem;position:relative}.nav-panel{display:contents}
-.nav-links{grid-area:nav;display:none;gap:.55rem;align-items:center;justify-content:center;min-width:0;width:100%;margin-inline:clamp(.25rem,.9vw,.8rem);padding:0;border:0;background:transparent;backdrop-filter:none}.menu-toggle{display:none;grid-area:toggle;align-items:center;justify-content:center;width:44px;height:44px;border-radius:12px;border:1px solid #2d5d51;background:#0f2e27;color:#d1fae5;cursor:pointer;font-size:1.45rem;line-height:1;padding:0}.menu-toggle .menu-open-icon{display:inline}.menu-toggle .menu-close-icon{display:none}.menu-open .menu-toggle .menu-open-icon{display:none}.menu-open .menu-toggle .menu-close-icon{display:inline}
-.nav-links a{font-size:.94rem;color:#d1fae5;display:inline-flex;align-items:center;justify-content:center;line-height:1.15;white-space:nowrap;flex:0 0 auto;min-width:max-content;padding:.5rem .85rem;border-radius:999px;transition:background .22s ease,color .22s ease,transform .22s ease}.nav-links a:hover{color:#bbf7d0;background:rgba(16,185,129,.16);transform:translateY(-1px)}
-.brandmark{grid-area:brand;display:flex;align-items:center;gap:.6rem;color:#9ff3cd;flex-shrink:0;min-width:0}
-.brandmark strong{line-height:1.2;white-space:nowrap;font-size:clamp(1.05rem,1.4vw,1.95rem)}
-.brand-logo{display:block;width:clamp(170px,22vw,280px);height:auto}
-.nav-actions{grid-area:actions;display:flex;align-items:center;justify-content:flex-end;flex-wrap:nowrap;gap:.65rem;flex-shrink:0}
-.nav-actions .btn{white-space:nowrap}
-.lang-switch{display:inline-flex;position:relative;gap:0;border:1px solid var(--line);border-radius:999px;padding:.2rem;background:#0b1f19;box-shadow:var(--shadow);flex-shrink:0}
-@media(min-width:768px){.nav-links{display:flex}}
-@media(max-width:767px){.navbar{backdrop-filter:none}.menu-toggle{display:inline-flex;justify-self:end;z-index:92}.nav-wrap{grid-template-columns:minmax(0,1fr) auto;grid-template-areas:"brand toggle" "nav nav";align-items:center;gap:.35rem;min-height:56px;padding:.35rem 0}.nav-wrap::after{content:"";position:fixed;inset:0;background:linear-gradient(180deg,rgba(2,10,8,.62),rgba(2,10,8,.84));backdrop-filter:blur(6px);opacity:0;visibility:hidden;pointer-events:none;transition:opacity .28s ease,visibility .28s ease;z-index:70}.menu-open.nav-wrap::after{opacity:1;visibility:visible;pointer-events:auto}.brandmark strong{display:none}.brand-logo{width:clamp(104px,34vw,128px)}.nav-panel{grid-area:nav;display:none;width:100%;max-width:min(92vw,430px);margin-inline:auto;max-height:none;overflow:visible;opacity:0;visibility:hidden;pointer-events:none;transform:translateY(-8px) scale(.985);transform-origin:top center;transition:opacity .24s ease,transform .24s ease,visibility .24s ease;z-index:82}.menu-open .nav-panel{display:block;opacity:1;visibility:visible;pointer-events:auto;transform:translateY(0) scale(1)}.menu-open .nav-links{padding-top:2.7rem}.nav-links{display:flex;flex-direction:column;align-items:stretch;justify-content:flex-start;position:relative;left:auto;right:auto;top:auto;width:100%;max-height:none;overflow:hidden;margin-inline:0;padding:.5rem;border:1px solid color-mix(in srgb,var(--line) 74%,#6ee7b7 26%);border-radius:20px;background:linear-gradient(180deg,rgba(7,18,15,.97),rgba(8,27,22,.94));box-shadow:0 18px 38px rgba(0,0,0,.38);backdrop-filter:blur(12px) saturate(120%)}.nav-links a{justify-content:flex-start;min-width:0;width:100%;padding:.66rem .72rem;border-radius:11px}.nav-links .menu-toggle{display:inline-flex;position:absolute;top:.5rem;right:.5rem;margin:0;z-index:93}.nav-actions{display:flex;width:100%;justify-content:space-between;flex-wrap:wrap;gap:.45rem;position:relative;left:auto;right:auto;bottom:auto;margin:.3rem 0 0;padding:.45rem 0 0;border:0;border-radius:0;background:transparent;box-shadow:none;backdrop-filter:none}.nav-actions .btn{flex:1 1 100%;text-align:center}.lang-switch{width:100%;justify-content:space-between}.lang-switch button{flex:1}body.menu-overlay-open{overflow:hidden;touch-action:none}}@media(min-width:768px) and (max-width:1480px){.nav-wrap{grid-template-columns:minmax(0,1fr) auto;grid-template-areas:"brand actions" "nav nav";height:auto;padding:.65rem 0}.nav-links{justify-content:flex-start;overflow-x:auto;padding:0;margin-inline:0}.nav-actions{justify-self:end}}
-@media(min-width:768px) and (max-width:980px){.nav-wrap{grid-template-columns:1fr;grid-template-areas:"brand" "actions" "nav";gap:.65rem}.brandmark strong{font-size:clamp(.95rem,4.2vw,1.3rem)}.nav-actions{width:100%;justify-content:space-between;flex-wrap:wrap;gap:.5rem}.nav-actions .btn{flex:1 1 160px;text-align:center}.lang-switch{width:100%;justify-content:space-between}.lang-switch button{flex:1}}
-@media(max-width:560px){.nav-wrap{padding:.32rem 0}.menu-toggle{width:40px;height:40px}.nav-panel{max-height:none}.nav-links{padding:.44rem}.nav-links .menu-toggle{top:.42rem;right:.42rem}.nav-links a{font-size:.86rem;padding:.58rem .64rem}.nav-actions{padding:.36rem 0 0}.nav-actions .btn{flex:1 1 100%}}
+    <section id="about" class="inset" aria-labelledby="about-title">
+      <div class="container">
+        <div class="center section-header">
+          <div class="title-xl" id="about-title" data-i18n="about.title">Sobre o Hortelan</div>
+          <p class="subtitle" data-i18n="about.subtitle">Nossa missão é simplificar o cultivo com tecnologia acessível, dados em tempo real e uma comunidade que aprende junto.</p>
+        </div>
+        <div class="grid-2">
+          <div class="video-wrap">
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/91gdJPCjX40" title="Apresentação Hortelan" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+          </div>
+          <div class="card"><div class="card-body prose">
+            <p data-i18n="about.p1">Hortelan integra sensores, automação por regras e um painel web para acompanhar tudo de forma simples.</p>
+            <ul>
+              <li data-i18n="about.l1">Instalação rápida e segura com kits compatíveis.</li>
+              <li data-i18n="about.l2">Automatize irrigação, iluminação e ventilação com histerese e janelas de operação.</li>
+              <li data-i18n="about.l3">Alertas inteligentes para agir no tempo certo.</li>
+              <li data-i18n="about.l4">Comunidade para compartilhar resultados e aprender com outros cultivadores.</li>
+            </ul>
+            <div class="row mt-4 about-cta-row">
+              <a class="btn ghost youtube-cta" target="_blank" rel="noopener noreferrer" href="https://www.youtube.com/@hortelan">
+                <span aria-hidden="true" class="youtube-cta-icon">▶</span>
+                Canal do Hortelan no YouTube
+              </a>
+            </div>
+          </div></div>
+        </div>
+      </div>
+    </section>
 
-.skip{position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden}
-.skip:focus{left:1rem;top:1rem;width:auto;height:auto;background:#102722;padding:.5rem .75rem;border-radius:8px;box-shadow:var(--shadow)}
-.hero{padding:5rem 0 2rem;background:linear-gradient(180deg,#0f2e27,#07120f 50%)}
-.grid{display:grid;gap:2rem}
-@media(min-width:1024px){.hero .grid{grid-template-columns:1.15fr .85fr}}
-h1{font-size:2.6rem;line-height:1.15;margin:.6rem 0;font-weight:800}
-@media(min-width:640px){h1{font-size:3.1rem}}
-p.lead{font-size:1.12rem;color:var(--muted)}
-.kpis{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem;margin-top:1.25rem}
-@media(min-width:640px){.kpis{grid-template-columns:repeat(4,1fr)}}
-.card{background:var(--surface);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow)}
-.card-body{padding:1.25rem}
-.kpi .value{font-size:1.4rem;font-weight:800;color:#6ee7b7}
-.kpi .label{font-size:.75rem;color:#8eb3a8;margin-top:.25rem}
-.mock{aspect-ratio:4/3;border:1px dashed #2f705f;border-radius:16px;background:linear-gradient(135deg,#123228, #0c211b);display:flex;align-items:center;justify-content:center;padding:0;overflow:hidden}
-.mock .card-body{width:100%;height:100%;padding:0}.mock .hint{font-size:.9rem;color:#9ff3cd;text-align:center}
-.mock img{width:100%;height:100%;object-fit:cover;display:block;border-radius:0}
-section{padding:4rem 0}
-section.inset{background:var(--bg-soft)}
-.title-xl{font-size:2rem;font-weight:800}
-.subtitle{color:var(--muted);margin-top:.5rem}
-.features{display:grid;gap:1rem}
-@media(min-width:640px){.features{grid-template-columns:repeat(2,1fr)}}
-@media(min-width:1024px){.features{grid-template-columns:repeat(3,1fr)}}
-.feature{display:flex;gap:.9rem}
-.icon{flex:0 0 40px;height:40px;border-radius:12px;background:#123228;display:flex;align-items:center;justify-content:center;color:#9ff3cd;font-weight:700}
-.feature h3{margin:0;font-size:1rem}
-.feature p{margin:.25rem 0 0;color:var(--muted);font-size:.92rem}
-.cards{display:grid;gap:1rem}
-@media(min-width:1024px){.cards{grid-template-columns:repeat(3,1fr)}}
-.list{margin:.5rem 0 0;padding-left:1.1rem}
-.list li{margin:.4rem 0;color:var(--muted)}
-.pricing{display:grid;gap:1rem}
-@media(min-width:768px){.pricing{grid-template-columns:repeat(3,1fr)}}
-.price{font-size:1.8rem;font-weight:800;margin-top:.25rem}
-.pill{display:inline-flex;border:1px solid #2f705f;background:#123228;color:#9ff3cd;padding:.2rem .5rem;border-radius:999px;font-size:.75rem}
-.dot{display:inline-block;width:6px;height:6px;background:#6ee7b7;border-radius:999px;margin-right:.45rem;margin-top:.45rem}
-.perk{display:flex;align-items:flex-start;font-size:.92rem;color:var(--muted)}
-.faq-board{display:grid;gap:1rem}
-.faq-item{border:1px solid var(--line);border-radius:12px;padding:1rem;background:var(--surface-2)}
-.faq-meta{font-size:.8rem;color:#86a8a0}
-.cta{background:linear-gradient(135deg,#0f513f,#0a2f26);color:#e6f4ef;border-top:1px solid #2d5d51}
-.cta .btn{background:#d1fae5;color:#065f46;border-color:transparent}.cta .btn:hover{background:#9ff3cd}
-footer{border-top:1px solid #1b443a;padding:2rem 0;background:#081510}
-.logo-svg{width:44px;height:44px;display:block}
-.logo-footer{width:72px;height:72px}
-.section-header{margin-bottom:1.25rem}
-.section-header .title-xl{position:relative;display:inline-block}
-.section-header .title-xl::after{content:"";position:absolute;left:0;right:0;bottom:-6px;height:6px;background:linear-gradient(90deg,#34d399,#059669);opacity:.3;border-radius:6px}
-.prose p{margin:.5rem 0;color:var(--muted);line-height:1.7}
-.prose ul{margin:.25rem 0 0 1.1rem;color:var(--muted)}
-.prose li{margin:.3rem 0}
-.grid-2{display:grid;gap:1.5rem}
-@media(min-width:1024px){.grid-2{grid-template-columns:1.2fr .8fr}}
-.video-wrap{position:relative;width:100%;aspect-ratio:16/9;border-radius:16px;overflow:hidden;border:1px solid var(--line);box-shadow:var(--shadow)}
-.video-wrap iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
-.input{width:100%;padding:.9rem 1rem;border:1px solid var(--line);border-radius:12px;background:#0b1f19;color:var(--fg)}
-.textarea{width:100%;padding:.9rem 1rem;border:1px solid var(--line);border-radius:12px;background:#0b1f19;color:var(--fg)}
-.footer-wrap{display:flex;gap:1rem;align-items:center;justify-content:space-between;flex-wrap:wrap}
-.copy{color:#86a8a0;font-size:.9rem}
-.flex1{flex:1;min-width:220px}
+    <section id="how" aria-labelledby="how-title">
+      <div class="container">
+        <div class="cards">
+          <div class="card"><div class="card-body"><h3 id="how-title" data-i18n="how.c1.title">Telemetria & IoT</h3><p class="mt-2" data-i18n="how.c1.desc">Sensoriamento (temperatura, umidade, luz, solo) com envio seguro, buffer local e atualização OTA. Atores: bomba, iluminação, ventilação e mais.</p></div></div>
+          <div class="card"><div class="card-body"><h3 data-i18n="how.c2.title">Regras & Insights</h3><p class="mt-2" data-i18n="how.c2.desc">Automação com histerese, janelas e limites. Análises e comparativos por período, planta e local. Exportação de dados.</p></div></div>
+          <div class="card"><div class="card-body"><h3 data-i18n="how.c3.title">Segurança & Privacidade</h3><p class="mt-2" data-i18n="how.c3.desc">Criptografia em trânsito, RBAC, auditoria e proteção de dispositivos (chaves únicas e revogação).</p></div></div>
+        </div>
+      </div>
+    </section>
 
-.lang-switch button{position:relative;background:none;border:none;padding:.5rem .9rem;border-radius:999px;cursor:pointer;color:var(--muted);font-weight:700;letter-spacing:.3px}
-.lang-switch button:hover{color:var(--fg)}
-.lang-switch .active{color:#052e23;font-weight:800;text-shadow:0 0 0 transparent}
-.lang-switch::after{content:"";position:absolute;top:4px;height:calc(100% - 8px);left:var(--indicator-left,4px);width:var(--indicator-width,calc((100% - 8px)/4));border-radius:999px;background:linear-gradient(90deg,#9ff3cd,#6ee7b7);border:1px solid #34d399;transition:left .25s ease,width .25s ease;pointer-events:none}.lang-switch button{z-index:1}
+    <section class="banner-strip" aria-label="Banner Hortelan">
+      <div class="container">
+        <div class="promo-banner" role="img" aria-label="Banner Hortelan com identidade visual verde sustentável">
+          <div class="promo-glow" aria-hidden="true"></div>
+          <span class="promo-leaf promo-leaf-top-left" aria-hidden="true">🍃</span>
+          <span class="promo-leaf promo-leaf-top-right" aria-hidden="true">🌿</span>
+          <span class="promo-leaf promo-leaf-bottom-left" aria-hidden="true">🍀</span>
+          <span class="promo-leaf promo-leaf-bottom-right" aria-hidden="true">🌱</span>
+          <img src="Assets/logo.png" alt="Logo Hortelan" class="promo-logo" loading="lazy" decoding="async">
+        </div>
+      </div>
+    </section>
 
-.brand-logo{width:clamp(170px,22vw,280px);height:auto;object-fit:contain;filter:drop-shadow(0 2px 4px rgba(0,0,0,.3));flex-shrink:0}
-.logo-footer{width:32px;height:32px;object-fit:contain}
+    <section id="journeys" class="inset" aria-labelledby="journeys-title">
+      <div class="container">
+        <div class="center">
+          <div class="title-xl" id="journeys-title" data-i18n="journeys.title">Jornadas que começam simples e escalam com você</div>
+          <p class="subtitle" data-i18n="journeys.subtitle">Templates prontos por cultura, desafios mensais e comunidade para tirar dúvidas reais.</p>
+        </div>
+        <div class="grid mt-6" style="grid-template-columns:1fr;gap:1rem">
+          <div class="card"><div class="card-body"><h3 data-i18n="journeys.j1.title">Primeira horta</h3><ul class="list"><li data-i18n="journeys.j1.i1">Instalação guiada do kit básico</li><li data-i18n="journeys.j1.i2">Template de regras recomendado para manjericão</li><li data-i18n="journeys.j1.i3">Alertas de sub/super irrigação com ajuste fino</li><li data-i18n="journeys.j1.i4">Compartilhe resultados e ganhe recompensas</li></ul></div></div>
+          <div class="card"><div class="card-body"><h3 data-i18n="journeys.j2.title">Otimização avançada</h3><ul class="list"><li data-i18n="journeys.j2.i1">Novos sensores (ex.: luz) e regras de iluminação/ventilação</li><li data-i18n="journeys.j2.i2">Comparativos semanais (p95 de temperatura, variação de umidade)</li><li data-i18n="journeys.j2.i3">Exportação CSV e relatórios</li><li data-i18n="journeys.j2.i4">Guia público: como estabilizar sua estufa</li></ul></div></div>
+        </div>
+      </div>
+    </section>
 
-/* responsive enhancements */
-:root{--space-fluid:clamp(0.85rem,2.4vw,1.25rem)}
-.container{padding:0 var(--space-fluid)}
-.hero{padding:clamp(3.2rem,9vw,5rem) 0 clamp(1.8rem,5vw,2.5rem)}
-h1{font-size:clamp(1.9rem,6.8vw,3.1rem);text-wrap:balance}
-p.lead{font-size:clamp(1rem,2.8vw,1.12rem);line-height:1.65}
-.title-xl{font-size:clamp(1.45rem,5.2vw,2rem)}
-.subtitle{font-size:clamp(.95rem,2.8vw,1.05rem);line-height:1.6}
-.card-body{padding:clamp(.95rem,2.7vw,1.25rem)}
-.features,.cards,.pricing,.faq-board,.grid-2,.hero .grid{align-items:stretch}
-.feature{height:100%}
-.btn{min-height:44px}
-.nav-links{-webkit-overflow-scrolling:touch}
-.nav-links::-webkit-scrollbar{height:4px}
-.nav-links::-webkit-scrollbar-thumb{background:#2e6a58;border-radius:999px}
-
-@media (max-width:1023px){
-  .hero .grid,.grid-2{grid-template-columns:1fr}
-  .mock{max-width:680px;margin-inline:auto}
-}
-
-@media (max-width:767px){
-  section{padding:clamp(2.5rem,10vw,3.25rem) 0}
-  .kpis{grid-template-columns:repeat(2,minmax(0,1fr));gap:.75rem}
-  .pricing{grid-template-columns:1fr}
-  .cards{grid-template-columns:1fr}
-  .video-wrap{aspect-ratio:4/3}
-  .brandmark{width:auto;justify-content:flex-start}
-  .brandmark strong{white-space:normal;text-align:center}
-  .nav-links{padding-bottom:.35rem}.nav-panel{margin-top:.1rem}
-}
-
-@media (max-width:480px){
-  .container{padding:0 .85rem}
-  .hero{padding-top:2.6rem}
-  .nav-wrap{gap:.55rem}
-  .nav-links{gap:.38rem}
-  .nav-links a{font-size:.83rem;padding:.4rem .62rem}
-  .badge{font-size:.68rem}
-  .kpi .value{font-size:1.2rem}
-  .feature{gap:.7rem}
-  .icon{flex-basis:34px;height:34px;border-radius:10px}
-  .faq-item{padding:.85rem}
-  .footer-wrap{justify-content:center;text-align:center}
-}
-
-@media (min-width:1536px){
-  .container{max-width:1280px}
-}
-
-</style></head><body><a class="skip" href="#main">Pular para o conteúdo</a><header class="navbar" role="banner"><div aria-label="Barra de navegação" class="container nav-wrap"><div aria-label="Marca" class="brandmark"><img alt="Logo da Hortelan Agtech Ltda." class="brand-logo" height="44" src="img/hortelan-logo.svg" width="44"/><strong>Hortelan Agtech Ltda.</strong></div><button aria-controls="primary-nav-actions" aria-expanded="false" aria-label="Abrir menu" class="menu-toggle" type="button"><span aria-hidden="true" class="menu-open-icon">☰</span><span aria-hidden="true" class="menu-close-icon">✕</span></button><nav aria-label="Navegação primária" class="nav-links"><a data-i18n="nav.features" href="#features">Recursos</a><a data-i18n="nav.about" href="#about">Sobre</a><a data-i18n="nav.how" href="#how">Como funciona</a><a data-i18n="nav.journeys" href="#journeys">Jornadas</a><a data-i18n="nav.pricing" href="#pricing">Planos</a><a data-i18n="nav.faq" href="#faq">FAQ</a></nav><div aria-label="Ações" class="row nav-actions" id="primary-nav-actions"><div aria-label="Idioma" class="lang-switch" role="group"><button aria-pressed="false" id="btn-en" type="button">EN</button><button aria-pressed="false" id="btn-fr" type="button">FR</button><button aria-pressed="true" class="active" id="btn-pt" type="button">PT-BR</button><button aria-pressed="false" id="btn-es" type="button">ESP</button></div><a class="btn ghost" data-i18n="nav.docs" href="https://docs.google.com/presentation/d/1BpvxRFnMVgAnUO2XeYl6Q6Yads8sWMLKgpi-b2snJ1Y/edit?slide=id.p#slide=id.p" target="_blank">Documentação</a></div></div></header><main id="main" role="main"><section aria-labelledby="hero-title" class="hero"><div class="container"><div class="grid"><div><span class="badge" data-i18n="hero.badge">IoT • Automação • Comunidade</span><h1 data-i18n="hero.title" id="hero-title">Cultive melhor com dados, automação e uma comunidade ativa</h1><p class="lead" data-i18n="hero.subtitle">Hortelan Agtech Ltda. integra sensores, regras de automação e um painel em tempo real, com uma comunidade que ensina e recompensa boas práticas.</p><div class="row mt-4"><a class="btn ghost" data-i18n="hero.ctaSecondary" href="#features">Ver Recursos</a></div><div aria-label="Métricas de impacto" class="kpis mt-6"><div class="card kpi"><div class="card-body center"><div class="value">−22%</div><div class="label" data-i18n="kpis.k1">Tempo p/ ação em alertas</div></div></div><div class="card kpi"><div class="card-body center"><div class="value">−35%</div><div class="label" data-i18n="kpis.k2">Relatórios manuais</div></div></div><div class="card kpi"><div class="card-body center"><div class="value">−40%</div><div class="label" data-i18n="kpis.k3">Chamados repetitivos</div></div></div><div class="card kpi"><div class="card-body center"><div class="value">&lt; 15 min</div><div class="label" data-i18n="kpis.k4">Onboarding c/ SSO</div></div></div></div></div><div><div aria-label="Dashboard da Hortelan Agtech Ltda." class="mock card"><div class="card-body center"><img alt="Dashboard da Hortelan Agtech Ltda." decoding="async" loading="lazy" src="Assets/dashboard.png"/></div></div></div></div></div></section><section aria-labelledby="features-title" class="inset" id="features"><div class="container"><div class="center section-header"><div class="title-xl" data-i18n="features.title" id="features-title">Recursos que fecham o ciclo de cuidado</div><p class="subtitle" data-i18n="features.subtitle">Do monitoramento ao aprendizado, da automação aos incentivos — tudo em um único produto.</p></div><div class="features mt-6"><div class="card"><div class="card-body feature"><div aria-hidden="true" class="icon">📊</div><div><h3 data-i18n="features.f1.title">Dashboard em tempo real</h3><p data-i18n="features.f1.desc">KPIs, gráficos e histórico — do overview executivo ao detalhe operacional.</p></div></div></div><div class="card"><div class="card-body feature"><div aria-hidden="true" class="icon">⚙️</div><div><h3 data-i18n="features.f2.title">Automação por regras</h3><p data-i18n="features.f2.desc">Se temperatura &gt; X, ligue ventilação. Histerese, janelas e bloqueios de segurança.</p></div></div></div><div class="card"><div class="card-body feature"><div aria-hidden="true" class="icon">🔔</div><div><h3 data-i18n="features.f3.title">Alertas inteligentes</h3><p data-i18n="features.f3.desc">Você só é chamado quando importa — com contexto para agir rápido.</p></div></div></div><div class="card"><div class="card-body feature"><div aria-hidden="true" class="icon">👥</div><div><h3 data-i18n="features.f4.title">Comunidade</h3><p data-i18n="features.f4.desc">Aprenda, ensine e compartilhe cadernos de cultivo, dicas e resultados.</p></div></div></div><div class="card"><div class="card-body feature"><div aria-hidden="true" class="icon">🛒</div><div><h3 data-i18n="features.f5.title">Loja e kits</h3><p data-i18n="features.f5.desc">Sensores, atuadores e insumos recomendados para cada jornada de cultivo.</p></div></div></div><div class="card"><div class="card-body feature"><div aria-hidden="true" class="icon">⚡</div><div><h3 data-i18n="features.f6.title">Recompensas</h3><p data-i18n="features.f6.desc">Incentivos ao engajamento: guias, respostas úteis e boas práticas.</p></div></div></div></div></div></section><section aria-labelledby="about-title" class="inset" id="about"><div class="container"><div class="center section-header"><div class="title-xl" data-i18n="about.title" id="about-title">Sobre a Hortelan Agtech Ltda.</div><p class="subtitle" data-i18n="about.subtitle">Nossa missão é simplificar o cultivo com tecnologia acessível, dados em tempo real e uma comunidade que aprende junto.</p></div><div class="grid-2"><div class="video-wrap"><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="" height="315" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/91gdJPCjX40" title="Apresentação Hortelan Agtech Ltda." width="560"></iframe></div><div class="card"><div class="card-body prose"><p data-i18n="about.p1">Hortelan Agtech Ltda. integra sensores, automação por regras e um painel web para acompanhar tudo de forma simples.</p><ul><li data-i18n="about.l1">Instalação rápida e segura com kits compatíveis.</li><li data-i18n="about.l2">Automatize irrigação, iluminação e ventilação com histerese e janelas de operação.</li><li data-i18n="about.l3">Alertas inteligentes para agir no tempo certo.</li><li data-i18n="about.l4">Comunidade para compartilhar resultados e aprender com outros cultivadores.</li></ul><div class="row mt-4"><a class="btn ghost" target="_blank" rel="noopener noreferrer" href="https://www.youtube.com/@HortelanAgTechLtda">Canal do Hortelan Agtech Ltda. no YouTube</a></div></div></div></div></div></section><section aria-labelledby="how-title" id="how"><div class="container"><div class="cards"><div class="card"><div class="card-body"><h3 data-i18n="how.c1.title" id="how-title">Telemetria &amp; IoT</h3><p class="mt-2" data-i18n="how.c1.desc">Sensoriamento (temperatura, umidade, luz, solo) com envio seguro, buffer local e atualização OTA. Atores: bomba, iluminação, ventilação e mais.</p></div></div><div class="card"><div class="card-body"><h3 data-i18n="how.c2.title">Regras &amp; Insights</h3><p class="mt-2" data-i18n="how.c2.desc">Automação com histerese, janelas e limites. Análises e comparativos por período, planta e local. Exportação de dados.</p></div></div><div class="card"><div class="card-body"><h3 data-i18n="how.c3.title">Segurança &amp; Privacidade</h3><p class="mt-2" data-i18n="how.c3.desc">Criptografia em trânsito, RBAC, auditoria e proteção de dispositivos (chaves únicas e revogação).</p></div></div></div></div></section><section aria-labelledby="journeys-title" class="inset" id="journeys"><div class="container"><div class="center"><div class="title-xl" data-i18n="journeys.title" id="journeys-title">Jornadas que começam simples e escalam com você</div><p class="subtitle" data-i18n="journeys.subtitle">Templates prontos por cultura, desafios mensais e comunidade para tirar dúvidas reais.</p></div><div class="grid mt-6" style="grid-template-columns:1fr;gap:1rem"><div class="card"><div class="card-body"><h3 data-i18n="journeys.j1.title">Primeira horta</h3><ul class="list"><li data-i18n="journeys.j1.i1">Instalação guiada do kit básico</li><li data-i18n="journeys.j1.i2">Template de regras recomendado para manjericão</li><li data-i18n="journeys.j1.i3">Alertas de sub/super irrigação com ajuste fino</li><li data-i18n="journeys.j1.i4">Compartilhe resultados e ganhe recompensas</li></ul></div></div><div class="card"><div class="card-body"><h3 data-i18n="journeys.j2.title">Otimização avançada</h3><ul class="list"><li data-i18n="journeys.j2.i1">Novos sensores (ex.: luz) e regras de iluminação/ventilação</li><li data-i18n="journeys.j2.i2">Comparativos semanais (p95 de temperatura, variação de umidade)</li><li data-i18n="journeys.j2.i3">Exportação CSV e relatórios</li><li data-i18n="journeys.j2.i4">Guia público: como estabilizar sua estufa</li></ul></div></div></div></div></section><section aria-labelledby="pricing-title" id="pricing"><div class="container"><div class="center"><div class="title-xl" data-i18n="pricing.title" id="pricing-title">Planos que evoluem com o seu cultivo</div><p class="subtitle" data-i18n="pricing.subtitle">Comece grátis e ative recursos avançados quando fizer sentido.</p></div><div class="pricing mt-6"><div class="card"><div class="card-body"><div class="row" style="justify-content:space-between"><h3>Free</h3></div><div class="price">R$ 0</div><div class="mt-2"><div class="perk"><span aria-hidden="true" class="dot"></span><span data-i18n="pricing.free.p1">Dashboard básico</span></div><div class="perk"><span aria-hidden="true" class="dot"></span><span data-i18n="pricing.free.p2">Comunidade</span></div><div class="perk"><span aria-hidden="true" class="dot"></span><span data-i18n="pricing.free.p3">Regras essenciais</span></div><div class="perk"><span aria-hidden="true" class="dot"></span><span data-i18n="pricing.free.p4">Histórico 7 dias</span></div></div><a class="btn ghost mt-4" data-i18n="pricing.cta.try" href="https://hortelan.vercel.app/" target="_blank">Experimentar</a></div></div><div class="card" style="border-color:#2f705f;box-shadow:0 0 0 3px rgba(52,211,153,.18) inset"><div class="card-body"><div class="row" style="justify-content:space-between"><h3>Plus</h3><span class="pill" data-i18n="pricing.popular">Mais popular</span></div><div class="price">R$ 29/mês</div><div class="mt-2"><div class="perk"><span aria-hidden="true" class="dot"></span><span data-i18n="pricing.plus.p1">Automação avançada</span></div><div class="perk"><span aria-hidden="true" class="dot"></span><span data-i18n="pricing.plus.p2">Histórico estendido</span></div><div class="perk"><span aria-hidden="true" class="dot"></span><span data-i18n="pricing.plus.p3">Exportação CSV</span></div><div class="perk"><span aria-hidden="true" class="dot"></span><span data-i18n="pricing.plus.p4">Templates por cultura</span></div></div><a class="btn primary mt-4" data-i18n="pricing.cta.subscribe" href="https://hortelan.vercel.app/" target="_blank">Assinar Plus</a></div></div><div class="card"><div class="card-body"><div class="row" style="justify-content:space-between"><h3>Premium</h3></div><div class="price">R$ 79/mês</div><div class="mt-2"><div class="perk"><span aria-hidden="true" class="dot"></span><span data-i18n="pricing.prem.p1">Insights e detecção de anomalias</span></div><div class="perk"><span aria-hidden="true" class="dot"></span><span data-i18n="pricing.prem.p2">Integrações (ex.: Home Assistant)</span></div><div class="perk"><span aria-hidden="true" class="dot"></span><span data-i18n="pricing.prem.p3">Suporte prioritário</span></div><div class="perk"><span aria-hidden="true" class="dot"></span><span data-i18n="pricing.prem.p4">Relatórios avançados</span></div></div><a class="btn ghost mt-4" data-i18n="pricing.cta.sales" href="https://hortelan.vercel.app/" target="_blank">Falar com vendas</a></div></div></div></div></section><section aria-labelledby="contact-title" class="inset" id="contact"><div class="container"><div class="center"><div class="title-xl" data-i18n="contact.title" id="contact-title">Fale com a gente</div><p class="subtitle" data-i18n="contact.subtitle">Dúvidas, parcerias ou implantação em escolas/condomínios.</p></div><div aria-describedby="contact-note" class="card mt-6" role="form"><div class="card-body"><form action="mailto:davidalexandrefernandes@outlook.com" class="grid" enctype="text/plain" method="post" style="gap:1rem"><label><span class="sr-only" data-i18n="contact.nameLabel">Nome</span><input aria-label="Nome" class="input" name="nome" placeholder="Nome" required=""/></label><label><span class="sr-only" data-i18n="contact.emailLabel">E-mail</span><input aria-label="E-mail" class="input" name="email" placeholder="E-mail" required="" type="email"/></label><label><span class="sr-only" data-i18n="contact.msgLabel">Mensagem</span><textarea aria-label="Mensagem" class="textarea" name="mensagem" placeholder="Como podemos ajudar?" required="" rows="4"></textarea></label><div class="row"><button class="btn primary" data-i18n="contact.send" type="submit">Enviar</button><a class="btn ghost" data-i18n="contact.email" href="mailto:davidalexandrefernandes@outlook.com">Abrir e-mail</a></div><small class="subtitle" data-i18n="contact.note" id="contact-note">Dica: substitua o <em>mailto:</em> por um endpoint do Formspree/Formspark para capturar mensagens sem backend.</small></form></div></div></div></section><section aria-labelledby="faq-title" id="faq"><div class="container"><div class="center section-header"><div class="title-xl" id="faq-title">FAQ e Mural da Comunidade</div><p class="subtitle">Envie dúvidas, elogios e opiniões. As mensagens ficam salvas no seu navegador (localStorage). Para uso em produção, conecte a um serviço de formulários.</p></div><div class="grid" style="grid-template-columns:1fr;gap:1rem;margin-top:1rem"><div class="card"><div class="card-body"><form class="grid" id="faq-form" style="gap:1rem"><div class="row" style="gap:.75rem;flex-wrap:wrap"><input class="input flex1" id="f-nome" placeholder="Seu nome" required=""/><input class="input flex1" id="f-email" placeholder="E-mail (opcional)" type="email"/><select class="input" id="f-tipo"><option value="duvida">Dúvida</option><option value="elogio">Elogio</option><option value="opiniao">Opinião</option></select></div><textarea class="textarea" id="f-msg" placeholder="Escreva sua mensagem" required="" rows="4"></textarea><div class="row"><button class="btn primary" type="submit">Publicar no mural</button><button class="btn ghost" id="faq-export" type="button">Exportar JSON</button></div><small class="subtitle">Só você verá os envios salvos neste navegador. Para receber por e-mail, use o formulário de contato acima.</small></form></div></div><div aria-live="polite" class="faq-board" id="faq-list"></div></div></div></section></main><footer role="contentinfo"><div class="container footer-wrap"><div class="brandmark"><img alt="Logo da Hortelan Agtech Ltda." class="logo-footer" src="img/hortelan-logo.svg"/><span>Hortelan Agtech Ltda. • Cultivo com inteligência</span></div><div class="copy">© <span id="y"></span> Hortelan Agtech Ltda. <span data-i18n="footer.rights">Todos os direitos reservados.</span></div></div></footer><script>document.getElementById('y') && (document.getElementById('y').textContent = new Date().getFullYear());
-
-const navPrimary=document.querySelector('.nav-links');
-const misplacedFeaturesLink=document.querySelector('.nav-wrap > a[data-i18n="nav.features"]');
-if(navPrimary&&misplacedFeaturesLink){navPrimary.prepend(misplacedFeaturesLink);}
-
-
-// i18n dictionaries (kept short for demo)
-const dict={pt:{'nav.features':'Recursos','nav.how':'Como funciona','nav.journeys':'Jornadas','nav.pricing':'Planos','nav.faq':'FAQ','nav.docs':'Documentação','nav.demo':'Abrir Demo','nav.about':'Sobre','hero.badge':'Acesso • Monitoramento • Gestão 360','hero.title':'Plataforma Hortelan completa: do acesso seguro ao monitoramento, operações e comunidade','hero.subtitle':'Tela splash, login com 2FA e recuperação de senha, dashboard com automações IoT, onboarding guiado, catálogo, blog, admin, alertas, relatórios, assinaturas, integrações, suporte, segurança, perfil e visão Hortelan 360 em um só fluxo.','hero.ctaPrimary':'Explorar Demo','hero.ctaSecondary':'Ver Recursos','kpis.k1':'Acesso seguro com 2FA','kpis.k2':'Onboarding guiado com checklist','kpis.k3':'Operação com alertas e relatórios','kpis.k4':'Módulos integrados (360)','features.title':'Recursos que cobrem toda a jornada da plataforma','features.subtitle':'Da autenticação ao checkout, da automação ao suporte: módulos prontos para operação diária, gestão e crescimento.','about.title':'Sobre a Hortelan Agtech Ltda.','about.subtitle':'Centralizamos experiência do usuário, confiabilidade operacional e governança de dados para todas as etapas da jornada digital do cultivo.','about.p1':'O produto atual reúne acesso/conta, monitoramento principal, onboarding orientado, catálogo, comunidade, gestão administrativa, alertas, relatórios, assinaturas, integrações, segurança, perfil, suporte e status operacional em tempo real.','about.l1':'Conta e acesso: splash, login com lembrar-me e confiar no dispositivo, cadastro seguro, esqueci senha e reset com token.','about.l2':'Dashboard e operação: widgets, indicadores por horta, automação por regras, agenda de tarefas, planejamento de plantio, eventos por planta e bloco blockchain.','about.l3':'Módulos de negócio: onboarding guiado/demo, loja com filtros/carrinho/checkout, comunidade com reputação/feed/perguntas e central admin para usuários e IoT.','about.l4':'Confiabilidade e experiência: alertas e notificações, relatórios CSV/PDF, assinaturas, integrações + ops, LGPD/sessões/2FA, perfil/preferências, help center, status em tempo real, topbar global com busca/tema/idioma/conta.','cta.title':'Pronto para validar a plataforma ponta a ponta?','cta.subtitle':'Abra o demo e percorra os fluxos de acesso, monitoramento, operações, comunidade e gestão completa.','cta.demo':'Abrir Demo','cta.docs':'Ver Apresentação','footer.rights':'Todos os direitos reservados.'},en:{'nav.features':'Features','nav.how':'How it works','nav.journeys':'Journeys','nav.pricing':'Pricing','nav.faq':'FAQ','nav.docs':'Documentation','nav.demo':'Open Demo','nav.about':'About','hero.badge':'IoT • Automation • Community','hero.title':'Grow better with data, automation and an active community','hero.subtitle':'Hortelan Agtech Ltda. brings sensors, rule-based automation and a realtime dashboard together with a community that teaches and rewards good practices.','hero.ctaPrimary':'Explore Demo','hero.ctaSecondary':'See Features','kpis.k1':'Time to act on alerts','kpis.k2':'Manual reports','kpis.k3':'Repeat tickets','kpis.k4':'SSO onboarding','features.title':'Features that close the care loop','features.subtitle':'From monitoring to learning, from automation to incentives — in a single product.','about.title':'About Hortelan Agtech Ltda.','about.subtitle':'Our mission is to make growing simple with accessible tech, realtime data and a community that learns together.','about.p1':'Hortelan Agtech Ltda. brings sensors, rule-based automation and a web dashboard to keep everything simple.','about.l1':'Quick, secure setup with compatible kits.','about.l2':'Automate watering, lighting and ventilation with hysteresis and time windows.','about.l3':'Smart alerts so you act at the right time.','about.l4':'Community to share results and learn from other growers.','cta.title':'Ready to grow smart?','cta.subtitle':'Open the demo, explore the features and tell the community about your first results.','cta.demo':'Open Demo','cta.docs':'View Slides','footer.rights':'All rights reserved.'},es:{'nav.features':'Funciones','nav.how':'Cómo funciona','nav.journeys':'Jornadas','nav.pricing':'Planes','nav.faq':'FAQ','nav.docs':'Documentación','nav.demo':'Abrir demo','nav.about':'Sobre','hero.badge':'IoT • Automatización • Comunidad','hero.title':'Cultiva mejor con datos, automatización y una comunidad activa','hero.subtitle':'Hortelan Agtech Ltda. integra sensores, reglas de automatización y un panel en tiempo real con una comunidad que enseña y recompensa buenas prácticas.','hero.ctaPrimary':'Explorar demo','hero.ctaSecondary':'Ver funciones','kpis.k1':'Tiempo para actuar en alertas','kpis.k2':'Reportes manuales','kpis.k3':'Tickets repetitivos','kpis.k4':'Onboarding con SSO','features.title':'Funciones que cierran el ciclo de cuidado','features.subtitle':'Del monitoreo al aprendizaje, de la automatización a los incentivos, en un único producto.','about.title':'Sobre Hortelan Agtech Ltda.','about.subtitle':'Nuestra misión es simplificar el cultivo con tecnología accesible, datos en tiempo real y una comunidad que aprende unida.','about.p1':'Hortelan Agtech Ltda. integra sensores, automatización por reglas y un panel web para acompañar todo de forma simple.','about.l1':'Instalación rápida y segura con kits compatibles.','about.l2':'Automatiza riego, iluminación y ventilación con histéresis y ventanas de operación.','about.l3':'Alertas inteligentes para actuar en el momento correcto.','about.l4':'Comunidad para compartir resultados y aprender con otros cultivadores.','cta.title':'¿Listo para cultivar con inteligencia?','cta.subtitle':'Abre el demo, explora funciones y cuéntale a la comunidad tus primeros resultados.','cta.demo':'Abrir demo','cta.docs':'Ver presentación','footer.rights':'Todos los derechos reservados.'},fr:{'nav.features':'Fonctionnalités','nav.how':'Comment ça marche','nav.journeys':'Parcours','nav.pricing':'Tarifs','nav.faq':'FAQ','nav.docs':'Documentation','nav.demo':'Ouvrir la démo','nav.about':'À propos','hero.badge':'IoT • Automatisation • Communauté','hero.title':'Cultivez mieux avec les données, l’automatisation et une communauté active','hero.subtitle':'Hortelan Agtech Ltda. réunit capteurs, automatisation par règles et tableau de bord en temps réel avec une communauté qui enseigne et récompense les bonnes pratiques.','hero.ctaPrimary':'Explorer la démo','hero.ctaSecondary':'Voir les fonctionnalités','kpis.k1':'Temps d’action sur alertes','kpis.k2':'Rapports manuels','kpis.k3':'Tickets répétitifs','kpis.k4':'Intégration SSO','features.title':'Fonctionnalités pour couvrir tout le cycle','features.subtitle':'Du suivi à l’apprentissage, de l’automatisation aux incitations — dans un seul produit.','about.title':'À propos de Hortelan Agtech Ltda.','about.subtitle':'Notre mission est de simplifier la culture grâce à une technologie accessible, des données en temps réel et une communauté qui apprend ensemble.','about.p1':'Hortelan Agtech Ltda. réunit capteurs, automatisation par règles et un tableau de bord web pour tout suivre simplement.','about.l1':'Installation rapide et sûre avec des kits compatibles.','about.l2':'Automatisez irrigation, éclairage et ventilation avec hystérésis et plages horaires.','about.l3':'Alertes intelligentes pour agir au bon moment.','about.l4':'Communauté pour partager des résultats et apprendre avec d’autres cultivateurs.','cta.title':'Prêt à cultiver intelligemment ?','cta.subtitle':'Ouvrez la démo, explorez les fonctionnalités et racontez vos premiers résultats à la communauté.','cta.demo':'Ouvrir la démo','cta.docs':'Voir la présentation','footer.rights':'Tous droits réservés.'}};
-
-function setLang(lang){
-  const localeMap = { pt:'pt-BR', en:'en', fr:'fr', es:'es' };
-  document.documentElement.lang = localeMap[lang] || 'pt-BR';
-  const map = dict[lang]||{};
-  document.querySelectorAll('[data-i18n]').forEach(el=>{
-    const k = el.getAttribute('data-i18n'); if(map[k]!==undefined){ el.innerHTML = map[k]; }
-  });
-}
-function updateLanguageButtons(activeLang){
-  const switchEl = document.querySelector('.lang-switch');
-  if(!switchEl) return;
-
-  let activeButton = null;
-  switchEl.querySelectorAll('button').forEach((button)=>{
-    const isActive = button.dataset.lang===activeLang;
-    button.classList.toggle('active',isActive);
-    button.setAttribute('aria-pressed', String(isActive));
-    if(isActive) activeButton = button;
-  });
-
-  switchEl.dataset.active = activeLang;
-  if(activeButton){
-    switchEl.style.setProperty('--indicator-left', `${activeButton.offsetLeft}px`);
-    switchEl.style.setProperty('--indicator-width', `${activeButton.offsetWidth}px`);
-  }
-}
-
-function applyLanguage(lang){
-  const normalized = lang==='pt-br' ? 'pt' : lang;
-  const selected = dict[normalized] ? normalized : 'pt';
-  setLang(selected);
-  updateLanguageButtons(selected);
-  localStorage.setItem('hortelan_lang', selected);
-}
-
-function mapCountryToLang(countryCode){
-  const country = (countryCode || '').toUpperCase();
-  if(['BR','PT','AO','MZ','CV','GW','ST','TL'].includes(country)) return 'pt';
-  if(['FR','BE','CH','CA','LU','MC'].includes(country)) return 'fr';
-  if(['ES','MX','AR','CO','CL','PE','UY','PY','BO','VE','EC','DO','GT','HN','SV','NI','CR','PA','CU'].includes(country)) return 'es';
-  return 'en';
-}
-
-function mapBrowserLangToLang(browserLang){
-  const normalized = (browserLang || '').toLowerCase();
-  if(normalized.startsWith('fr')) return 'fr';
-  if(normalized.startsWith('es')) return 'es';
-  if(normalized.startsWith('en')) return 'en';
-  return 'pt';
-}
-
-async function detectInitialLanguage(){
-  const savedLang = localStorage.getItem('hortelan_lang');
-  if(dict[savedLang]) return savedLang;
-
-  const browserLang = mapBrowserLangToLang(navigator.language);
-
-  try{
-    const response = await fetch('https://ipapi.co/json/', { cache: 'no-store' });
-    if(!response.ok) throw new Error('geo lookup failed');
-    const data = await response.json();
-    return mapCountryToLang(data?.country) || browserLang;
-  }catch(_error){
-    return browserLang;
-  }
-}
-
-function refreshActiveLanguageIndicator(){
-  const activeLang = document.querySelector('.lang-switch button.active')?.dataset.lang || localStorage.getItem('hortelan_lang') || 'pt';
-  requestAnimationFrame(()=>updateLanguageButtons(activeLang));
-}
-
-document.querySelectorAll('.lang-switch button').forEach((button)=>{
-  const id = button.id;
-  if(id==='btn-pt') button.dataset.lang='pt';
-  if(id==='btn-en') button.dataset.lang='en';
-  if(id==='btn-fr') button.dataset.lang='fr';
-  if(id==='btn-es') button.dataset.lang='es';
-  button.addEventListener('click', ()=>applyLanguage(button.dataset.lang));
-});
-
-const navWrap = document.querySelector('.nav-wrap');
-const menuToggle = document.querySelector('.menu-toggle');
-const navLinks = document.querySelector('.nav-links');
-const navActions = document.getElementById('primary-nav-actions');
-const navPanel = navWrap?.querySelector('.nav-panel');
+    <section id="pricing" aria-labelledby="pricing-title">
+      <div class="container">
+        <div class="center">
+          <div class="title-xl" id="pricing-title" data-i18n="pricing.title">Planos que evoluem com o seu cultivo</div>
+          <p class="subtitle" data-i18n="pricing.subtitle">Comece grátis e ative recursos avançados quando fizer sentido.</p>
+        </div>
+        <div class="pricing mt-6">
+          <div class="card pricing-card"><div class="card-body"><div class="row" style="justify-content:space-between"><h3>Free</h3></div><div class="price">R$ 0</div><div class="mt-2"><div class="perk"><span class="dot" aria-hidden="true"></span><span data-i18n="pricing.free.p1">Dashboard básico</span></div><div class="perk"><span class="dot" aria-hidden="true"></span><span data-i18n="pricing.free.p2">Comunidade</span></div><div class="perk"><span class="dot" aria-hidden="true"></span><span data-i18n="pricing.free.p3">Regras essenciais</span></div><div class="perk"><span class="dot" aria-hidden="true"></span><span data-i18n="pricing.free.p4">Histórico 7 dias</span></div></div><a class="btn ghost mt-4" target="_blank" href="https://hortelan.vercel.app/dashboard/app" data-i18n="pricing.cta.try">Experimentar</a></div></div>
+          <div class="card pricing-card pricing-card-plus"><div class="card-body"><div class="row" style="justify-content:space-between"><h3>Plus</h3><span class="pill" data-i18n="pricing.popular">Mais popular</span></div><div class="price">R$ 29/mês</div><div class="mt-2"><div class="perk"><span class="dot" aria-hidden="true"></span><span data-i18n="pricing.plus.p1">Automação avançada</span></div><div class="perk"><span class="dot" aria-hidden="true"></span><span data-i18n="pricing.plus.p2">Histórico estendido</span></div><div class="perk"><span class="dot" aria-hidden="true"></span><span data-i18n="pricing.plus.p3">Exportação CSV</span></div><div class="perk"><span class="dot" aria-hidden="true"></span><span data-i18n="pricing.plus.p4">Templates por cultura</span></div></div><a class="btn primary mt-4" target="_blank" href="https://hortelan.vercel.app/dashboard/app" data-i18n="pricing.cta.subscribe">Assinar Plus</a></div></div>
+          <div class="card pricing-card pricing-card-premium"><div class="card-body"><div class="row" style="justify-content:space-between"><h3>Premium</h3></div><div class="price">R$ 79/mês</div><div class="mt-2"><div class="perk"><span class="dot" aria-hidden="true"></span><span data-i18n="pricing.prem.p1">Insights e detecção de anomalias</span></div><div class="perk"><span class="dot" aria-hidden="true"></span><span data-i18n="pricing.prem.p2">Integrações (ex.: Home Assistant)</span></div><div class="perk"><span class="dot" aria-hidden="true"></span><span data-i18n="pricing.prem.p3">Suporte prioritário</span></div><div class="perk"><span class="dot" aria-hidden="true"></span><span data-i18n="pricing.prem.p4">Relatórios avançados</span></div></div><a class="btn ghost mt-4" target="_blank" href="https://hortelan.vercel.app/dashboard/app" data-i18n="pricing.cta.sales">Falar com vendas</a></div></div>
+        </div>
+      </div>
+    </section>
 
 
-if(navWrap && menuToggle && navLinks && navActions && navPanel){
-  const menuToggleAnchor = document.createElement('span');
-  menuToggleAnchor.hidden = true;
-  navWrap.insertBefore(menuToggleAnchor, menuToggle);
+    <section id="contact" class="inset" aria-labelledby="contact-title">
+      <div class="container">
+        <div class="center">
+          <div class="title-xl" id="contact-title" data-i18n="contact.title">Fale com a gente</div>
+          <p class="subtitle" data-i18n="contact.subtitle">Dúvidas, parcerias ou implantação em escolas/condomínios.</p>
+        </div>
+        <div class="card mt-6" role="form" aria-describedby="contact-note">
+          <div class="card-body">
+            <form class="grid" style="gap:1rem" action="mailto:davidalexandrefernandes@outlook.com" method="post" enctype="text/plain">
+              <label>
+                <span class="sr-only" data-i18n="contact.nameLabel">Nome</span>
+                <input aria-label="Nome" name="nome" required placeholder="Nome" class="input" />
+              </label>
+              <label>
+                <span class="sr-only" data-i18n="contact.emailLabel">E-mail</span>
+                <input aria-label="E-mail" type="email" name="email" required placeholder="E-mail" class="input" />
+              </label>
+              <label>
+                <span class="sr-only" data-i18n="contact.msgLabel">Mensagem</span>
+                <textarea aria-label="Mensagem" name="mensagem" required placeholder="Como podemos ajudar?" rows="4" class="textarea"></textarea>
+              </label>
+              <div class="row">
+                <button class="btn primary" type="submit" data-i18n="contact.send">Enviar</button>
+                <a class="btn ghost" href="mailto:davidalexandrefernandes@outlook.com" data-i18n="contact.email">Abrir e-mail</a>
+              </div>
+              <small id="contact-note" class="subtitle" data-i18n="contact.note">Dica: substitua o <em>mailto:</em> por um endpoint do Formspree/Formspark para capturar mensagens sem backend.</small>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
 
-  const syncMenuTogglePlacement=()=>{
-    const shouldDockToggle = window.innerWidth <= 767 && navWrap.classList.contains('menu-open');
-    if(shouldDockToggle){
-      if(menuToggle.parentElement !== navLinks){
-        navLinks.prepend(menuToggle);
-      }
-      return;
-    }
 
-    if(menuToggle.parentElement !== navWrap){
-      navWrap.insertBefore(menuToggle, menuToggleAnchor.nextSibling);
-    }
-  };
+    <section class="banner-strip" aria-label="Banner Hortelan">
+      <div class="container">
+        <div class="promo-banner" role="img" aria-label="Banner Hortelan com identidade visual verde sustentável">
+          <div class="promo-glow" aria-hidden="true"></div>
+          <span class="promo-leaf promo-leaf-top-left" aria-hidden="true">🍃</span>
+          <span class="promo-leaf promo-leaf-top-right" aria-hidden="true">🌿</span>
+          <span class="promo-leaf promo-leaf-bottom-left" aria-hidden="true">🍀</span>
+          <span class="promo-leaf promo-leaf-bottom-right" aria-hidden="true">🌱</span>
+          <img src="Assets/logo.png" alt="Logo Hortelan" class="promo-logo" loading="lazy" decoding="async">
+        </div>
+      </div>
+    </section>
+    <section id="faq" aria-labelledby="faq-title">
+      <div class="container">
+        <div class="center section-header">
+          <div class="title-xl" id="faq-title">FAQ e Mural da Comunidade</div>
+          <p class="subtitle">Envie dúvidas, elogios e opiniões. As mensagens ficam salvas no seu navegador (localStorage). Para uso em produção, conecte a um serviço de formulários.</p>
+        </div>
+        <div class="grid" style="grid-template-columns:1fr;gap:1rem;margin-top:1rem">
+          <div class="card">
+            <div class="card-body">
+              <form id="faq-form" class="grid" style="gap:1rem">
+                <div class="row" style="gap:.75rem;flex-wrap:wrap">
+                  <input id="f-nome" required placeholder="Seu nome" class="input flex1" />
+                  <input id="f-email" type="email" placeholder="E-mail (opcional)" class="input flex1" />
+                  <select id="f-tipo" class="input">
+                    <option value="duvida">Dúvida</option>
+                    <option value="elogio">Elogio</option>
+                    <option value="opiniao">Opinião</option>
+                  </select>
+                </div>
+                <textarea id="f-msg" required rows="4" placeholder="Escreva sua mensagem" class="textarea"></textarea>
+                <div class="row">
+                  <button class="btn primary" type="submit">Publicar no mural</button>
+                  <button class="btn ghost" id="faq-export" type="button">Exportar JSON</button>
+                </div>
+                <small class="subtitle">Só você verá os envios salvos neste navegador. Para receber por e-mail, use o formulário de contato acima.</small>
+              </form>
+            </div>
+          </div>
+          <div class="faq-board" id="faq-list" aria-live="polite"></div>
+        </div>
+      </div>
+    </section>
+  </main>
 
-  const syncBodyMenuState=()=>{};
+  <footer role="contentinfo">
+    <div class="container footer-wrap">
+      <div class="brandmark">
+        <img class="logo-footer" src="Assets/logo.png" alt="Logo Hortelan">
+        <span>Hortelan AgTech Ltda.</span>
+      </div>
+      <a class="instagram-link" href="https://www.instagram.com/hortelan_agtech/" target="_blank" rel="noopener noreferrer" aria-label="Instagram da Hortelan @hortelan_agtech">
+        <img class="instagram-icon" src="Assets/instagram-icon.svg" alt="" aria-hidden="true" loading="lazy" decoding="async">
+      </a>
+      <div class="copy">© <span id="y"></span> Hortelan. <span data-i18n="footer.rights">Todos os direitos reservados.</span></div>
+    </div>
+  </footer>
 
-  const closeMenu=()=>{
-    navWrap.classList.remove('menu-open');
-    navPanel.setAttribute('aria-hidden','true');
-    syncBodyMenuState(false);
-    menuToggle.setAttribute('aria-expanded','false');
-    menuToggle.setAttribute('aria-label','Abrir menu');
-    syncMenuTogglePlacement();
-  };
+  <script>
+    (function () {
+      const switchEl = document.querySelector('.lang-switch');
+      if (!switchEl) return;
 
-  const toggleMenu=()=>{
-    const isOpen = navWrap.classList.toggle('menu-open');
-    navPanel.setAttribute('aria-hidden', String(!isOpen));
-    syncBodyMenuState(isOpen);
-    menuToggle.setAttribute('aria-expanded', String(isOpen));
-    menuToggle.setAttribute('aria-label', isOpen ? 'Fechar menu' : 'Abrir menu');
-    if(isOpen){
-      refreshActiveLanguageIndicator();
-    }
-  };
+      const updateIndicator = () => {
+        const activeButton = switchEl.querySelector('button.active');
+        if (!activeButton) return;
+        switchEl.style.setProperty('--indicator-left', `${activeButton.offsetLeft}px`);
+        switchEl.style.setProperty('--indicator-width', `${activeButton.offsetWidth}px`);
+      };
 
-  closeMenu();
-  syncMenuTogglePlacement();
+      const applyLangState = (lang) => {
+        const resolved = lang || localStorage.getItem('lang') || localStorage.getItem('hortelan_lang') || 'pt';
+        document.documentElement.lang = resolved;
 
-  menuToggle.addEventListener('click', toggleMenu);
+        switchEl.querySelectorAll('button[data-lang]').forEach((button) => {
+          const active = button.dataset.lang === resolved;
+          button.classList.toggle('active', active);
+          button.setAttribute('aria-pressed', String(active));
+        });
 
-  [...navLinks.querySelectorAll('a[href]'), ...navActions.querySelectorAll('a[href]')].forEach((link)=>{
-    link.addEventListener('click', ()=>{
-      if(window.innerWidth <= 767){
-        closeMenu();
-      }
-    });
-  });
+        localStorage.setItem('lang', resolved);
+        localStorage.setItem('hortelan_lang', resolved);
+        requestAnimationFrame(updateIndicator);
+      };
 
-  document.addEventListener('click', (event)=>{
-    if(window.innerWidth > 767 || !navWrap.classList.contains('menu-open')) return;
-    if(navWrap.contains(event.target)) return;
-    closeMenu();
-  });
+      switchEl.querySelectorAll('button[data-lang]').forEach((button) => {
+        button.addEventListener('click', () => applyLangState(button.dataset.lang));
+      });
 
-  document.addEventListener('keydown',(event)=>{
-    if(event.key==='Escape' && navWrap.classList.contains('menu-open')){
-      closeMenu();
-      menuToggle.focus();
-    }
-  });
-
-  window.addEventListener('resize', ()=>{
-    if(window.innerWidth > 767){
-      closeMenu();
-    }else{
-      syncBodyMenuState(navWrap.classList.contains('menu-open'));
-      syncMenuTogglePlacement();
-    }
-  });
-}
-
-window.addEventListener('resize', ()=>{
-  refreshActiveLanguageIndicator();
-});
-
-detectInitialLanguage().then((lang)=>{
-  applyLanguage(lang);
-  refreshActiveLanguageIndicator();
-});
-
-// FAQ board logic (localStorage)
-const LIST_KEY='hortelan_faq';
-const form=document.getElementById('faq-form');
-const listEl=document.getElementById('faq-list');
-const btnExport=document.getElementById('faq-export');
-
-function loadItems(){
-  try{return JSON.parse(localStorage.getItem(LIST_KEY))||[]}catch(e){return[]}
-}
-function saveItems(items){ localStorage.setItem(LIST_KEY, JSON.stringify(items)) }
-function render(){
-  if(!listEl) return;
-  const items=loadItems();
-  listEl.innerHTML='';
-  if(items.length===0){
-    const empty=document.createElement('div');
-    empty.className='faq-item';
-    empty.innerHTML='<em>Nenhuma mensagem ainda. Seja o primeiro a publicar!</em>';
-    listEl.appendChild(empty);
-    return;
-  }
-
-  items.slice().reverse().forEach((it)=>{
-    const card=document.createElement('article');
-    card.className='faq-item';
-    const stamp=new Date(it.ts).toLocaleString();
-    card.innerHTML=`<div class="faq-meta"><strong>${it.nome||'Anônimo'}</strong> • ${String(it.tipo||'mensagem').toUpperCase()} • ${stamp}</div><p>${it.msg||''}</p><div class="row mt-2"><button class="btn ghost btn-del" data-id="${it.id}" type="button">Remover</button></div>`;
-    listEl.appendChild(card);
-  });
-
-  listEl.querySelectorAll('.btn-del').forEach((button)=>button.addEventListener('click',()=>{
-    const id=button.getAttribute('data-id');
-    saveItems(loadItems().filter((item)=>item.id!==id));
-    render();
-  }));
-}
-
-form?.addEventListener('submit',(e)=>{
-  e.preventDefault();
-  const item={
-    id:Math.random().toString(36).slice(2),
-    nome:document.getElementById('f-nome')?.value.trim(),
-    email:document.getElementById('f-email')?.value.trim(),
-    tipo:document.getElementById('f-tipo')?.value,
-    msg:document.getElementById('f-msg')?.value.trim(),
-    ts:Date.now()
-  };
-  if(!item.msg) return;
-  const items=loadItems();
-  items.push(item);
-  saveItems(items);
-  form.reset();
-  render();
-});
-
-btnExport?.addEventListener('click',()=>{
-  const blob=new Blob([JSON.stringify(loadItems(),null,2)],{type:'application/json'});
-  const url=URL.createObjectURL(blob);
-  const a=document.createElement('a');
-  a.href=url;
-  a.download='faq-hortelan.json';
-  a.click();
-  URL.revokeObjectURL(url);
-});
-
-if(location.search.includes('clearFaq')){ localStorage.removeItem(LIST_KEY); }
-render();</script></body></html>
+      window.addEventListener('resize', updateIndicator);
+      applyLangState();
+    })();
+  </script>
+  <script type="module" src="app.js"></script>
+</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hortelan • Splash</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
