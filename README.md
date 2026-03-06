@@ -1,6 +1,6 @@
-Hortelan — Landing Page
+Hortelan Agtech Ltda. — Landing Page
 
-Uma landing page leve, estática e responsiva para apresentar o Hortelan (IoT + automação + comunidade). O projeto inclui versão particionada (HTML/CSS/JS) e versão minificada single-file, integração de fonte Inter, favicon e Open Graph gerados a partir da logo, seção “Sobre” com vídeo e um FAQ/Mural com persistência local.
+Uma landing page leve, estática e responsiva para apresentar o Hortelan Agtech Ltda. (IoT + automação + comunidade). O projeto inclui versão particionada (HTML/CSS/JS) e versão minificada single-file, integração de fonte Inter, favicon e Open Graph gerados a partir da logo, seção “Sobre” com vídeo e um FAQ/Mural com persistência local.
 
 ✨ Destaques
 
@@ -10,7 +10,7 @@ Uma landing page leve, estática e responsiva para apresentar o Hortelan (IoT + 
 
 🎬 Seção “Sobre” com embed do YouTube (16:9, lazy).
 
-🌐 PT/EN com switch estilizado (segmentado com animação).
+🌐 PT/EN/ES/FR com switch estilizado (segmentado com animação).
 
 💬 FAQ/Mural (localStorage): publicar, remover e exportar JSON.
 
@@ -28,8 +28,8 @@ hortelan/
 ├─ styles.css            # estilos (tema claro/escuro via prefers-color-scheme)
 ├─ app.js                # i18n + lógica do FAQ/Mural
 ├─ index.min.html        # single-file minificado (CSS/JS inline)
-└─ assets/
-   ├─ logo.png           # logo do Hortelan
+└─ Assets/
+   ├─ logo.png           # logo do Hortelan Agtech Ltda.
    ├─ dashboard.png      # screenshot do dashboard
    ├─ favicon.ico        # gerado (16–256px)
    └─ og-image.jpg       # imagem Open Graph (1200×630)
@@ -69,15 +69,15 @@ No styles.css, ajuste os tokens do tema:
 
 2) Logo, Dashboard e OG
 
-Substitua os arquivos em assets/:
+Substitua os arquivos em Assets/:
 
-logo.png (usado na navbar, rodapé, favicon e JSON-LD)
+logo.png (usado no JSON-LD e materiais sociais)
 
 dashboard.png (imagem do hero)
 
 og-image.jpg (thumbnail ao compartilhar)
 
-Favicon: já está em assets/favicon.ico (gerado a partir da logo). Se trocar a logo, recomendo regenerar; posso automatizar via script se quiser.
+Favicon: já está em Assets/favicon.ico (gerado a partir da logo). Se trocar a logo, recomendo regenerar; posso automatizar via script se quiser.
 
 3) Fonte (Inter)
 
@@ -105,7 +105,7 @@ JSON-LD:
 {
   "@context":"https://schema.org",
   "@type":"Organization",
-  "name":"Hortelan",
+  "name":"Hortelan Agtech Ltda.",
   "url":"https://SEU-DOMINIO",
   "logo":"assets/logo.png",
   "sameAs":["https://www.linkedin.com/company/hortelan"]
