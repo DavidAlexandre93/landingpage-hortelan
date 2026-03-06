@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { getMessages } from "../i18n.js";
+import { getSplashMessages } from "../../localization/splashMessages.js";
 
 const DURATION_RAIN = 2.6;
 const DURATION_GROW = 2.4;
@@ -10,9 +10,9 @@ function range(n) {
   return Array.from({ length: n }, (_, i) => i);
 }
 
-export default function DaySplash({ onDone }) {
+export default function DaySplashScreen({ onDone }) {
   const [phase, setPhase] = useState("rain");
-  const copy = useMemo(() => getMessages(), []);
+  const copy = useMemo(() => getSplashMessages(), []);
 
   useEffect(() => {
     const t1 = setTimeout(() => setPhase("grow"), DURATION_RAIN * 1000);
@@ -117,9 +117,13 @@ function Plant({ index, grow }) {
       transition={{ duration: grow ? 2.0 : 0.6, delay: grow ? index * 0.08 : 0, ease: "easeInOut" }}
       style={{ transformOrigin: "50% 100%" }}
     >
-      <motion.div className="leaf left" animate={{ rotate: [0, -4, 0] }} transition={{ duration: 2.8, repeat: Infinity, ease: "easeInOut" }} />
-      <motion.div className="leaf right" animate={{ rotate: [0, 4, 0] }} transition={{ duration: 2.6, repeat: Infinity, ease: "easeInOut" }} />
-      <div className="stem" />
+      <motion.div
+        className="stem"
+        animate={{ rotate: grow ? [0, -2, 1, 0] : 0 }}
+        transition={{ duration: 2.2, repeat: Infinity, ease: "easeInOut" }}
+      />
+      <motion.div className="leaf leafL" animate={{ rotate: grow ? [-6, -10, -7] : -6 }} transition={{ duration: 1.8, repeat: Infinity }} />
+      <motion.div className="leaf leafR" animate={{ rotate: grow ? [6, 10, 7] : 6 }} transition={{ duration: 1.8, repeat: Infinity }} />
     </motion.div>
   );
 }
