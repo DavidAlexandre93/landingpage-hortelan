@@ -2,6 +2,7 @@ import React, { Suspense, lazy, useEffect, useMemo } from "react";
 import { LANDING_PAGE_PATH } from "../../../app/routes.js";
 import { detectAndPersistLanguage } from "../../localization/languageDetection.js";
 import { trackMetric } from "../../../shared/observability/rumMetrics.js";
+import HortelanSeo from "../../../shared/seo/HortelanSeo.jsx";
 
 const DaySplashScreen = lazy(() => import("./DaySplashScreen.jsx"));
 const NightSplashScreen = lazy(() => import("./NightSplashScreen.jsx"));
@@ -40,8 +41,11 @@ export default function SplashExperienceGate() {
   };
 
   return (
-    <Suspense fallback={<SplashFallback />}>
-      {mode === "day" ? <DaySplashScreen onDone={handleDone} /> : <NightSplashScreen onDone={handleDone} />}
-    </Suspense>
+    <>
+      <HortelanSeo />
+      <Suspense fallback={<SplashFallback />}>
+        {mode === "day" ? <DaySplashScreen onDone={handleDone} /> : <NightSplashScreen onDone={handleDone} />}
+      </Suspense>
+    </>
   );
 }
