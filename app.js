@@ -22,6 +22,7 @@ function setLang(lang){
   });
   updateLanguageIndicator();
   localStorage.setItem('lang',lang);
+  localStorage.setItem('hortelan_lang',lang);
   requestAnimationFrame(()=>initTypingEffects({ restart:true }));
 }
 
@@ -33,8 +34,20 @@ function getLangFromCountry(countryCode){
   return 'en';
 }
 
+function getLangFromBrowser(browserLanguage = navigator.language){
+  const browserLanguages = Array.isArray(navigator.languages) ? navigator.languages : [];
+  const candidates = [browserLanguage, ...browserLanguages]
+    .filter(Boolean)
+    .map((value)=>String(value).toLowerCase());
+
+  if(candidates.some((value)=>value.startsWith('pt'))) return 'pt';
+  if(candidates.some((value)=>value.startsWith('es'))) return 'es';
+  if(candidates.some((value)=>value.startsWith('fr'))) return 'fr';
+  return 'pt';
+}
+
 async function detectLanguage(){
-  const saved=localStorage.getItem('lang');
+  const saved=localStorage.getItem('lang') || localStorage.getItem('hortelan_lang');
   if(saved){ setLang(saved); return; }
 
   const controller = new AbortController();
@@ -44,9 +57,10 @@ async function detectLanguage(){
     const res=await fetch('https://ipapi.co/json/', { cache: 'no-store', signal: controller.signal });
     if(!res.ok) throw new Error('request failed');
     const data=await res.json();
-    setLang(getLangFromCountry(data.country));
+    const countryCode = data.country_code || data.country;
+    setLang(getLangFromCountry(countryCode));
   }catch(err){
-    setLang('en');
+    setLang(getLangFromBrowser());
   } finally {
     clearTimeout(timeout);
   }
