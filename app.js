@@ -149,9 +149,49 @@ import { createRoot } from 'https://esm.sh/react-dom@18.3.1/client';
 import gsap from 'https://esm.sh/gsap@3.12.5';
 import { ScrollTrigger } from 'https://esm.sh/gsap@3.12.5/ScrollTrigger';
 import { useGSAP } from 'https://esm.sh/@gsap/react@2.1.1';
-import { animate as motionAnimate, inView as motionInView, hover, press } from 'https://esm.sh/motion@11.11.13';
+import { animate as motionAnimate, inView as motionInView } from 'https://esm.sh/motion@11.11.13';
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
+
+function toElementList(target){
+  if(!target) return [];
+  if(target instanceof Element || target === document || target === window) return [target];
+  if(typeof target.length==='number') return Array.from(target);
+  return [target];
+}
+
+function press(target, handler){
+  const elements=toElementList(target);
+  const cleanups=elements.map((element)=>{
+    const listener=(event)=>handler(element,event);
+    element.addEventListener('click',listener);
+    return ()=>element.removeEventListener('click',listener);
+  });
+  return ()=>cleanups.forEach((cleanup)=>cleanup());
+}
+
+function hover(target, handler){
+  const elements=toElementList(target);
+  const cleanups=elements.map((element)=>{
+    let leaveCleanup;
+    const onEnter=(event)=>{
+      if(leaveCleanup) leaveCleanup();
+      leaveCleanup=handler(element,event);
+    };
+    const onLeave=()=>{
+      if(typeof leaveCleanup==='function') leaveCleanup();
+      leaveCleanup=undefined;
+    };
+    element.addEventListener('pointerenter',onEnter);
+    element.addEventListener('pointerleave',onLeave);
+    return ()=>{
+      element.removeEventListener('pointerenter',onEnter);
+      element.removeEventListener('pointerleave',onLeave);
+      onLeave();
+    };
+  });
+  return ()=>cleanups.forEach((cleanup)=>cleanup());
+}
 
 initSplashScene();
 
