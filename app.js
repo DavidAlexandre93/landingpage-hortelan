@@ -35,13 +35,19 @@ function getLangFromCountry(countryCode){
 async function detectLanguage(){
   const saved=localStorage.getItem('lang');
   if(saved){ setLang(saved); return; }
+
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), 2200);
+
   try{
-    const res=await fetch('https://ipapi.co/json/');
+    const res=await fetch('https://ipapi.co/json/', { cache: 'no-store', signal: controller.signal });
     if(!res.ok) throw new Error('request failed');
     const data=await res.json();
     setLang(getLangFromCountry(data.country));
   }catch(err){
     setLang('en');
+  } finally {
+    clearTimeout(timeout);
   }
 }
 
