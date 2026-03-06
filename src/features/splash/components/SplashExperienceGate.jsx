@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo } from "react";
-import DaySplash from "./DaySplash.jsx";
-import NightSplash from "./NightSplash.jsx";
+import { LANDING_PAGE_PATH } from "../../../app/routes.js";
+import DaySplashScreen from "./DaySplashScreen.jsx";
+import NightSplashScreen from "./NightSplashScreen.jsx";
 
 const GEO_LANGUAGE_BY_COUNTRY = {
   BR: "pt",
@@ -22,8 +23,8 @@ function getTimeMode(date = new Date()) {
   return h >= 6 && h < 18 ? "day" : "night";
 }
 
-function redirectToCorrectHome() {
-  window.location.assign("/index.min.html");
+function redirectToLandingPage() {
+  window.location.assign(LANDING_PAGE_PATH);
 }
 
 function normalizeBrowserLanguage(value) {
@@ -65,7 +66,7 @@ async function detectAndPersistLanguage() {
   localStorage.setItem("hortelan_lang", normalizeBrowserLanguage(navigator.language));
 }
 
-export default function SplashGate() {
+export default function SplashExperienceGate() {
   const mode = useMemo(() => getTimeMode(new Date()), []);
 
   useEffect(() => {
@@ -73,8 +74,8 @@ export default function SplashGate() {
   }, []);
 
   return mode === "day" ? (
-    <DaySplash onDone={redirectToCorrectHome} />
+    <DaySplashScreen onDone={redirectToLandingPage} />
   ) : (
-    <NightSplash onDone={redirectToCorrectHome} />
+    <NightSplashScreen onDone={redirectToLandingPage} />
   );
 }

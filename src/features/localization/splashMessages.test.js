@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { resolveLanguage, getMessages } from "../i18n.js";
+import { resolveLanguage, getSplashMessages } from "./splashMessages.js";
 
 function createStorage() {
   const store = new Map();
@@ -41,8 +41,8 @@ test("resolveLanguage cai para pt para idiomas não suportados", () => {
   assert.equal(resolveLanguage(), "pt");
 });
 
-test("getMessages retorna mensagens do idioma resolvido", () => {
+test("getSplashMessages retorna mensagens do idioma resolvido", () => {
   localStorage.clear();
   localStorage.setItem("hortelan_lang", "en");
-  assert.equal(getMessages().welcome, "Welcome!");
+  assert.equal(getSplashMessages().welcome, "Welcome!");
 });
