@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { getMessages } from "../i18n.js";
+import { getSplashMessages } from "../../localization/splashMessages.js";
 
 const DURATION_NIGHT = 4.6;
 const EXIT_FADE = 0.6;
@@ -9,9 +9,9 @@ function range(n) {
   return Array.from({ length: n }, (_, i) => i);
 }
 
-export default function NightSplash({ onDone }) {
+export default function NightSplashScreen({ onDone }) {
   const [phase, setPhase] = useState("night");
-  const copy = useMemo(() => getMessages(), []);
+  const copy = useMemo(() => getSplashMessages(), []);
 
   useEffect(() => {
     const t1 = setTimeout(() => setPhase("exit"), DURATION_NIGHT * 1000);

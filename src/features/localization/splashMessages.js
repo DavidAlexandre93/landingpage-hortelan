@@ -65,6 +65,6 @@ export function resolveLanguage() {
   return "pt";
 }
 
-export function getMessages() {
+export function getSplashMessages() {
   return TEXTS[resolveLanguage()] || TEXTS.pt;
 }
