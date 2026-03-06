@@ -236,3 +236,41 @@ el.textContent = map[k];
 ## Checks executados nesta revisão
 - Build de produção com Vite (ok).
 - Tentativa de auditoria de dependências via npm audit (bloqueada por endpoint do registry no ambiente).
+
+## 15) Baseline e melhorias aplicadas nesta rodada (2026-03-06)
+
+### Baseline antes das mudanças
+- `npm test`: 4 testes passando.
+- `npm run build`: bundle principal único (`dist/assets/index-DIWRSQRH.js`) com 426.48 kB (138.21 kB gzip), build em ~20.90s.
+
+### Melhorias implementadas (cabíveis ao escopo front-end estático)
+1. **Medição/observabilidade (itens 1 e 11 do checklist)**
+   - Instrumentação de métricas RUM no cliente (`trackMetric`) para:
+     - início/fim da splash,
+     - sucesso/erro/cache-hit da detecção de geolocalização.
+   - Eventos publicados como `CustomEvent("hortelan:metric")` e buffer opcional em `window.__HORTELAN_METRICS__`.
+
+2. **Chamadas externas resilientes (item 4)**
+   - Detecção de idioma via Geo IP com:
+     - timeout curto,
+     - retry com backoff + jitter,
+     - cache em `sessionStorage` (TTL),
+     - deduplicação de chamadas concorrentes,
+     - circuit breaker simples após falhas consecutivas.
+
+3. **Performance de frontend (item 7)**
+   - Code splitting das telas de splash diurna/noturna com `React.lazy` + `Suspense`.
+
+4. **Qualidade/testes (itens 9 e 10)**
+   - Nova suíte de testes unitários para lógica de detecção de idioma:
+     - fallback,
+     - persistência,
+     - cache e redução de chamadas externas.
+
+### Resultado após mudanças
+- `npm test`: 8 testes passando.
+- `npm run build`: bundle inicial reduzido para 307.90 kB (99.90 kB gzip), com chunks separados das splash screens.
+
+### Itens não aplicáveis nesta base
+- Banco de dados, pool de conexões, `EXPLAIN ANALYZE`, locks/transações (projeto sem backend/DB).
+- Fila/job server-side e autoscaling de runtime backend.
