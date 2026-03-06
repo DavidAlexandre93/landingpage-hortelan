@@ -287,7 +287,6 @@ if(navWrap && menuToggle && navLinks && navActions && navPanel){
     syncBodyMenuState(isOpen);
     menuToggle.setAttribute('aria-expanded', String(isOpen));
     menuToggle.setAttribute('aria-label', isOpen ? 'Fechar menu' : 'Abrir menu');
-    syncMenuTogglePlacement();
     if(isOpen){
       refreshActiveLanguageIndicator();
     }
