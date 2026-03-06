@@ -13,6 +13,7 @@ function getTimeMode(date = new Date()) {
 }
 
 function redirectToLandingPage() {
+  window.sessionStorage.setItem("hortelan_splash_ready", "1");
   window.location.assign(LANDING_PAGE_PATH);
 }
 
