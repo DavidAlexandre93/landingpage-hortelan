@@ -20,9 +20,7 @@ function setLang(lang){
     btn.classList.toggle('active',active);
     btn.setAttribute('aria-pressed',String(active));
   });
-  updateLanguageIndicator();
   localStorage.setItem('lang',lang);
-  localStorage.setItem('hortelan_lang',lang);
   requestAnimationFrame(()=>initTypingEffects({ restart:true }));
 }
 
@@ -34,20 +32,8 @@ function getLangFromCountry(countryCode){
   return 'en';
 }
 
-function getLangFromBrowser(browserLanguage = navigator.language){
-  const browserLanguages = Array.isArray(navigator.languages) ? navigator.languages : [];
-  const candidates = [browserLanguage, ...browserLanguages]
-    .filter(Boolean)
-    .map((value)=>String(value).toLowerCase());
-
-  if(candidates.some((value)=>value.startsWith('pt'))) return 'pt';
-  if(candidates.some((value)=>value.startsWith('es'))) return 'es';
-  if(candidates.some((value)=>value.startsWith('fr'))) return 'fr';
-  return 'pt';
-}
-
 async function detectLanguage(){
-  const saved=localStorage.getItem('lang') || localStorage.getItem('hortelan_lang');
+  const saved=localStorage.getItem('lang');
   if(saved){ setLang(saved); return; }
 
   const controller = new AbortController();
@@ -57,24 +43,12 @@ async function detectLanguage(){
     const res=await fetch('https://ipapi.co/json/', { cache: 'no-store', signal: controller.signal });
     if(!res.ok) throw new Error('request failed');
     const data=await res.json();
-    const countryCode = data.country_code || data.country;
-    setLang(getLangFromCountry(countryCode));
+    setLang(getLangFromCountry(data.country));
   }catch(err){
-    setLang(getLangFromBrowser());
+    setLang('en');
   } finally {
     clearTimeout(timeout);
   }
-}
-
-function updateLanguageIndicator(){
-  const switchEl=document.querySelector('.lang-switch');
-  if(!switchEl) return;
-
-  const activeButton=switchEl.querySelector('button.active');
-  if(!activeButton) return;
-
-  switchEl.style.setProperty('--indicator-left', `${activeButton.offsetLeft}px`);
-  switchEl.style.setProperty('--indicator-width', `${activeButton.offsetWidth}px`);
 }
 
 const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -149,49 +123,9 @@ import { createRoot } from 'https://esm.sh/react-dom@18.3.1/client';
 import gsap from 'https://esm.sh/gsap@3.12.5';
 import { ScrollTrigger } from 'https://esm.sh/gsap@3.12.5/ScrollTrigger';
 import { useGSAP } from 'https://esm.sh/@gsap/react@2.1.1';
-import { animate as motionAnimate, inView as motionInView } from 'https://esm.sh/motion@11.11.13';
+import { animate as motionAnimate, inView as motionInView, hover, press } from 'https://esm.sh/motion@11.11.13';
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
-
-function toElementList(target){
-  if(!target) return [];
-  if(target instanceof Element || target === document || target === window) return [target];
-  if(typeof target.length==='number') return Array.from(target);
-  return [target];
-}
-
-function press(target, handler){
-  const elements=toElementList(target);
-  const cleanups=elements.map((element)=>{
-    const listener=(event)=>handler(element,event);
-    element.addEventListener('click',listener);
-    return ()=>element.removeEventListener('click',listener);
-  });
-  return ()=>cleanups.forEach((cleanup)=>cleanup());
-}
-
-function hover(target, handler){
-  const elements=toElementList(target);
-  const cleanups=elements.map((element)=>{
-    let leaveCleanup;
-    const onEnter=(event)=>{
-      if(leaveCleanup) leaveCleanup();
-      leaveCleanup=handler(element,event);
-    };
-    const onLeave=()=>{
-      if(typeof leaveCleanup==='function') leaveCleanup();
-      leaveCleanup=undefined;
-    };
-    element.addEventListener('pointerenter',onEnter);
-    element.addEventListener('pointerleave',onLeave);
-    return ()=>{
-      element.removeEventListener('pointerenter',onEnter);
-      element.removeEventListener('pointerleave',onLeave);
-      onLeave();
-    };
-  });
-  return ()=>cleanups.forEach((cleanup)=>cleanup());
-}
 
 initSplashScene();
 
@@ -273,45 +207,30 @@ if(navWrap&&menuToggle&&navCollapse){
     menuToggle.setAttribute('aria-expanded','false');
   };
 
-  const toggleMenu=()=>{
+  press(menuToggle,()=>{
     const opening=!navWrap.classList.contains('menu-open');
     navWrap.classList.toggle('menu-open',opening);
     menuToggle.setAttribute('aria-expanded',String(opening));
-  };
-
-  menuToggle.addEventListener('click',(event)=>{
-    event.preventDefault();
-    event.stopPropagation();
-    toggleMenu();
   });
 
-  navCollapse.querySelectorAll('a[href]').forEach((link)=>{
-    link.addEventListener('click',()=>closeMenu());
-  });
+  press(navCollapse.querySelectorAll('a[href]'),()=>closeMenu());
 
   ScrollTrigger.matchMedia({
     '(min-width: 768px)': ()=>closeMenu()
   });
 
-  document.addEventListener('click',(event)=>{
-    const target = event.target;
+  press(document,(_, startEvent)=>{
+    const target = startEvent.target;
     if(!navWrap.classList.contains('menu-open')) return;
     if(navWrap.contains(target)) return;
     closeMenu();
   });
 
-  document.addEventListener('keydown',(event)=>{
-    if(event.key==='Escape') closeMenu();
-  });
-
   closeMenu();
 }
 
-document.querySelectorAll('.lang-switch button').forEach((button)=>{
-  button.addEventListener('click', ()=>setLang(button.dataset.lang));
-});
-window.addEventListener('resize', updateLanguageIndicator);
-detectLanguage().then(updateLanguageIndicator);
+press(document.querySelectorAll('.lang-switch button'),(element)=>setLang(element.dataset.lang));
+detectLanguage();
 initTypingEffects();
 
 function setupCultivoScene(){

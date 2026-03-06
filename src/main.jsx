@@ -5,9 +5,7 @@ import AppRoutes from "./app/AppRoutes.jsx";
 import "./features/splash/styles/splash-screen.css";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <React.StrictMode>
-    <BrowserRouter>
-      <AppRoutes />
-    </BrowserRouter>
-  </React.StrictMode>
+  <BrowserRouter>
+    <AppRoutes />
+  </BrowserRouter>
 );
