@@ -20,6 +20,7 @@ function setLang(lang){
     btn.classList.toggle('active',active);
     btn.setAttribute('aria-pressed',String(active));
   });
+  updateLanguageIndicator();
   localStorage.setItem('lang',lang);
   requestAnimationFrame(()=>initTypingEffects({ restart:true }));
 }
@@ -49,6 +50,17 @@ async function detectLanguage(){
   } finally {
     clearTimeout(timeout);
   }
+}
+
+function updateLanguageIndicator(){
+  const switchEl=document.querySelector('.lang-switch');
+  if(!switchEl) return;
+
+  const activeButton=switchEl.querySelector('button.active');
+  if(!activeButton) return;
+
+  switchEl.style.setProperty('--indicator-left', `${activeButton.offsetLeft}px`);
+  switchEl.style.setProperty('--indicator-width', `${activeButton.offsetWidth}px`);
 }
 
 const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -229,8 +241,11 @@ if(navWrap&&menuToggle&&navCollapse){
   closeMenu();
 }
 
-press(document.querySelectorAll('.lang-switch button'),(element)=>setLang(element.dataset.lang));
-detectLanguage();
+document.querySelectorAll('.lang-switch button').forEach((button)=>{
+  button.addEventListener('click', ()=>setLang(button.dataset.lang));
+});
+window.addEventListener('resize', updateLanguageIndicator);
+detectLanguage().then(updateLanguageIndicator);
 initTypingEffects();
 
 function setupCultivoScene(){
