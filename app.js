@@ -10,7 +10,7 @@ const dict={pt:{'nav.features':'Recursos','nav.how':'Como funciona','nav.journey
 
 function setLang(lang){
   const selected=dict[lang]||dict.en;
-  document.documentElement.lang=lang;
+  document.documentElement.lang=lang==='pt' ? 'pt-BR' : lang;
   document.querySelectorAll('[data-i18n]').forEach(el=>{
     const k=el.getAttribute('data-i18n');
     if(selected[k]) el.textContent=selected[k];
@@ -24,6 +24,14 @@ function setLang(lang){
   requestAnimationFrame(()=>initTypingEffects({ restart:true }));
 }
 
+function getLangFromNavigator(locale){
+  const normalized=String(locale||'').toLowerCase();
+  if(normalized.startsWith('pt')) return 'pt';
+  if(normalized.startsWith('es')) return 'es';
+  if(normalized.startsWith('fr')) return 'fr';
+  return 'en';
+}
+
 function getLangFromCountry(countryCode){
   const cc=(countryCode||'').toUpperCase();
   if(['BR','PT','AO','MZ'].includes(cc)) return 'pt';
@@ -33,8 +41,10 @@ function getLangFromCountry(countryCode){
 }
 
 async function detectLanguage(){
-  const saved=localStorage.getItem('lang');
-  if(saved){ setLang(saved); return; }
+  const saved=localStorage.getItem('lang') || localStorage.getItem('hortelan_lang');
+  if(saved&&dict[saved]){ setLang(saved); return; }
+
+  const browserLang=getLangFromNavigator(navigator.language);
 
   const controller = new AbortController();
   const timeout = setTimeout(() => controller.abort(), 2200);
@@ -43,9 +53,9 @@ async function detectLanguage(){
     const res=await fetch('https://ipapi.co/json/', { cache: 'no-store', signal: controller.signal });
     if(!res.ok) throw new Error('request failed');
     const data=await res.json();
-    setLang(getLangFromCountry(data.country));
+    setLang(getLangFromCountry(data.country) || browserLang);
   }catch(err){
-    setLang('en');
+    setLang(browserLang || 'pt');
   } finally {
     clearTimeout(timeout);
   }
