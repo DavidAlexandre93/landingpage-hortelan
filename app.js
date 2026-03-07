@@ -165,9 +165,84 @@ function setLang(lang) {
   requestAnimationFrame(updateLangIndicator);
 }
 
-function detectLanguage() {
+const GEO_TIMEOUT_MS = 1200;
+const COUNTRY_LANGUAGE = {
+  BR: 'pt',
+  PT: 'pt',
+  MZ: 'pt',
+  AO: 'pt',
+  CV: 'pt',
+  GW: 'pt',
+  ST: 'pt',
+  TL: 'pt',
+  GQ: 'pt',
+  ES: 'es',
+  AR: 'es',
+  MX: 'es',
+  CL: 'es',
+  CO: 'es',
+  PE: 'es',
+  VE: 'es',
+  UY: 'es',
+  PY: 'es',
+  BO: 'es',
+  EC: 'es',
+  PA: 'es',
+  CR: 'es',
+  GT: 'es',
+  HN: 'es',
+  NI: 'es',
+  SV: 'es',
+  CU: 'es',
+  DO: 'es',
+  PR: 'es',
+  FR: 'fr',
+  BE: 'fr',
+  CH: 'fr',
+  CA: 'fr',
+  LU: 'fr',
+  MC: 'fr',
+};
+
+function normalizeLanguage(value) {
+  const [prefix] = String(value || '').toLowerCase().split('-');
+  return dict[prefix] ? prefix : null;
+}
+
+function withTimeout(promise, timeoutMs) {
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), timeoutMs);
+
+  return promise(controller.signal).finally(() => clearTimeout(timeoutId));
+}
+
+async function detectGeoLanguage() {
+  try {
+    const response = await withTimeout(
+      (signal) => fetch('https://ipapi.co/json/', { signal }),
+      GEO_TIMEOUT_MS
+    );
+
+    if (!response.ok) return null;
+    const payload = await response.json();
+    const countryCode = String(payload?.country_code || '').toUpperCase();
+    localStorage.setItem('hortelan_geo_country', countryCode);
+    return COUNTRY_LANGUAGE[countryCode] || null;
+  } catch {
+    return null;
+  }
+}
+
+async function detectLanguage() {
   const saved = localStorage.getItem('lang') || localStorage.getItem('hortelan_lang');
-  setLang(saved && dict[saved] ? saved : 'pt');
+  if (saved && dict[saved]) {
+    setLang(saved);
+    return;
+  }
+
+  const browserLanguage = normalizeLanguage(navigator.language);
+  const geoLanguage = await detectGeoLanguage();
+  setLang(geoLanguage || browserLanguage || 'pt');
 }
 
 function closeMenu() {
