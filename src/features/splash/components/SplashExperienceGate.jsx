@@ -1,3 +1,4 @@
+import React from "react";
 import { Suspense, lazy, useEffect, useMemo, useRef } from "react";
 import { LANDING_PAGE_PATH } from "../../../app/routes.js";
 import { detectAndPersistLanguage } from "../../localization/languageDetection.js";

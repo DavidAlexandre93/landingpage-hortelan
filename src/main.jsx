@@ -1,10 +1,6 @@
+import React from "react";
 import ReactDOM from "react-dom/client";
-import { BrowserRouter } from "react-router-dom";
 import AppRoutes from "./app/AppRoutes.jsx";
 import "./features/splash/styles/splash-screen.css";
 
-ReactDOM.createRoot(document.getElementById("root")).render(
-  <BrowserRouter>
-    <AppRoutes />
-  </BrowserRouter>
-);
+ReactDOM.createRoot(document.getElementById("root")).render(<AppRoutes />);
