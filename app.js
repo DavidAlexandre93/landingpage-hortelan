@@ -1,5 +1,6 @@
 document.getElementById('y') && (document.getElementById('y').textContent = new Date().getFullYear());
 
+const navBar = document.querySelector('.navbar');
 const navWrap = document.querySelector('.nav-wrap');
 const menuToggle = document.querySelector('.menu-toggle');
 const navCollapse = document.getElementById('nav-collapse');
@@ -214,23 +215,40 @@ const animateWithGsap=(target,vars,options={})=>{
 if(navWrap&&menuToggle&&navCollapse){
   const closeMenu=()=>{
     navWrap.classList.remove('menu-open');
+    navBar?.classList.remove('mobile-menu-open');
+    document.body.classList.remove('menu-open-active');
     menuToggle.setAttribute('aria-expanded','false');
   };
 
-  press(menuToggle,()=>{
+  const toggleMenu=()=>{
     const opening=!navWrap.classList.contains('menu-open');
     navWrap.classList.toggle('menu-open',opening);
+    navBar?.classList.toggle('mobile-menu-open',opening);
+    document.body.classList.toggle('menu-open-active',opening);
     menuToggle.setAttribute('aria-expanded',String(opening));
+  };
+
+  menuToggle.addEventListener('click',toggleMenu);
+  menuToggle.addEventListener('keydown',(event)=>{
+    if(event.key!=='Enter'&&event.key!==' ') return;
+    event.preventDefault();
+    toggleMenu();
   });
 
-  press(navCollapse.querySelectorAll('a[href]'),()=>closeMenu());
+  navCollapse.querySelectorAll('a[href]').forEach((link)=>{
+    link.addEventListener('click',closeMenu);
+  });
 
   ScrollTrigger.matchMedia({
     '(min-width: 768px)': ()=>closeMenu()
   });
 
-  press(document,(_, startEvent)=>{
-    const target = startEvent.target;
+  document.addEventListener('keydown',(event)=>{
+    if(event.key==='Escape') closeMenu();
+  });
+
+  document.addEventListener('click',(event)=>{
+    const target = event.target;
     if(!navWrap.classList.contains('menu-open')) return;
     if(navWrap.contains(target)) return;
     closeMenu();
