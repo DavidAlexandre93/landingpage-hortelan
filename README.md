@@ -50,9 +50,11 @@ Se quiser um único arquivo para subir em qualquer lugar, use index.min.html.
 
 🌍 Deploy
 
-Vercel: importe o repositório, framework “Other”, diretório raiz ., output padrão.
+Vercel: importe o repositório, use o `vercel.json` do projeto (framework Vite), mantenha o diretório raiz como `.`.
 
 Netlify: arraste a pasta para o drop; ou conecte o repo; build não é necessário.
+
+Se ocorrer `ENOENT: no such file or directory, open '/vercel/path0/package.json'`, o projeto foi configurado com diretório raiz incorreto no painel da Vercel. Ajuste **Root Directory** para `.` e redeploy.
 
 GitHub Pages: branch main → Settings → Pages → Deploy from a branch → / (root).
 
