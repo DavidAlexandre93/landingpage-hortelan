@@ -194,3 +194,41 @@ Sugestão: MIT. (Posso incluir o texto completo e o arquivo LICENSE se preferir.
 E-mail: davidalexandrefernandes@outlook.com
 
 Demo: https://hortelan.vercel.app/dashboard/app
+
+## 🔁 Pipeline CI/CD (Frontend)
+
+O projeto possui uma esteira completa em GitHub Actions com separação entre validação (CI) e entrega (CD):
+
+- **CI (`.github/workflows/ci.yml`)**
+  - Instalação reprodutível com `npm ci`.
+  - **Lint** automatizado (checagem sintática + regras de higiene de código).
+  - **Formatação** com validação de padronização de arquivos críticos.
+  - **Testes unitários** com `node --test`.
+  - **Cobertura** com runner nativo do Node (`--experimental-test-coverage`) e thresholds mínimos.
+  - **Validação de build** com Vite.
+  - **Análise de vulnerabilidades** com `npm audit --audit-level=high`.
+  - Publicação de artefatos de build e cobertura.
+  - Job final de **Quality Gate** só conclui quando qualidade e segurança passam.
+
+- **CD (`.github/workflows/cd.yml`)**
+  - Empacota artefato uma única vez e reutiliza nos ambientes.
+  - **Deploy automatizado por ambiente** em branches dedicadas:
+    - `gh-pages-development` (development)
+    - `gh-pages-staging` (staging)
+    - `gh-pages` (production)
+  - **Regra de promoção para produção**:
+    - produção só executa para tags `v*`;
+    - passa obrigatoriamente por `deploy-development` e `deploy-staging` antes de `deploy-production`.
+
+### Scripts de qualidade locais
+
+```bash
+npm run lint
+npm run format:check
+npm run test:unit
+npm run test:coverage
+npm run build:validate
+npm run security:audit
+npm run ci
+```
+
