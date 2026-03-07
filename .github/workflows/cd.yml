@@ -44,53 +44,9 @@ jobs:
           path: dist
           if-no-files-found: error
 
-  deploy-development:
-    name: Deploy development
-    needs: package
-    runs-on: ubuntu-latest
-    environment:
-      name: development
-
-    steps:
-      - name: Download build artifact
-        uses: actions/download-artifact@v4
-        with:
-          name: frontend-dist
-          path: dist
-
-      - name: Deploy to development branch
-        uses: peaceiris/actions-gh-pages@v4
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: dist
-          publish_branch: gh-pages-development
-          force_orphan: true
-
-  deploy-staging:
-    name: Deploy staging
-    needs: deploy-development
-    runs-on: ubuntu-latest
-    environment:
-      name: staging
-
-    steps:
-      - name: Download build artifact
-        uses: actions/download-artifact@v4
-        with:
-          name: frontend-dist
-          path: dist
-
-      - name: Deploy to staging branch
-        uses: peaceiris/actions-gh-pages@v4
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: dist
-          publish_branch: gh-pages-staging
-          force_orphan: true
-
   deploy-production:
     name: Deploy production
-    needs: deploy-staging
+    needs: package
     runs-on: ubuntu-latest
     if: startsWith(github.ref, 'refs/tags/v')
     environment:
