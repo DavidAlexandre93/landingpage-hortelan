@@ -21,44 +21,17 @@ function setLang(lang){
     btn.setAttribute('aria-pressed',String(active));
   });
   localStorage.setItem('lang',lang);
+  localStorage.setItem('hortelan_lang',lang);
   requestAnimationFrame(()=>initTypingEffects({ restart:true }));
-}
-
-function getLangFromNavigator(locale){
-  const normalized=String(locale||'').toLowerCase();
-  if(normalized.startsWith('pt')) return 'pt';
-  if(normalized.startsWith('es')) return 'es';
-  if(normalized.startsWith('fr')) return 'fr';
-  return 'en';
-}
-
-function getLangFromCountry(countryCode){
-  const cc=(countryCode||'').toUpperCase();
-  if(['BR','PT','AO','MZ'].includes(cc)) return 'pt';
-  if(['ES','MX','AR','CO','CL','PE','UY','PY','BO','VE','EC','DO','GT','HN','SV','NI','CR','PA','CU'].includes(cc)) return 'es';
-  if(['FR','BE','CH','CA','LU','MC'].includes(cc)) return 'fr';
-  return 'en';
 }
 
 async function detectLanguage(){
   const saved=localStorage.getItem('lang') || localStorage.getItem('hortelan_lang');
   if(saved&&dict[saved]){ setLang(saved); return; }
 
-  const browserLang=getLangFromNavigator(navigator.language);
-
-  const controller = new AbortController();
-  const timeout = setTimeout(() => controller.abort(), 2200);
-
-  try{
-    const res=await fetch('https://ipapi.co/json/', { cache: 'no-store', signal: controller.signal });
-    if(!res.ok) throw new Error('request failed');
-    const data=await res.json();
-    setLang(getLangFromCountry(data.country) || browserLang);
-  }catch(err){
-    setLang(browserLang || 'pt');
-  } finally {
-    clearTimeout(timeout);
-  }
+  // A landing já nasce em português (pt-BR), então mantemos esse idioma
+  // como padrão inicial quando o usuário ainda não escolheu outro.
+  setLang('pt');
 }
 
 const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
