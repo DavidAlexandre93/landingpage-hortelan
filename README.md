@@ -1,4 +1,4 @@
-Hortelan Agtech Ltda. — Landing Page
+Hortelan Agtech Ltda. — LandingPage
 
 Uma landing page leve, estática e responsiva para apresentar o Hortelan Agtech Ltda. (IoT + automação + comunidade). O projeto inclui versão particionada (HTML/CSS/JS) e versão minificada single-file, integração de fonte Inter, favicon e Open Graph gerados a partir da logo, seção “Sobre” com vídeo e um FAQ/Mural com persistência local.
 
