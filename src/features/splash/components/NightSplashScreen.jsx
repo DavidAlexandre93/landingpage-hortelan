@@ -1,25 +1,21 @@
-import React, { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { getSplashMessages } from "../../localization/splashMessages.js";
+import { range } from "../utils/range.js";
+import { scheduleSplashTimeline } from "../utils/scheduleSplashTimeline.js";
 
 const DURATION_NIGHT = 4.6;
 const EXIT_FADE = 0.6;
-
-function range(n) {
-  return Array.from({ length: n }, (_, i) => i);
-}
 
 export default function NightSplashScreen({ onDone }) {
   const [phase, setPhase] = useState("night");
   const copy = useMemo(() => getSplashMessages(), []);
 
   useEffect(() => {
-    const t1 = setTimeout(() => setPhase("exit"), DURATION_NIGHT * 1000);
-    const t2 = setTimeout(() => onDone?.(), (DURATION_NIGHT + EXIT_FADE) * 1000);
-    return () => {
-      clearTimeout(t1);
-      clearTimeout(t2);
-    };
+    return scheduleSplashTimeline([
+      { delayMs: DURATION_NIGHT * 1000, action: () => setPhase("exit") },
+      { delayMs: (DURATION_NIGHT + EXIT_FADE) * 1000, action: () => onDone?.() },
+    ]);
   }, [onDone]);
 
   const stars = useMemo(
