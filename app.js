@@ -9,30 +9,267 @@ const typingRegistry = new WeakMap();
 // i18n dictionaries (kept short for demo)
 const dict={pt:{'nav.features':'Recursos','nav.how':'Como funciona','nav.journeys':'Jornadas','nav.pricing':'Planos','nav.faq':'FAQ','nav.docs':'Documentação','nav.demo':'Abrir Demo','nav.about':'Sobre','hero.badge':'Acesso • Monitoramento • Gestão 360','hero.title':'Plataforma Hortelan completa: do acesso seguro ao monitoramento, operações e comunidade','hero.subtitle':'Tela splash, login com 2FA e recuperação de senha, dashboard com automações IoT, onboarding guiado, catálogo, blog, admin, alertas, relatórios, assinaturas, integrações, suporte, segurança, perfil e visão Hortelan 360 em um só fluxo.','hero.ctaPrimary':'Explorar Demo','hero.ctaSecondary':'Ver Recursos','kpis.k1':'Acesso seguro com 2FA','kpis.k2':'Onboarding guiado com checklist','kpis.k3':'Operação com alertas e relatórios','kpis.k4':'Módulos integrados (360)','features.title':'Recursos que cobrem toda a jornada da plataforma','features.subtitle':'Da autenticação ao checkout, da automação ao suporte: módulos prontos para operação diária, gestão e crescimento.','about.title':'Sobre a Hortelan Agtech Ltda.','about.subtitle':'Centralizamos experiência do usuário, confiabilidade operacional e governança de dados para todas as etapas da jornada digital do cultivo.','about.p1':'O produto atual reúne acesso/conta, monitoramento principal, onboarding orientado, catálogo, comunidade, gestão administrativa, alertas, relatórios, assinaturas, integrações, segurança, perfil, suporte e status operacional em tempo real.','about.l1':'Conta e acesso: splash, login com lembrar-me e confiar no dispositivo, cadastro seguro, esqueci senha e reset com token.','about.l2':'Dashboard e operação: widgets, indicadores por horta, automação por regras, agenda de tarefas, planejamento de plantio, eventos por planta e bloco blockchain.','about.l3':'Módulos de negócio: onboarding guiado/demo, loja com filtros/carrinho/checkout, comunidade com reputação/feed/perguntas e central admin para usuários e IoT.','about.l4':'Confiabilidade e experiência: alertas e notificações, relatórios CSV/PDF, assinaturas, integrações + ops, LGPD/sessões/2FA, perfil/preferências, help center, status em tempo real, topbar global com busca/tema/idioma/conta.','cta.title':'Pronto para validar a plataforma ponta a ponta?','cta.subtitle':'Abra o demo e percorra os fluxos de acesso, monitoramento, operações, comunidade e gestão completa.','cta.demo':'Abrir Demo','cta.docs':'Ver Apresentação','footer.rights':'Todos os direitos reservados.'},en:{'nav.features':'Features','nav.how':'How it works','nav.journeys':'Journeys','nav.pricing':'Pricing','nav.faq':'FAQ','nav.docs':'Documentation','nav.demo':'Open Demo','nav.about':'About','hero.badge':'IoT • Automation • Community','hero.title':'Grow better with data, automation and an active community','hero.subtitle':'Hortelan Agtech Ltda. brings sensors, rule-based automation and a realtime dashboard together with a community that teaches and rewards good practices.','hero.ctaPrimary':'Explore Demo','hero.ctaSecondary':'See Features','kpis.k1':'Time to act on alerts','kpis.k2':'Manual reports','kpis.k3':'Repeat tickets','kpis.k4':'SSO onboarding','features.title':'Features that close the care loop','features.subtitle':'From monitoring to learning, from automation to incentives — in a single product.','about.title':'About Hortelan Agtech Ltda.','about.subtitle':'Our mission is to make growing simple with accessible tech, realtime data and a community that learns together.','about.p1':'Hortelan Agtech Ltda. brings sensors, rule-based automation and a web dashboard to keep everything simple.','about.l1':'Quick, secure setup with compatible kits.','about.l2':'Automate watering, lighting and ventilation with hysteresis and time windows.','about.l3':'Smart alerts so you act at the right time.','about.l4':'Community to share results and learn from other growers.','cta.title':'Ready to grow smart?','cta.subtitle':'Open the demo, explore the features and tell the community about your first results.','cta.demo':'Open Demo','cta.docs':'View Slides','footer.rights':'All rights reserved.'},es:{'nav.features':'Funciones','nav.how':'Cómo funciona','nav.journeys':'Jornadas','nav.pricing':'Planes','nav.faq':'FAQ','nav.docs':'Documentación','nav.demo':'Abrir demo','nav.about':'Sobre','hero.badge':'IoT • Automatización • Comunidad','hero.title':'Cultiva mejor con datos, automatización y una comunidad activa','hero.subtitle':'Hortelan Agtech Ltda. integra sensores, reglas de automatización y un panel en tiempo real con una comunidad que enseña y recompensa buenas prácticas.','hero.ctaPrimary':'Explorar demo','hero.ctaSecondary':'Ver funciones','kpis.k1':'Tiempo para actuar en alertas','kpis.k2':'Reportes manuales','kpis.k3':'Tickets repetitivos','kpis.k4':'Onboarding con SSO','features.title':'Funciones que cierran el ciclo de cuidado','features.subtitle':'Del monitoreo al aprendizaje, de la automatización a los incentivos, en un único producto.','about.title':'Sobre Hortelan Agtech Ltda.','about.subtitle':'Nuestra misión es simplificar el cultivo con tecnología accesible, datos en tiempo real y una comunidad que aprende unida.','about.p1':'Hortelan Agtech Ltda. integra sensores, automatización por reglas y un panel web para acompañar todo de forma simple.','about.l1':'Instalación rápida y segura con kits compatibles.','about.l2':'Automatiza riego, iluminación y ventilación con histéresis y ventanas de operación.','about.l3':'Alertas inteligentes para actuar en el momento correcto.','about.l4':'Comunidad para compartir resultados y aprender con otros cultivadores.','cta.title':'¿Listo para cultivar con inteligencia?','cta.subtitle':'Abre el demo, explora funciones y cuéntale a la comunidad tus primeros resultados.','cta.demo':'Abrir demo','cta.docs':'Ver presentación','footer.rights':'Todos los derechos reservados.'},fr:{'nav.features':'Fonctionnalités','nav.how':'Comment ça marche','nav.journeys':'Parcours','nav.pricing':'Tarifs','nav.faq':'FAQ','nav.docs':'Documentation','nav.demo':'Ouvrir la démo','nav.about':'À propos','hero.badge':'IoT • Automatisation • Communauté','hero.title':'Cultivez mieux avec les données, l’automatisation et une communauté active','hero.subtitle':'Hortelan Agtech Ltda. réunit capteurs, automatisation par règles et tableau de bord temps réel avec une communauté qui enseigne et récompense les bonnes pratiques.','hero.ctaPrimary':'Explorer la démo','hero.ctaSecondary':'Voir les fonctionnalités','kpis.k1':'Temps d’action sur alertes','kpis.k2':'Rapports manuels','kpis.k3':'Tickets répétitifs','kpis.k4':'Onboarding SSO','features.title':'Des fonctionnalités qui bouclent le cycle du soin','features.subtitle':'Du suivi à l’apprentissage, de l’automatisation aux incitations — dans un seul produit.','about.title':'À propos de Hortelan Agtech Ltda.','about.subtitle':'Notre mission: simplifier la culture avec une technologie accessible, des données temps réel et une communauté qui apprend ensemble.','about.p1':'Hortelan Agtech Ltda. intègre capteurs, automatisation par règles et un tableau de bord web pour tout suivre simplement.','about.l1':'Installation rapide et sécurisée avec kits compatibles.','about.l2':'Automatisez arrosage, éclairage et ventilation avec hystérésis et fenêtres d’opération.','about.l3':'Alertes intelligentes pour agir au bon moment.','about.l4':'Communauté pour partager des résultats et apprendre des autres cultivateurs.','cta.title':'Prêt à cultiver intelligemment ?','cta.subtitle':'Ouvrez la démo, explorez les fonctionnalités et partagez vos premiers résultats avec la communauté.','cta.demo':'Ouvrir la démo','cta.docs':'Voir la présentation','footer.rights':'Tous droits réservés.'}};
 
-function setLang(lang){
-  const selected=dict[lang]||dict.en;
-  document.documentElement.lang=lang==='pt' ? 'pt-BR' : lang;
-  document.querySelectorAll('[data-i18n]').forEach(el=>{
-    const k=el.getAttribute('data-i18n');
-    if(selected[k]) el.textContent=selected[k];
+const SUPPORTED_LANGUAGES = Object.freeze(Object.keys(dict));
+const DEFAULT_LANG = 'pt';
+const browserLanguageMap = Object.freeze({
+  pt: 'pt',
+  en: 'en',
+  es: 'es',
+  fr: 'fr',
+});
+
+
+const dictOverrides = {
+  en: {
+    'features.f1.title': 'Realtime dashboard',
+    'features.f1.desc': 'KPIs, charts and history — from executive overview to operational detail.',
+    'features.f2.title': 'Rule-based automation',
+    'features.f2.desc': 'If temperature > X, turn on ventilation. Hysteresis, windows and safety locks.',
+    'features.f3.title': 'Smart alerts',
+    'features.f3.desc': 'You are only notified when it matters — with context to act fast.',
+    'features.f4.title': 'Community',
+    'features.f4.desc': 'Learn, teach and share grow journals, tips and outcomes.',
+    'features.f5.title': 'Store and kits',
+    'features.f5.desc': 'Sensors, actuators and supplies recommended for each growing journey.',
+    'features.f6.title': 'Rewards',
+    'features.f6.desc': 'Engagement incentives: guides, useful answers and best practices.',
+    'how.c1.title': 'Telemetry & IoT',
+    'how.c1.desc': 'Sensing (temperature, humidity, light, soil) with secure delivery, local buffer and OTA updates. Actuators: pump, lighting, ventilation and more.',
+    'how.c2.title': 'Rules & Insights',
+    'how.c2.desc': 'Automation with hysteresis, windows and thresholds. Analytics and comparisons by period, crop and location. Data export.',
+    'how.c3.title': 'Security & Privacy',
+    'how.c3.desc': 'Encryption in transit, RBAC, auditing and device protection (unique keys and revocation).',
+    'journeys.title': 'Journeys that start simple and scale with you',
+    'journeys.subtitle': 'Ready-made crop templates, monthly challenges and a community for real questions.',
+    'journeys.j1.title': 'First garden',
+    'journeys.j1.i1': 'Guided setup for the starter kit',
+    'journeys.j1.i2': 'Recommended rule template for basil',
+    'journeys.j1.i3': 'Under/over watering alerts with fine tuning',
+    'journeys.j1.i4': 'Share results and earn rewards',
+    'journeys.j2.title': 'Advanced optimization',
+    'journeys.j2.i1': 'New sensors (e.g. light) and lighting/ventilation rules',
+    'journeys.j2.i2': 'Weekly comparisons (temperature p95, humidity variation)',
+    'journeys.j2.i3': 'CSV export and reports',
+    'journeys.j2.i4': 'Public guide: how to stabilize your greenhouse',
+    'pricing.title': 'Plans that evolve with your crop',
+    'pricing.subtitle': 'Start free and unlock advanced features when it makes sense.',
+    'pricing.free.p1': 'Basic dashboard',
+    'pricing.free.p2': 'Community',
+    'pricing.free.p3': 'Essential rules',
+    'pricing.free.p4': '7-day history',
+    'pricing.popular': 'Most popular',
+    'pricing.plus.p1': 'Advanced automation',
+    'pricing.plus.p2': 'Extended history',
+    'pricing.plus.p3': 'CSV export',
+    'pricing.plus.p4': 'Crop templates',
+    'pricing.prem.p1': 'Insights and anomaly detection',
+    'pricing.prem.p2': 'Integrations (e.g. Home Assistant)',
+    'pricing.prem.p3': 'Priority support',
+    'pricing.prem.p4': 'Advanced reports',
+    'pricing.cta.try': 'Try now',
+    'pricing.cta.subscribe': 'Subscribe to Plus',
+    'pricing.cta.sales': 'Talk to sales',
+    'contact.title': 'Talk to us',
+    'contact.subtitle': 'Questions, partnerships or rollouts for schools/condos.',
+    'contact.nameLabel': 'Name',
+    'contact.emailLabel': 'Email',
+    'contact.msgLabel': 'Message',
+    'contact.send': 'Send',
+    'contact.email': 'Open email',
+    'contact.note': 'Tip: replace the mailto: with a Formspree/Formspark endpoint to capture messages without backend.',
+  },
+  es: {
+    'features.f1.title': 'Panel en tiempo real',
+    'features.f1.desc': 'KPIs, gráficos e histórico: desde vista ejecutiva hasta detalle operativo.',
+    'features.f2.title': 'Automatización por reglas',
+    'features.f2.desc': 'Si temperatura > X, enciende ventilación. Histéresis, ventanas y bloqueos de seguridad.',
+    'features.f3.title': 'Alertas inteligentes',
+    'features.f3.desc': 'Solo te notificamos cuando importa, con contexto para actuar rápido.',
+    'features.f4.title': 'Comunidad',
+    'features.f4.desc': 'Aprende, enseña y comparte cuadernos de cultivo, consejos y resultados.',
+    'features.f5.title': 'Tienda y kits',
+    'features.f5.desc': 'Sensores, actuadores e insumos recomendados para cada jornada de cultivo.',
+    'features.f6.title': 'Recompensas',
+    'features.f6.desc': 'Incentivos al compromiso: guías, respuestas útiles y buenas prácticas.',
+    'how.c1.title': 'Telemetría e IoT',
+    'how.c1.desc': 'Sensado (temperatura, humedad, luz, suelo) con envío seguro, buffer local y actualización OTA. Actuadores: bomba, iluminación, ventilación y más.',
+    'how.c2.title': 'Reglas e insights',
+    'how.c2.desc': 'Automatización con histéresis, ventanas y límites. Análisis y comparativas por período, cultivo y lugar. Exportación de datos.',
+    'how.c3.title': 'Seguridad y privacidad',
+    'how.c3.desc': 'Cifrado en tránsito, RBAC, auditoría y protección de dispositivos (claves únicas y revocación).',
+    'journeys.title': 'Jornadas que empiezan simples y escalan contigo',
+    'journeys.subtitle': 'Plantillas listas por cultivo, retos mensuales y comunidad para dudas reales.',
+    'journeys.j1.title': 'Primer huerto',
+    'journeys.j1.i1': 'Instalación guiada del kit básico',
+    'journeys.j1.i2': 'Plantilla de reglas recomendada para albahaca',
+    'journeys.j1.i3': 'Alertas de riego insuficiente/excesivo con ajuste fino',
+    'journeys.j1.i4': 'Comparte resultados y gana recompensas',
+    'journeys.j2.title': 'Optimización avanzada',
+    'journeys.j2.i1': 'Nuevos sensores (ej.: luz) y reglas de iluminación/ventilación',
+    'journeys.j2.i2': 'Comparativas semanales (p95 de temperatura, variación de humedad)',
+    'journeys.j2.i3': 'Exportación CSV e informes',
+    'journeys.j2.i4': 'Guía pública: cómo estabilizar tu invernadero',
+    'pricing.title': 'Planes que evolucionan con tu cultivo',
+    'pricing.subtitle': 'Comienza gratis y activa funciones avanzadas cuando tenga sentido.',
+    'pricing.free.p1': 'Panel básico',
+    'pricing.free.p2': 'Comunidad',
+    'pricing.free.p3': 'Reglas esenciales',
+    'pricing.free.p4': 'Histórico de 7 días',
+    'pricing.popular': 'Más popular',
+    'pricing.plus.p1': 'Automatización avanzada',
+    'pricing.plus.p2': 'Histórico extendido',
+    'pricing.plus.p3': 'Exportación CSV',
+    'pricing.plus.p4': 'Plantillas por cultivo',
+    'pricing.prem.p1': 'Insights y detección de anomalías',
+    'pricing.prem.p2': 'Integraciones (ej.: Home Assistant)',
+    'pricing.prem.p3': 'Soporte prioritario',
+    'pricing.prem.p4': 'Informes avanzados',
+    'pricing.cta.try': 'Probar',
+    'pricing.cta.subscribe': 'Suscribirse a Plus',
+    'pricing.cta.sales': 'Hablar con ventas',
+    'contact.title': 'Habla con nosotros',
+    'contact.subtitle': 'Dudas, alianzas o implementación en escuelas/condominios.',
+    'contact.nameLabel': 'Nombre',
+    'contact.emailLabel': 'Correo electrónico',
+    'contact.msgLabel': 'Mensaje',
+    'contact.send': 'Enviar',
+    'contact.email': 'Abrir correo',
+    'contact.note': 'Consejo: sustituye el mailto: por un endpoint de Formspree/Formspark para capturar mensajes sin backend.',
+  },
+  fr: {
+    'features.f1.title': 'Tableau de bord en temps réel',
+    'features.f1.desc': 'KPIs, graphiques et historique — de la vue exécutive au détail opérationnel.',
+    'features.f2.title': 'Automatisation par règles',
+    'features.f2.desc': 'Si température > X, activez la ventilation. Hystérésis, fenêtres et verrous de sécurité.',
+    'features.f3.title': 'Alertes intelligentes',
+    'features.f3.desc': 'Vous êtes notifié uniquement quand c’est utile, avec le contexte pour agir vite.',
+    'features.f4.title': 'Communauté',
+    'features.f4.desc': 'Apprenez, enseignez et partagez journaux de culture, conseils et résultats.',
+    'features.f5.title': 'Boutique et kits',
+    'features.f5.desc': 'Capteurs, actionneurs et consommables recommandés pour chaque parcours de culture.',
+    'features.f6.title': 'Récompenses',
+    'features.f6.desc': 'Incitations à l’engagement : guides, réponses utiles et bonnes pratiques.',
+    'how.c1.title': 'Télémétrie & IoT',
+    'how.c1.desc': 'Mesures (température, humidité, lumière, sol) avec envoi sécurisé, buffer local et mise à jour OTA. Actionneurs : pompe, éclairage, ventilation et plus.',
+    'how.c2.title': 'Règles & Insights',
+    'how.c2.desc': 'Automatisation avec hystérésis, fenêtres et limites. Analyses et comparaisons par période, culture et lieu. Export des données.',
+    'how.c3.title': 'Sécurité & Confidentialité',
+    'how.c3.desc': 'Chiffrement en transit, RBAC, audit et protection des appareils (clés uniques et révocation).',
+    'journeys.title': 'Des parcours simples au départ, évolutifs avec vous',
+    'journeys.subtitle': 'Modèles prêts par culture, défis mensuels et communauté pour des questions réelles.',
+    'journeys.j1.title': 'Premier potager',
+    'journeys.j1.i1': 'Installation guidée du kit de base',
+    'journeys.j1.i2': 'Modèle de règles recommandé pour le basilic',
+    'journeys.j1.i3': 'Alertes sous/sur-arrosage avec réglage fin',
+    'journeys.j1.i4': 'Partagez vos résultats et gagnez des récompenses',
+    'journeys.j2.title': 'Optimisation avancée',
+    'journeys.j2.i1': 'Nouveaux capteurs (ex. : lumière) et règles d’éclairage/ventilation',
+    'journeys.j2.i2': 'Comparaisons hebdomadaires (température p95, variation d’humidité)',
+    'journeys.j2.i3': 'Export CSV et rapports',
+    'journeys.j2.i4': 'Guide public : comment stabiliser votre serre',
+    'pricing.title': 'Des offres qui évoluent avec votre culture',
+    'pricing.subtitle': 'Commencez gratuitement et activez les fonctions avancées quand nécessaire.',
+    'pricing.free.p1': 'Tableau de bord basique',
+    'pricing.free.p2': 'Communauté',
+    'pricing.free.p3': 'Règles essentielles',
+    'pricing.free.p4': 'Historique 7 jours',
+    'pricing.popular': 'Le plus populaire',
+    'pricing.plus.p1': 'Automatisation avancée',
+    'pricing.plus.p2': 'Historique étendu',
+    'pricing.plus.p3': 'Export CSV',
+    'pricing.plus.p4': 'Modèles par culture',
+    'pricing.prem.p1': 'Insights et détection d’anomalies',
+    'pricing.prem.p2': 'Intégrations (ex. : Home Assistant)',
+    'pricing.prem.p3': 'Support prioritaire',
+    'pricing.prem.p4': 'Rapports avancés',
+    'pricing.cta.try': 'Essayer',
+    'pricing.cta.subscribe': 'S’abonner à Plus',
+    'pricing.cta.sales': 'Contacter les ventes',
+    'contact.title': 'Contactez-nous',
+    'contact.subtitle': 'Questions, partenariats ou déploiement en écoles/copropriétés.',
+    'contact.nameLabel': 'Nom',
+    'contact.emailLabel': 'E-mail',
+    'contact.msgLabel': 'Message',
+    'contact.send': 'Envoyer',
+    'contact.email': 'Ouvrir e-mail',
+    'contact.note': 'Astuce : remplacez le mailto: par un endpoint Formspree/Formspark pour capter les messages sans backend.',
+  },
+};
+
+function normalizeLanguageCode(input){
+  const normalized=String(input||'').toLowerCase().trim();
+  if(!normalized) return null;
+  if(dict[normalized]) return normalized;
+  const [prefix]=normalized.split('-');
+  return browserLanguageMap[prefix]||null;
+}
+
+function buildFallbackTranslations(){
+  const fallback={};
+  document.querySelectorAll('[data-i18n]').forEach((el)=>{
+    const key=el.getAttribute('data-i18n');
+    if(!key || fallback[key]) return;
+    fallback[key]=(el.textContent||'').trim();
   });
-  document.querySelectorAll('.lang-switch button').forEach((btn)=>{
+  return fallback;
+}
+
+const fallbackTranslations=buildFallbackTranslations();
+const mergedTranslations=SUPPORTED_LANGUAGES.reduce((acc,lang)=>{
+  acc[lang]={ ...fallbackTranslations, ...dict[lang], ...(dictOverrides[lang]||{}) };
+  return acc;
+},{});
+
+function updateLanguageSwitchUI(lang){
+  const buttons=Array.from(document.querySelectorAll('.lang-switch button'));
+  buttons.forEach((btn)=>{
     const active=btn.dataset.lang===lang;
     btn.classList.toggle('active',active);
     btn.setAttribute('aria-pressed',String(active));
   });
+
+  const switchRoot=document.querySelector('.lang-switch');
+  if(!switchRoot) return;
+
+  const activeButton=buttons.find((button)=>button.dataset.lang===lang);
+  if(!activeButton) return;
+
+  const rootRect=switchRoot.getBoundingClientRect();
+  const buttonRect=activeButton.getBoundingClientRect();
+  switchRoot.style.setProperty('--indicator-left',`${Math.round(buttonRect.left-rootRect.left)}px`);
+  switchRoot.style.setProperty('--indicator-width',`${Math.round(buttonRect.width)}px`);
+}
+
+function setLang(language){
+  const lang=normalizeLanguageCode(language)||DEFAULT_LANG;
+  const selected=mergedTranslations[lang]||mergedTranslations[DEFAULT_LANG];
+  document.documentElement.lang=lang==='pt' ? 'pt-BR' : lang;
+
+  document.querySelectorAll('[data-i18n]').forEach((el)=>{
+    const key=el.getAttribute('data-i18n');
+    const text=selected[key];
+    if(typeof text==='string'){
+      el.textContent=text;
+    }
+  });
+
+  updateLanguageSwitchUI(lang);
   localStorage.setItem('lang',lang);
   localStorage.setItem('hortelan_lang',lang);
   requestAnimationFrame(()=>initTypingEffects({ restart:true }));
 }
 
-async function detectLanguage(){
-  const saved=localStorage.getItem('lang') || localStorage.getItem('hortelan_lang');
-  if(saved&&dict[saved]){ setLang(saved); return; }
+function detectLanguage(){
+  const fromStorage=normalizeLanguageCode(localStorage.getItem('lang'))
+    || normalizeLanguageCode(localStorage.getItem('hortelan_lang'));
 
-  // A landing já nasce em português (pt-BR), então mantemos esse idioma
-  // como padrão inicial quando o usuário ainda não escolheu outro.
-  setLang('pt');
+  if(fromStorage){
+    setLang(fromStorage);
+    return;
+  }
+
+  const fromBrowser=normalizeLanguageCode(navigator.language);
+  setLang(fromBrowser||DEFAULT_LANG);
 }
 
 const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -230,7 +467,20 @@ if(navWrap&&menuToggle&&navCollapse){
   closeMenu();
 }
 
-press(document.querySelectorAll('.lang-switch button'),(element)=>setLang(element.dataset.lang));
+function bindLanguageSwitch(){
+  const buttons=Array.from(document.querySelectorAll('.lang-switch button'));
+  buttons.forEach((button)=>{
+    button.addEventListener('click',()=>setLang(button.dataset.lang));
+    button.addEventListener('keydown',(event)=>{
+      if(event.key==='Enter' || event.key===' '){
+        event.preventDefault();
+        setLang(button.dataset.lang);
+      }
+    });
+  });
+}
+
+bindLanguageSwitch();
 detectLanguage();
 initTypingEffects();
 
