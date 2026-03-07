@@ -13,7 +13,7 @@ a:hover{color:#a7f3d0}
 .btn.primary{background:var(--brand);color:#052e23}.btn.primary:hover{background:var(--brand-700);color:#ecfdf5}
 .btn.ghost{border-color:#2d5d51;color:#9ff3cd;background:rgba(16,39,34,.45)}.btn.ghost:hover{background:#15362e}
 .about-cta-row{justify-content:center;align-items:center}
-.youtube-cta{gap:.55rem;min-height:52px;padding-inline:1.35rem;margin-inline:auto;text-align:center;line-height:1.2;border-color:#3b7b67;background:linear-gradient(135deg,#133a31,#0f2f27 60%,#123d32);color:#c9ffe8;box-shadow:0 8px 22px rgba(4,38,31,.45),0 0 0 1px rgba(110,231,183,.2) inset;transform:translateY(0);animation:youtubePulse 2.4s ease-in-out infinite}
+.youtube-cta{gap:.55rem;min-height:52px;padding-inline:1.35rem;margin:.45rem auto 0;text-align:center;line-height:1.2;border-color:#3b7b67;background:linear-gradient(135deg,#133a31,#0f2f27 60%,#123d32);color:#c9ffe8;box-shadow:0 8px 22px rgba(4,38,31,.45),0 0 0 1px rgba(110,231,183,.2) inset;transform:translateY(0);animation:youtubePulse 2.4s ease-in-out infinite}
 .youtube-cta:hover{color:#ecfdf5;background:linear-gradient(135deg,#175143,#144439 60%,#185246);border-color:#6ee7b7;box-shadow:0 12px 28px rgba(16,185,129,.38),0 0 0 1px rgba(167,243,208,.38) inset;transform:translateY(-2px) scale(1.02)}
 .youtube-cta:focus{outline:2px solid #a7f3d0;outline-offset:3px}
 .youtube-cta-icon{display:inline-flex;align-items:center;justify-content:center;flex:0 0 auto;transform:translateY(-.5px)}
