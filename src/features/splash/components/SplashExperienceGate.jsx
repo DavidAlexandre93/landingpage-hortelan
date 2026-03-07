@@ -1,4 +1,4 @@
-import React, { Suspense, lazy, useEffect, useMemo } from "react";
+import { Suspense, lazy, useEffect, useMemo, useRef } from "react";
 import { LANDING_PAGE_PATH } from "../../../app/routes.js";
 import { detectAndPersistLanguage } from "../../localization/languageDetection.js";
 import { trackMetric } from "../../../shared/observability/rumMetrics.js";
@@ -23,7 +23,7 @@ function SplashFallback() {
 
 export default function SplashExperienceGate() {
   const mode = useMemo(() => getTimeMode(new Date()), []);
-  const startedAt = useMemo(() => performance.now(), []);
+  const startedAtRef = useRef(performance.now());
 
   useEffect(() => {
     trackMetric("splash_boot", { mode });
@@ -36,7 +36,7 @@ export default function SplashExperienceGate() {
   const handleDone = () => {
     trackMetric("splash_finished", {
       mode,
-      durationMs: Math.round(performance.now() - startedAt),
+      durationMs: Math.round(performance.now() - startedAtRef.current),
     });
     redirectToLandingPage();
   };

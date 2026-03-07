@@ -1,29 +1,23 @@
-import React, { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { getSplashMessages } from "../../localization/splashMessages.js";
+import { range } from "../utils/range.js";
+import { scheduleSplashTimeline } from "../utils/scheduleSplashTimeline.js";
 
 const DURATION_RAIN = 2.6;
 const DURATION_GROW = 2.4;
 const EXIT_FADE = 0.5;
-
-function range(n) {
-  return Array.from({ length: n }, (_, i) => i);
-}
 
 export default function DaySplashScreen({ onDone }) {
   const [phase, setPhase] = useState("rain");
   const copy = useMemo(() => getSplashMessages(), []);
 
   useEffect(() => {
-    const t1 = setTimeout(() => setPhase("grow"), DURATION_RAIN * 1000);
-    const t2 = setTimeout(() => setPhase("exit"), (DURATION_RAIN + DURATION_GROW) * 1000);
-    const t3 = setTimeout(() => onDone?.(), (DURATION_RAIN + DURATION_GROW + EXIT_FADE) * 1000);
-
-    return () => {
-      clearTimeout(t1);
-      clearTimeout(t2);
-      clearTimeout(t3);
-    };
+    return scheduleSplashTimeline([
+      { delayMs: DURATION_RAIN * 1000, action: () => setPhase("grow") },
+      { delayMs: (DURATION_RAIN + DURATION_GROW) * 1000, action: () => setPhase("exit") },
+      { delayMs: (DURATION_RAIN + DURATION_GROW + EXIT_FADE) * 1000, action: () => onDone?.() },
+    ]);
   }, [onDone]);
 
   const raindrops = useMemo(
@@ -122,8 +116,8 @@ function Plant({ index, grow }) {
         animate={{ rotate: grow ? [0, -2, 1, 0] : 0 }}
         transition={{ duration: 2.2, repeat: Infinity, ease: "easeInOut" }}
       />
-      <motion.div className="leaf leafL" animate={{ rotate: grow ? [-6, -10, -7] : -6 }} transition={{ duration: 1.8, repeat: Infinity }} />
-      <motion.div className="leaf leafR" animate={{ rotate: grow ? [6, 10, 7] : 6 }} transition={{ duration: 1.8, repeat: Infinity }} />
+      <motion.div className="leaf left" animate={{ rotate: grow ? [-6, -10, -7] : -6 }} transition={{ duration: 1.8, repeat: Infinity }} />
+      <motion.div className="leaf right" animate={{ rotate: grow ? [6, 10, 7] : 6 }} transition={{ duration: 1.8, repeat: Infinity }} />
     </motion.div>
   );
 }

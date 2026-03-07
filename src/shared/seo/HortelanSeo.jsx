@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import { useMemo } from "react";
 import { useDocumentSeo } from "./useDocumentSeo.js";
 
 const SITE_URL = "https://hortelan.vercel.app/";
