@@ -6,8 +6,17 @@
   "scripts": {
     "start": "vite",
     "build": "vite build",
+    "build:validate": "npm run build",
     "preview": "vite preview",
-    "test": "node --test"
+    "lint": "node scripts/lint.mjs",
+    "format": "node scripts/format.mjs --write",
+    "format:check": "node scripts/format.mjs --check",
+    "test": "npm run test:unit",
+    "test:unit": "node --test",
+    "test:coverage": "mkdir -p coverage && NODE_V8_COVERAGE=coverage node --test --experimental-test-coverage --test-coverage-lines=80 --test-coverage-functions=80 --test-coverage-branches=70 --test-coverage-include=src/**/*.js | tee coverage/summary.txt",
+    "security:audit": "npm audit --audit-level=high",
+    "quality:gate": "npm run lint && npm run format:check && npm run test:coverage && npm run build:validate",
+    "ci": "npm run quality:gate && npm run security:audit"
   },
   "dependencies": {
     "framer-motion": "^11.2.10",
@@ -22,3 +31,4 @@
     "esbuild": "^0.25.0"
   }
 }
+
