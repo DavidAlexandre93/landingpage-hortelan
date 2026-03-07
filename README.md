@@ -199,6 +199,8 @@ Demo: https://hortelan.vercel.app/dashboard/app
 
 O projeto possui uma esteira completa em GitHub Actions com separação entre validação (CI) e entrega (CD):
 
+O projeto utiliza **somente npm** como gerenciador de pacotes (sem `yarn.lock` ou comandos Yarn).
+
 - **CI (`.github/workflows/ci.yml`)**
   - Instalação reprodutível com `npm ci`.
   - **Lint** automatizado (checagem sintática + regras de higiene de código).

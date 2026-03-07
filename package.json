@@ -29,6 +29,6 @@
   },
   "overrides": {
     "esbuild": "^0.25.0"
-  }
+  },
+  "packageManager": "npm@10"
 }
-
