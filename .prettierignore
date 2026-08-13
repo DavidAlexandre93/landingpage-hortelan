@@ -1,0 +1,10 @@
+.agents/
+Assets/
+coverage/
+dist/
+dist-subpath/
+node_modules/
+package-lock.json
+playwright-report/
+public/index.min.html
+test-results/

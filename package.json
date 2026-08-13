@@ -1,35 +1,67 @@
 {
   "name": "landingpage-hortelan",
   "private": true,
-  "version": "1.0.0",
+  "version": "2.0.0",
+  "description": "Landing page institucional da Hortelan AgTech, guiada por OpenSpec e construída com React.",
   "type": "module",
+  "packageManager": "npm@11.9.0",
+  "engines": {
+    "node": ">=22.13 <23 || >=24 <25",
+    "npm": ">=10 <12"
+  },
   "scripts": {
-    "start": "node ./node_modules/vite/bin/vite.js",
-    "build": "node ./node_modules/vite/bin/vite.js build",
-    "build:validate": "npm run build",
-    "preview": "node ./node_modules/vite/bin/vite.js preview",
-    "lint": "node scripts/lint.mjs",
-    "format": "node scripts/format.mjs --write",
-    "format:check": "node scripts/format.mjs --check",
-    "test": "npm run test:unit",
-    "test:unit": "node --test",
-    "test:coverage": "mkdir -p coverage && NODE_V8_COVERAGE=coverage node --test --experimental-test-coverage --test-coverage-lines=80 --test-coverage-functions=80 --test-coverage-branches=70 --test-coverage-include=src/**/*.js | tee coverage/summary.txt",
+    "dev": "vite",
+    "start": "vite",
+    "build": "vite build",
+    "build:validate": "npm run build && npm run build:subpath && npm run artifact:check && npm run budget:check",
+    "build:subpath": "vite build --base=/landingpage-hortelan/ --outDir=dist-subpath",
+    "preview": "vite preview",
+    "lint": "eslint . --max-warnings=0",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "test": "vitest run",
+    "test:unit": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "test:e2e": "playwright test",
+    "test:e2e:chromium": "playwright test --project=chromium",
+    "test:e2e:install": "playwright install chromium firefox webkit",
+    "budget:check": "node scripts/check-build-budget.mjs",
+    "artifact:check": "node scripts/check-build-artifact.mjs",
+    "repo:check": "node scripts/check-repository.mjs",
+    "engine:check": "node scripts/check-node-version.mjs",
+    "workflow:check": "node scripts/check-workflows.mjs",
+    "spec:status": "openspec list && openspec list --specs",
+    "spec:validate": "openspec validate --all --strict",
     "security:audit": "npm audit --audit-level=high",
-    "quality:gate": "npm run lint && npm run format:check && npm run test:coverage && npm run build:validate",
-    "ci": "npm run quality:gate && npm run security:audit"
+    "quality:gate": "npm run engine:check && npm run repo:check && npm run workflow:check && npm run spec:validate && npm run lint && npm run format:check && npm run test:coverage && npm run build:validate",
+    "release:gate": "npm run quality:gate && npm run security:audit && npm run test:e2e",
+    "ci": "npm run release:gate"
   },
   "dependencies": {
-    "@vercel/analytics": "^1.5.0",
-    "framer-motion": "^11.2.10",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
-    "react-router-dom": "^6.26.1"
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8"
   },
   "devDependencies": {
-    "vite": "7.3.1"
-  },
-  "overrides": {
-    "esbuild": "^0.25.0"
+    "@axe-core/playwright": "4.13.0",
+    "@eslint/js": "9.39.5",
+    "@fission-ai/openspec": "^1.8.0",
+    "@playwright/test": "1.62.1",
+    "@testing-library/jest-dom": "7.0.1",
+    "@testing-library/react": "16.3.2",
+    "@testing-library/user-event": "14.6.4",
+    "@vitejs/plugin-react": "6.0.5",
+    "@vitest/coverage-v8": "4.1.10",
+    "eslint": "9.39.5",
+    "eslint-plugin-jsx-a11y": "6.10.2",
+    "eslint-plugin-react": "7.37.5",
+    "eslint-plugin-react-hooks": "7.1.1",
+    "eslint-plugin-react-refresh": "0.5.4",
+    "globals": "17.11.0",
+    "jsdom": "29.1.1",
+    "prettier": "3.9.6",
+    "vite": "8.2.1",
+    "vitest": "4.1.10",
+    "yaml": "2.9.0"
   }
 }
-

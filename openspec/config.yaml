@@ -1,0 +1,33 @@
+schema: spec-driven
+
+context: |
+  Produto: landing page institucional da Hortelan AgTech Ltda.
+  Stack: React, Vite, JavaScript ESM e CSS modular por responsabilidade.
+  Idioma principal: pt-BR, com suporte a en, es e fr.
+  Diretrizes: mobile-first, WCAG 2.2 AA, progressive enhancement, sem backend,
+  dependencias enxutas, conteudo seguro no DOM e URLs externas centralizadas.
+  Qualidade obrigatoria: lint, formatacao, testes, cobertura, build, auditoria de
+  dependencias e validacao OpenSpec antes de uma mudanca ser considerada pronta.
+
+rules:
+  proposal:
+    - Declare explicit user-facing capabilities and breaking changes.
+    - Keep scope aligned with the institutional marketing experience.
+  specs:
+    - Use testable MUST/SHALL requirements and Given/When/Then scenarios.
+    - Include responsive, accessibility and failure-state behavior when relevant.
+  design:
+    - Record security, accessibility, performance and migration decisions.
+    - Prefer one source of truth over duplicated static and React implementations.
+  tasks:
+    - Every implementation group must include proportional automated verification.
+    - End with OpenSpec validation and the full project quality gate.
+
+operations:
+  apply:
+    guidance:
+      - Keep the active change tasks synchronized with implementation progress.
+      - Preserve user-authored assets and unrelated repository changes.
+  archive:
+    guidance:
+      - Archive only after all acceptance criteria and quality gates pass.

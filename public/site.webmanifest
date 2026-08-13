@@ -1,0 +1,17 @@
+{
+  "name": "Hortelan AgTech",
+  "short_name": "Hortelan",
+  "description": "Cultivo conectado e cuidado inteligente.",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#f8faf5",
+  "theme_color": "#0a6b55",
+  "icons": [
+    {
+      "src": "img/hortelan-logo.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}
