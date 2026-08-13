@@ -2,12 +2,8 @@ name: CI Frontend
 
 on:
   pull_request:
-    paths-ignore:
-      - "**/*.md"
   push:
     branches: ["main", "develop", "release/**"]
-    paths-ignore:
-      - "**/*.md"
   workflow_dispatch:
 
 concurrency:
@@ -18,80 +14,83 @@ permissions:
   contents: read
 
 jobs:
-  quality:
-    name: Quality (lint, format, tests, coverage, build)
+  node-contract:
+    name: Node ${{ matrix.node }} compatibility
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        node: ["22.13.0", "24"]
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Setup Node
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v7
         with:
-          node-version: 20
+          node-version: ${{ matrix.node }}
           cache: npm
           cache-dependency-path: package-lock.json
 
-      - name: Install dependencies
-        run: npm ci --no-fund
+      - name: Install locked dependencies
+        run: npm ci --no-fund --ignore-scripts
 
-      - name: Lint
-        run: npm run lint
+      - name: Verify SDD, engine and repository contracts
+        run: npm run sdd:check && npm run engine:check && npm run repo:check
 
-      - name: Format check
-        run: npm run format:check
-
-      - name: Unit tests
+      - name: Unit compatibility
         run: npm run test:unit
 
-      - name: Coverage tests
-        run: npm run test:coverage
-
-      - name: Build validation
-        run: npm run build:validate
-
-      - name: Upload build artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: frontend-dist
-          path: dist
-          if-no-files-found: error
-
-      - name: Upload coverage report
-        uses: actions/upload-artifact@v4
-        with:
-          name: coverage-report
-          path: coverage
-          if-no-files-found: error
-
-  security:
-    name: Security (dependency vulnerabilities)
+  release:
+    name: Authoritative release gate
+    needs: node-contract
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Setup Node
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v7
         with:
-          node-version: 20
+          node-version: 24
           cache: npm
           cache-dependency-path: package-lock.json
 
-      - name: Install dependencies
-        run: npm ci --no-fund
+      - name: Install locked dependencies
+        run: npm ci --no-fund --ignore-scripts
 
-      - name: Audit vulnerabilities
-        run: npm run security:audit
+      - name: Install browser runtimes
+        run: npx playwright install --with-deps chromium firefox webkit
+
+      - name: Run release gate
+        run: npm run release:gate
+
+      - name: Upload build artifact
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: frontend-dist-${{ github.sha }}
+          path: dist
+          if-no-files-found: warn
+          retention-days: 14
+
+      - name: Upload coverage and browser evidence
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: quality-evidence-${{ github.sha }}
+          path: |
+            coverage
+            playwright-report
+            test-results
+          if-no-files-found: warn
+          retention-days: 14
 
   quality-gate:
     name: Quality Gate
+    needs: release
     runs-on: ubuntu-latest
-    needs: [quality, security]
-
     steps:
-      - name: Final status
-        run: echo "All quality and security checks passed."
-
+      - run: echo "All repository, quality, security, build and browser checks passed."

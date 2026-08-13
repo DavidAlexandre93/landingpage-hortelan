@@ -4,66 +4,115 @@ on:
   push:
     branches: ["main", "develop", "release/**"]
     tags: ["v*"]
-    paths-ignore:
-      - "**/*.md"
   workflow_dispatch:
 
 concurrency:
   group: cd-${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 permissions:
-  contents: write
+  contents: read
 
 jobs:
-  package:
-    name: Package build artifact
+  validate-package:
+    name: Validate and package once
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Setup Node
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v7
         with:
-          node-version: 20
+          node-version: 24
           cache: npm
           cache-dependency-path: package-lock.json
 
-      - name: Install dependencies
-        run: npm ci --no-fund
+      - name: Install locked dependencies
+        run: npm ci --no-fund --ignore-scripts
 
-      - name: Build
-        run: npm run build
+      - name: Install browser runtimes
+        run: npx playwright install --with-deps chromium firefox webkit
 
-      - name: Upload deploy artifact
-        uses: actions/upload-artifact@v4
+      - name: Run authoritative release gate
+        run: npm run release:gate
+
+      - name: Upload immutable deploy artifact
+        uses: actions/upload-artifact@v7
         with:
-          name: frontend-dist
-          path: dist
+          name: frontend-dist-${{ github.sha }}
+          path: dist-subpath
           if-no-files-found: error
+          retention-days: 14
 
-  deploy-production:
-    name: Deploy production
-    needs: package
+  deploy-development:
+    name: Promote to development
+    needs: validate-package
     runs-on: ubuntu-latest
-    if: startsWith(github.ref, 'refs/tags/v')
-    environment:
-      name: production
+    permissions:
+      contents: write
+    environment: development
 
     steps:
-      - name: Download build artifact
-        uses: actions/download-artifact@v4
+      - name: Download validated artifact
+        uses: actions/download-artifact@v8
         with:
-          name: frontend-dist
-          path: dist
+          name: frontend-dist-${{ github.sha }}
+          path: dist-subpath
 
-      - name: Deploy to production branch
+      - name: Deploy exact artifact
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: dist
-          publish_branch: gh-pages
+          publish_dir: dist-subpath
+          publish_branch: gh-pages-development
           force_orphan: true
 
+  deploy-staging:
+    name: Promote to staging
+    needs: deploy-development
+    if: startsWith(github.ref, 'refs/heads/release/') || startsWith(github.ref, 'refs/tags/v')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    environment: staging
+
+    steps:
+      - name: Download validated artifact
+        uses: actions/download-artifact@v8
+        with:
+          name: frontend-dist-${{ github.sha }}
+          path: dist-subpath
+
+      - name: Deploy exact artifact
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: dist-subpath
+          publish_branch: gh-pages-staging
+          force_orphan: true
+
+  deploy-production:
+    name: Promote to production
+    needs: deploy-staging
+    if: startsWith(github.ref, 'refs/tags/v')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    environment: production
+
+    steps:
+      - name: Download validated artifact
+        uses: actions/download-artifact@v8
+        with:
+          name: frontend-dist-${{ github.sha }}
+          path: dist-subpath
+
+      - name: Deploy exact artifact
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: dist-subpath
+          publish_branch: gh-pages
+          force_orphan: true

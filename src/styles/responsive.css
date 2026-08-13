@@ -1,0 +1,397 @@
+@media (max-width: 1100px) {
+  .header-panel {
+    gap: 1rem;
+  }
+
+  .primary-navigation {
+    gap: 0.8rem;
+  }
+
+  .header-demo {
+    display: none;
+  }
+
+  .feature-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .feature-card {
+    min-height: 19rem;
+  }
+
+  .journey-card {
+    grid-template-columns: 0.58fr 1.42fr;
+  }
+}
+
+@media (max-width: 900px) {
+  :root {
+    --header-height: 4.75rem;
+  }
+
+  .menu-button {
+    display: inline-grid;
+  }
+
+  .header-panel {
+    position: fixed;
+    top: var(--header-height);
+    right: 0;
+    left: 0;
+    display: grid;
+    gap: 1.25rem;
+    padding: 1.25rem max(1.25rem, calc((100vw - var(--container)) / 2));
+    border-bottom: 1px solid var(--color-line);
+    background: var(--color-canvas);
+    box-shadow: var(--shadow-md);
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-0.75rem);
+    transition:
+      opacity var(--transition),
+      transform var(--transition);
+  }
+
+  .header-panel.is-open {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+  }
+
+  .primary-navigation {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.25rem 1rem;
+  }
+
+  .primary-navigation a {
+    min-height: 2.75rem;
+    display: flex;
+    align-items: center;
+  }
+
+  .header-actions {
+    justify-content: flex-start;
+    padding-top: 1rem;
+    border-top: 1px solid var(--color-line);
+  }
+
+  .header-demo {
+    display: inline-flex;
+    margin-left: auto;
+  }
+
+  .hero-layout,
+  .story-layout,
+  .contact-layout,
+  .community-layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .hero-copy {
+    max-width: 46rem;
+  }
+
+  .hero h1 {
+    max-width: 13ch;
+  }
+
+  .hero-product {
+    width: min(100%, 46rem);
+    margin-inline: auto;
+  }
+
+  .story-media {
+    order: 2;
+  }
+
+  .story-copy {
+    max-width: 44rem;
+  }
+
+  .workflow-list {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .workflow-list li {
+    min-height: 13rem;
+  }
+
+  .journey-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .journey-card {
+    min-height: 24rem;
+    grid-template-columns: minmax(11rem, 0.65fr) minmax(0, 1.35fr);
+  }
+
+  .plan-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .plan-card:last-child {
+    grid-column: 1 / -1;
+    width: min(100%, calc(50% - 0.5rem));
+    justify-self: center;
+  }
+
+  .faq-layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .faq-layout .section-heading,
+  .community-form {
+    position: static;
+  }
+
+  .contact-copy {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(14rem, 0.7fr);
+    align-items: center;
+    gap: 2rem;
+  }
+
+  .contact-orbit {
+    width: 15rem;
+  }
+
+  .community-layout {
+    gap: 2rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .container {
+    width: min(calc(100% - 1.5rem), var(--container));
+  }
+
+  .section {
+    padding-block: 4.5rem;
+  }
+
+  .brand-copy small {
+    display: none;
+  }
+
+  .brand-mark {
+    width: 2.35rem;
+    height: 2.35rem;
+  }
+
+  .header-panel {
+    padding-inline: 0.75rem;
+  }
+
+  .primary-navigation {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .header-actions {
+    flex-wrap: wrap;
+  }
+
+  .header-demo {
+    flex: 1 1 auto;
+  }
+
+  .hero {
+    padding-block: 4.25rem 5rem;
+  }
+
+  .hero-actions .button {
+    width: 100%;
+  }
+
+  .signal-list {
+    gap: 0.6rem;
+  }
+
+  .signal-list > div {
+    padding-inline: 0.55rem;
+  }
+
+  .signal-list dt {
+    font-size: 1.2rem;
+  }
+
+  .hero-product {
+    padding-block: 3rem 0;
+  }
+
+  .dashboard-frame {
+    border-radius: var(--radius-md);
+    transform: none;
+  }
+
+  .dashboard-frame img {
+    min-height: 14rem;
+    aspect-ratio: 1.25 / 1;
+    object-fit: cover;
+    object-position: 21% top;
+  }
+
+  .product-status {
+    right: 0.75rem;
+  }
+
+  .proof-chips {
+    position: relative;
+    right: auto;
+    bottom: auto;
+    left: auto;
+    grid-template-columns: minmax(0, 1fr);
+    margin-top: 0.75rem;
+  }
+
+  .proof-chip {
+    background: var(--color-surface);
+  }
+
+  .proof-chip small {
+    white-space: normal;
+  }
+
+  .feature-grid,
+  .plan-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .feature-card {
+    min-height: 17rem;
+  }
+
+  .feature-card h3 {
+    margin-top: 2rem;
+  }
+
+  .video-shell {
+    border-width: 0.35rem;
+    border-radius: var(--radius-lg);
+  }
+
+  .journey-card {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .journey-visual {
+    min-height: 13rem;
+  }
+
+  .plan-card--featured {
+    transform: none;
+  }
+
+  .plan-card:last-child {
+    grid-column: auto;
+    width: 100%;
+  }
+
+  .faq-answer p {
+    padding-right: 0;
+  }
+
+  .contact-copy {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .contact-orbit {
+    display: none;
+  }
+
+  .form-row {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .form-actions .button {
+    width: 100%;
+  }
+
+  .closing-card {
+    border-radius: var(--radius-lg);
+  }
+
+  .closing-actions .button {
+    width: 100%;
+  }
+
+  .footer-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 2.5rem;
+  }
+
+  .footer-links {
+    gap: 2rem;
+  }
+
+  .footer-bottom {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 380px) {
+  .language-control select {
+    max-width: 7rem;
+  }
+
+  .header-demo {
+    width: 100%;
+    margin-left: 0;
+  }
+
+  .signal-list {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .signal-list > div {
+    display: flex;
+    align-items: baseline;
+    gap: 0.65rem;
+    padding: 0.6rem 0;
+    border-top: 1px solid var(--color-line);
+    border-left: 0;
+  }
+
+  .signal-list > div:first-child {
+    border-top: 0;
+  }
+
+  .footer-links {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
+
+@media (forced-colors: active) {
+  .hero h1 span {
+    background: none;
+    color: LinkText;
+  }
+
+  .scroll-progress {
+    display: none;
+  }
+
+  .brand-mark,
+  .feature-icon,
+  .journey-visual > span,
+  .contact-orbit-center,
+  .mural-empty > span {
+    border: 1px solid ButtonText;
+  }
+}

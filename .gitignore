@@ -5,3 +5,7 @@ dist/
 npm-debug.log*
 yarn-error.log*
 coverage/
+dist-subpath/
+playwright-report/
+test-results/
+*.log

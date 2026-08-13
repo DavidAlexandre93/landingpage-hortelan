@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://hortelan.vercel.app/sitemap.xml
+Sitemap: https://landingpage-hortelan.vercel.app/sitemap.xml

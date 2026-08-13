@@ -1,12 +1,15 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
-import { Analytics } from "@vercel/analytics/react";
-import AppRoutes from "./app/AppRoutes.jsx";
-import "./features/splash/styles/splash-screen.css";
+import { StrictMode } from "react";
+import { createRoot } from "react-dom/client";
+import App from "./app/App.jsx";
+import { normalizeLegacyRoute } from "./app/siteConfig.js";
+import { applyTheme, resolveInitialTheme } from "./features/preferences/theme.js";
+import "./styles/index.css";
 
-ReactDOM.createRoot(document.getElementById("root")).render(
-  <>
-    <AppRoutes />
-    <Analytics />
-  </>,
+normalizeLegacyRoute();
+applyTheme(resolveInitialTheme());
+
+createRoot(document.getElementById("root")).render(
+  <StrictMode>
+    <App />
+  </StrictMode>
 );

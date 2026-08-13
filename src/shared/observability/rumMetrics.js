@@ -34,9 +34,5 @@ export function trackMetric(name, details = {}) {
     }
   }
 
-  if (typeof console !== "undefined" && typeof console.debug === "function") {
-    console.debug("[hortelan-metric]", payload);
-  }
-
   return payload;
 }

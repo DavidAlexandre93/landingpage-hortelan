@@ -1,0 +1,32 @@
+{
+  "capturedAt": "2026-08-13T00:00:00-03:00",
+  "change": "complete-hortelan-quality-audit",
+  "baseline": {
+    "trackedNodeModulesFiles": 758,
+    "ciNodeMajor": 20,
+    "lintErrors": 30,
+    "unitTests": { "passed": 37, "failed": 4, "total": 41 },
+    "coverageScope": "utilities-only",
+    "build": {
+      "status": "passed",
+      "javascriptGzipKiB": 78.69,
+      "stylesheetGzipKiB": 7.13,
+      "artifactApproxMiB": 2.9,
+      "duplicatedAssetDirectory": true
+    },
+    "highOrCriticalAuditFindings": 0,
+    "strictOpenSpec": "passed"
+  },
+  "releaseCriteria": {
+    "trackedGeneratedFiles": 0,
+    "lintErrors": 0,
+    "failedUnitTests": 0,
+    "coveragePercent": { "statements": 90, "branches": 85, "functions": 85, "lines": 90 },
+    "artifactKiB": 650,
+    "initialTransferKiB": 320,
+    "largestMediaKiB": 250,
+    "seriousOrCriticalAxeViolations": 0,
+    "highOrCriticalAuditFindings": 0,
+    "browserProjects": ["chromium", "firefox", "webkit"]
+  }
+}

@@ -1,30 +1,21 @@
-import { cpSync, existsSync } from "node:fs";
-import { resolve } from "node:path";
+import react from "@vitejs/plugin-react";
 import { defineConfig } from "vite";
-
-function copyRootAssetsToDist() {
-  return {
-    name: "copy-root-assets-to-dist",
-    closeBundle() {
-      const sourceDir = resolve(__dirname, "Assets");
-      const targetDir = resolve(__dirname, "dist/Assets");
-
-      if (!existsSync(sourceDir)) {
-        return;
-      }
-
-      cpSync(sourceDir, targetDir, { recursive: true });
-    },
-  };
-}
 
 export default defineConfig({
   server: {
     host: "127.0.0.1",
     port: 5173,
-    strictPort: false,
+    strictPort: true,
     cors: false,
   },
-  plugins: [copyRootAssetsToDist()],
+  preview: {
+    host: "127.0.0.1",
+    port: 4173,
+    strictPort: true,
+  },
+  build: {
+    manifest: true,
+    target: "es2022",
+  },
+  plugins: [react()],
 });
-

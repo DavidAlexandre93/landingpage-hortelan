@@ -1,234 +1,68 @@
-Hortelan Agtech Ltda. — LandingPage
+# Hortelan AgTech — landing page
 
-Uma landing page leve, estática e responsiva para apresentar o Hortelan Agtech Ltda. (IoT + automação + comunidade). O projeto inclui versão particionada (HTML/CSS/JS) e versão minificada single-file, integração de fonte Inter, favicon e Open Graph gerados a partir da logo, seção “Sobre” com vídeo e um FAQ/Mural com persistência local.
+Experiência institucional da Hortelan construída com React 19 e Vite 8. O projeto apresenta a plataforma em português, inglês, espanhol e francês, oferece temas claro/escuro, contato por rascunho de e-mail e um mural privado mantido no navegador.
 
-✨ Destaques
+## Começar
 
-🎯 Design limpo com gradiente suave, cards e tipografia padronizada (Inter 400/600/800).
+Requisitos: Node `22.13.x` ou `24.x` e npm `10.x` ou `11.x`.
 
-🖼️ Hero com print real do dashboard (otimizado e responsivo).
+```bash
+npm ci
+npm run dev
+```
 
-🎬 Seção “Sobre” com embed do YouTube (16:9, lazy).
+O servidor local usa `http://127.0.0.1:5173`. Nenhum backend, token ou serviço de analytics é necessário.
 
-🌐 PT/EN/ES/FR com switch estilizado (segmentado com animação).
+## Arquitetura
 
-💬 FAQ/Mural (localStorage): publicar, remover e exportar JSON.
+- `src/app`: shell, metadados dinâmicos, links confiáveis e normalização de rotas legadas.
+- `src/features`: localização, preferências, marketing, contato e mural local.
+- `src/shared`: componentes sem estado e métricas locais, sem transmissão externa.
+- `src/styles`: tokens, base, componentes e regras responsivas.
+- `e2e`: aceitação em Chromium, Firefox e WebKit com Playwright e axe-core.
+- `openspec`: propostas, decisões, requisitos e tarefas do fluxo SDD.
+- `scripts`: contratos de engine/repositório, integridade do artefato e budgets.
 
-🧩 Estático de verdade: sem backend; ideal para GitHub Pages/Netlify/Vercel.
+O Vite controla todo o grafo de assets da aplicação. Arquivos públicos estáveis são limitados a metadados, logo compacta, `robots.txt`, sitemap e imagem social; o diretório-fonte `Assets` não é copiado integralmente para produção.
 
-🧠 SEO pronto: canonical, Open Graph, Twitter Card e JSON-LD.
-
-🖼️ Favicon multi-tamanhos e og-image gerados da sua logo.
-
-⚡ Performance: imagens lazy, preconnect de fontes, versão minificada.
-
-📁 Estrutura
-hortelan/
-├─ index.html            # versão particionada
-├─ styles.css            # estilos (tema claro/escuro via prefers-color-scheme)
-├─ app.js                # i18n + lógica do FAQ/Mural
-├─ index.min.html        # single-file minificado (CSS/JS inline)
-└─ Assets/
-   ├─ logo.png           # logo do Hortelan Agtech Ltda.
-   ├─ dashboard.png      # screenshot do dashboard
-   ├─ favicon.ico        # gerado (16–256px)
-   └─ og-image.jpg       # imagem Open Graph (1200×630)
-
-🚀 Como usar localmente
-Opção A — Servidor simples com Node
-cd hortelan
-npx serve . -p 5173
-# abra http://localhost:5173
-
-Opção B — Python
-cd hortelan
-python -m http.server 5173
-# abra http://localhost:5173
-
-
-Se quiser um único arquivo para subir em qualquer lugar, use index.min.html.
-
-🌍 Deploy
-
-Vercel: importe o repositório, framework “Other”, diretório raiz ., output padrão.
-
-Netlify: arraste a pasta para o drop; ou conecte o repo; build não é necessário.
-
-GitHub Pages: branch main → Settings → Pages → Deploy from a branch → / (root).
-
-🛠️ Personalização
-1) Branding e cores
-
-No styles.css, ajuste os tokens do tema:
-
-:root{
-  --bg:#ffffff; --fg:#0f172a; --muted:#475569; --line:#e2e8f0;
-  --brand:#059669; --brand-700:#047857; --brand-50:#ecfdf5;
-  --focus:#22c55e;
-}
-
-2) Logo, Dashboard e OG
-
-Substitua os arquivos em Assets/:
-
-logo.png (usado no JSON-LD e materiais sociais)
-
-dashboard.png (imagem do hero)
-
-og-image.jpg (thumbnail ao compartilhar)
-
-Favicon: já está em Assets/favicon.ico (gerado a partir da logo). Se trocar a logo, recomendo regenerar; posso automatizar via script se quiser.
-
-3) Fonte (Inter)
-
-O <head> já inclui:
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
-
-
-A pilha de fontes está padronizada em styles.css/index.html:
-
-body { font-family: 'Inter', Inter, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif; }
-
-4) Domínio e SEO
-
-No index.html:
-
-Canonical: https://hortelan.vercel.app (troque pelo seu domínio final)
-
-Open Graph: <meta property="og:image" content="assets/og-image.jpg">
-
-JSON-LD:
-
-{
-  "@context":"https://schema.org",
-  "@type":"Organization",
-  "name":"Hortelan Agtech Ltda.",
-  "url":"https://SEU-DOMINIO",
-  "logo":"assets/logo.png",
-  "sameAs":["https://www.linkedin.com/company/hortelan"]
-}
-
-5) Vídeo “Sobre”
-
-Arquivo: index.html → seção #about.
-Troque o src do iframe por outro vídeo se desejar.
-
-6) Switch PT/EN
-
-Atribuições data-i18n no HTML.
-
-Dicionário no app.js (dict.pt e dict.en).
-
-O seletor atualiza document.documentElement.lang e conteúdos.
-
-💬 FAQ/Mural (sem backend)
-
-Armazenamento: localStorage (cada navegador tem a sua “cópia”).
-
-Exportar: botão Exportar JSON baixa faq-hortelan.json.
-
-Limpar rápido: acesse a página com ?clearFaq no final da URL.
-
-Produção: para receber as mensagens em qualquer lugar, integre Formspree, Formspark ou crie um endpoint próprio. Posso entregar um patch pronto.
-
-♿ Acessibilidade
-
-Navegação por teclado (foco visível).
-
-“Pular para o conteúdo”.
-
-Cores com contraste alto no dark mode.
-
-Imagens com alt, vídeo com title e allowfullscreen.
-
-⚙️ Performance
-
-Imagens com loading="lazy".
-
-Fonte Inter com preconnect.
-
-Versão minificada (index.min.html) com CSS/JS inline para cargas rápidas.
-
-Layout responsivo com grid e aspect-ratio (vídeo 16:9).
-
-🧪 Troubleshooting
-
-Vídeo não aparece: verifique bloqueadores de terceiros (YouTube). O embed está correto (referrer policy restrita e allow completo).
-
-Switch PT/EN sem animação: confirme que a div.lang-switch não foi removida e que o app.js está carregando.
-
-Logo distorcida: mantenha proporção; preferir PNG/SVG com fundo transparente.
-
-📦 Scripts úteis
-
-Não há build step obrigatório; mas você pode servir localmente:
-
-# Node
-npx serve . -p 5173
-
-# Python
-python -m http.server 5173
-
-
-Se quiser um build “ultra” (minificar styles.css e app.js em arquivos separados), avise que eu gero um dist/ com hash de cache.
-
-🤝 Contribuindo
-
-Faça um fork
-
-Crie uma branch: feat/minhas-melhorias
-
-Commit: feat: ajusta cores e melhora FAQ
-
-PR!
-
-📄 Licença
-
-Sugestão: MIT. (Posso incluir o texto completo e o arquivo LICENSE se preferir.)
-
-📬 Contato
-
-E-mail: davidalexandrefernandes@outlook.com
-
-Demo: https://hortelan.vercel.app/dashboard/app
-
-## 🔁 Pipeline CI/CD (Frontend)
-
-O projeto possui uma esteira completa em GitHub Actions com separação entre validação (CI) e entrega (CD):
-
-- **CI (`.github/workflows/ci.yml`)**
-  - Instalação reprodutível com `npm ci`.
-  - **Lint** automatizado (checagem sintática + regras de higiene de código).
-  - **Formatação** com validação de padronização de arquivos críticos.
-  - **Testes unitários** com `node --test`.
-  - **Cobertura** com runner nativo do Node (`--experimental-test-coverage`) e thresholds mínimos.
-  - **Validação de build** com Vite.
-  - **Análise de vulnerabilidades** com `npm audit --audit-level=high`.
-  - Publicação de artefatos de build e cobertura.
-  - Job final de **Quality Gate** só conclui quando qualidade e segurança passam.
-
-- **CD (`.github/workflows/cd.yml`)**
-  - Empacota artefato uma única vez e reutiliza nos ambientes.
-  - **Deploy automatizado por ambiente** em branches dedicadas:
-    - `gh-pages-development` (development)
-    - `gh-pages-staging` (staging)
-    - `gh-pages` (production)
-  - **Regra de promoção para produção**:
-    - produção só executa para tags `v*`;
-    - passa obrigatoriamente por `deploy-development` e `deploy-staging` antes de `deploy-production`.
-
-### Scripts de qualidade locais
+## Qualidade e SDD
 
 ```bash
 npm run lint
 npm run format:check
-npm run test:unit
 npm run test:coverage
 npm run build:validate
 npm run security:audit
-npm run ci
+npm run test:e2e
+npm run sdd:check
+npm run spec:validate
+npm run release:gate
 ```
 
+`npm run release:gate` é o comando autoritativo: começa pela governança SDD e valida engines, higiene Git, OpenSpec estrito, lint, formatação, cobertura, builds raiz/subdiretório, referências do artefato, budgets, auditoria e navegadores reais. O Playwright também serve o artefato secundário em `/landingpage-hortelan/` e comprova seus assets, manifest e navegação interna.
+
+As mudanças são especificadas em `openspec/changes`. Antes de implementar, consulte a proposta, o design, os requisitos e as tarefas da mudança ativa; marque uma tarefa somente depois de produzir evidência reproduzível. O ciclo completo, fontes de verdade, tratamento de refatorações e política de arquivo estão no [manual SDD com OpenSpec](docs/SDD.md).
+
+## Contratos mensuráveis
+
+- Cobertura global mínima: 90% statements/lines e 85% branches/functions.
+- JavaScript inicial: até 150 KiB gzip; CSS: até 50 KiB gzip.
+- Transferência inicial: até 320 KiB; artefato total: até 650 KiB.
+- Maior mídia: até 250 KiB.
+- Viewports: 320, 375, 768, 1024, 1440 e 1920 CSS px sem overflow horizontal.
+- Acessibilidade: zero violações axe sérias ou críticas nos estados testados.
+- Segurança: zero vulnerabilidades de severidade alta/crítica no gate.
+
+## Acessibilidade, privacidade e segurança
+
+A interface possui skip link, foco visível, navegação móvel com Escape e restauração de foco, estados ao vivo, validação com foco no primeiro campo inválido, movimento reduzido e cores forçadas. Conteúdo semelhante a HTML no mural é tratado como texto por React.
+
+O mural usa apenas `localStorage`; o contato prepara um `mailto:` e nada é enviado automaticamente. O YouTube só é solicitado após ativação explícita. A aplicação não usa geolocalização por IP nem telemetria de terceiros.
+
+O host canônico aplica CSP, Permissions-Policy, Referrer-Policy, anti-framing e `nosniff` por cabeçalhos em `vercel.json`. Consulte [docs/QUALITY.md](docs/QUALITY.md) para matriz de suporte, deploy, rollback e limitações do GitHub Pages.
+
+## Entrega
+
+A CI testa os dois Node suportados e executa o gate completo no Node 24. A CD valida e empacota uma vez; development, staging e production baixam exatamente o mesmo artefato, sem rebuild. Produção só é promovida por tags `v*` e depende da promoção anterior.
+
+Licença: MIT. Contato: `davidalexandrefernandes@outlook.com`.

@@ -1,0 +1,63 @@
+:root {
+  color-scheme: light;
+  --color-canvas: #f8faf5;
+  --color-surface: #ffffff;
+  --color-surface-soft: #f0f5ed;
+  --color-surface-strong: #e4ecdf;
+  --color-ink: #10231d;
+  --color-ink-soft: #53645e;
+  --color-ink-faint: #5f6f69;
+  --color-line: #dce5d8;
+  --color-line-strong: #c7d4c2;
+  --color-primary: #0a6b55;
+  --color-primary-strong: #064c3d;
+  --color-primary-soft: #d8f2e4;
+  --color-lime: #b8df55;
+  --color-lime-strong: #8fbd28;
+  --color-coral: #ff795f;
+  --color-cyan: #55d6c2;
+  --color-dark: #09261f;
+  --color-dark-soft: #12372e;
+  --color-danger: #b83b32;
+  --shadow-sm: 0 8px 24px rgb(24 55 43 / 8%);
+  --shadow-md: 0 22px 70px rgb(24 55 43 / 14%);
+  --shadow-lg: 0 38px 100px rgb(8 54 43 / 20%);
+  --shadow-glow: 0 0 80px rgb(85 214 194 / 18%);
+  --radius-sm: 0.8rem;
+  --radius-md: 1.25rem;
+  --radius-lg: 2rem;
+  --radius-xl: 2.75rem;
+  --container: 1180px;
+  --header-height: 5.25rem;
+  --font-body:
+    "Aptos", "Segoe UI Variable", "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-display: "Aptos Display", "Segoe UI Variable Display", "Segoe UI", system-ui, sans-serif;
+  --transition: 180ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --color-canvas: #07130f;
+  --color-surface: #0c1d17;
+  --color-surface-soft: #10241d;
+  --color-surface-strong: #193129;
+  --color-ink: #edf7f1;
+  --color-ink-soft: #b2c5bc;
+  --color-ink-faint: #8ea39a;
+  --color-line: #234038;
+  --color-line-strong: #315149;
+  --color-primary: #63d5a6;
+  --color-primary-strong: #96e5c3;
+  --color-primary-soft: #123a2d;
+  --color-lime: #b9dd64;
+  --color-lime-strong: #cae985;
+  --color-coral: #ff8d75;
+  --color-cyan: #74ead6;
+  --color-dark: #04100c;
+  --color-dark-soft: #0b231b;
+  --color-danger: #ff8b80;
+  --shadow-sm: 0 8px 24px rgb(0 0 0 / 20%);
+  --shadow-md: 0 22px 70px rgb(0 0 0 / 32%);
+  --shadow-lg: 0 38px 100px rgb(0 0 0 / 45%);
+  --shadow-glow: 0 0 90px rgb(99 213 166 / 16%);
+}
