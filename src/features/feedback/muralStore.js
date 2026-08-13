@@ -1,6 +1,6 @@
 export const MURAL_STORAGE_KEY = "hortelan_faq";
 export const MURAL_LIMITS = Object.freeze({ name: 60, email: 120, message: 1000 });
-export const MURAL_TYPES = Object.freeze(["question", "praise", "idea"]);
+const MURAL_TYPES = Object.freeze(["question", "praise", "idea"]);
 
 function cleanText(value, maxLength) {
   return String(value ?? "")

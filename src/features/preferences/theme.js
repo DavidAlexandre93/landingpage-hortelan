@@ -1,5 +1,5 @@
 export const THEME_STORAGE_KEY = "hortelan_theme";
-export const THEMES = Object.freeze(["light", "dark"]);
+const THEMES = Object.freeze(["light", "dark"]);
 
 export function normalizeTheme(value) {
   return THEMES.includes(value) ? value : null;

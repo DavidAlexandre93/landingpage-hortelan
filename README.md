@@ -34,13 +34,14 @@ npm run test:coverage
 npm run build:validate
 npm run security:audit
 npm run test:e2e
+npm run sdd:check
 npm run spec:validate
 npm run release:gate
 ```
 
-`npm run release:gate` é o comando autoritativo: valida engines, higiene Git, OpenSpec estrito, lint, formatação, cobertura, builds raiz/subdiretório, referências do artefato, budgets, auditoria e navegadores reais.
+`npm run release:gate` é o comando autoritativo: começa pela governança SDD e valida engines, higiene Git, OpenSpec estrito, lint, formatação, cobertura, builds raiz/subdiretório, referências do artefato, budgets, auditoria e navegadores reais. O Playwright também serve o artefato secundário em `/landingpage-hortelan/` e comprova seus assets, manifest e navegação interna.
 
-As mudanças são especificadas em `openspec/changes`. Antes de implementar, consulte a proposta, o design, os requisitos e as tarefas da mudança ativa; marque uma tarefa somente depois de produzir evidência reproduzível.
+As mudanças são especificadas em `openspec/changes`. Antes de implementar, consulte a proposta, o design, os requisitos e as tarefas da mudança ativa; marque uma tarefa somente depois de produzir evidência reproduzível. O ciclo completo, fontes de verdade, tratamento de refatorações e política de arquivo estão no [manual SDD com OpenSpec](docs/SDD.md).
 
 ## Contratos mensuráveis
 

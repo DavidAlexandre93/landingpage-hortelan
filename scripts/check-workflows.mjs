@@ -51,6 +51,7 @@ export function validateWorkflowSource(source, filename = "workflow.yml") {
 export function validatePromotionWorkflow(workflow) {
   const issues = [];
   const jobs = workflow?.jobs ?? {};
+  const packaging = jobs["validate-package"];
   const production = jobs["deploy-production"];
   const staging = jobs["deploy-staging"];
   if (production?.needs !== "deploy-staging" || !String(production?.if).includes("refs/tags/v")) {
@@ -65,6 +66,20 @@ export function validatePromotionWorkflow(workflow) {
   );
   if (downloads.some((name) => name !== "frontend-dist-${{ github.sha }}")) {
     issues.push("Every environment must consume the immutable SHA artifact");
+  }
+
+  const upload = packaging?.steps?.find(({ uses }) => uses?.startsWith("actions/upload-artifact@"));
+  if (upload?.with?.path !== "dist-subpath") {
+    issues.push("The immutable Pages artifact must use the validated subpath build");
+  }
+
+  for (const job of deployJobs) {
+    const download = job.steps?.find(({ uses }) => uses?.startsWith("actions/download-artifact@"));
+    const deploy = job.steps?.find(({ uses }) => uses?.startsWith("peaceiris/actions-gh-pages@"));
+    if (download?.with?.path !== "dist-subpath" || deploy?.with?.publish_dir !== "dist-subpath") {
+      issues.push("Every Pages environment must publish the downloaded subpath artifact");
+      break;
+    }
   }
   return issues;
 }

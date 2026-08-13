@@ -69,7 +69,9 @@ export function validateMetadata(distDirectory) {
     /<script[^>]+type=["']application\/ld\+json["'][^>]*>([\s\S]*?)<\/script>/iu
   )?.[1];
 
-  if (canonical !== "https://hortelan.vercel.app/") issues.push("Canonical URL is missing or unexpected");
+  if (canonical !== "https://landingpage-hortelan.vercel.app/") {
+    issues.push("Canonical URL is missing or unexpected");
+  }
   if (ogUrl !== canonical) issues.push("Open Graph URL does not match the canonical URL");
   if (ogImage !== `${canonical}og-image.jpg` || twitterImage !== ogImage) {
     issues.push("Social image URLs do not match the canonical metadata asset");

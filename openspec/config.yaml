@@ -4,30 +4,43 @@ context: |
   Produto: landing page institucional da Hortelan AgTech Ltda.
   Stack: React, Vite, JavaScript ESM e CSS modular por responsabilidade.
   Idioma principal: pt-BR, com suporte a en, es e fr.
+  Arquitetura: aplicacao frontend estatica, sem backend, com estado local no
+  navegador e deploys imutaveis para Vercel e GitHub Pages.
   Diretrizes: mobile-first, WCAG 2.2 AA, progressive enhancement, sem backend,
-  dependencias enxutas, conteudo seguro no DOM e URLs externas centralizadas.
+  dependencias enxutas, Clean Code, SOLID proporcional, KISS, DRY, YAGNI,
+  conteudo seguro no DOM e URLs externas centralizadas.
   Qualidade obrigatoria: lint, formatacao, testes, cobertura, build, auditoria de
-  dependencias e validacao OpenSpec antes de uma mudanca ser considerada pronta.
+  dependencias, navegadores reais e validacao OpenSpec estrita antes de uma
+  mudanca ser considerada pronta.
 
 rules:
   proposal:
     - Declare explicit user-facing capabilities and breaking changes.
     - Keep scope aligned with the institutional marketing experience.
+    - Use skip_specs in .openspec.yaml only for pure refactors, tooling or docs with no observable behavior change.
   specs:
     - Use testable MUST/SHALL requirements and Given/When/Then scenarios.
     - Include responsive, accessibility and failure-state behavior when relevant.
+    - Keep one delta per declared capability and preserve the exact baseline capability path.
   design:
     - Record security, accessibility, performance and migration decisions.
     - Prefer one source of truth over duplicated static and React implementations.
+    - Resolve decisions that change scope before implementation; leave only safely deferrable open questions.
   tasks:
     - Every implementation group must include proportional automated verification.
     - End with OpenSpec validation and the full project quality gate.
+    - Mark a checkbox complete only after its implementation and reproducible evidence both exist.
 
 operations:
   apply:
     guidance:
       - Keep the active change tasks synchronized with implementation progress.
       - Preserve user-authored assets and unrelated repository changes.
+      - Keep behavior-preserving refactors minimal and remove code only with reference, build and test evidence.
+      - "For sync: reconcile overlapping active deltas, update the baseline through the official flow and validate all specifications strictly."
+      - "For validate: use openspec validate --all --strict and treat every structural or semantic failure as release-blocking."
   archive:
     guidance:
       - Archive only after all acceptance criteria and quality gates pass.
+      - Review baseline effects and unresolved overlapping changes before moving history.
+      - Keep archive as an explicit operation separate from implementation.

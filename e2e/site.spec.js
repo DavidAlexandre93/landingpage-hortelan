@@ -214,7 +214,10 @@ test.describe("Hortelan production experience", () => {
       expect(actionBox.height).toBeGreaterThanOrEqual(44);
       expect(actionBox.width).toBeGreaterThanOrEqual(44);
       await expect(page.locator(".dashboard-frame img")).toHaveJSProperty("complete", true);
-      expect(await page.locator(".dashboard-frame img").evaluate((image) => image.naturalWidth)).toBe(1851);
+      const dashboard = page.locator(".dashboard-frame img");
+      expect(await dashboard.evaluate((image) => image.naturalWidth)).toBe(1851);
+      const dashboardBox = await dashboard.boundingBox();
+      expect(dashboardBox.height).toBeLessThan(dashboardBox.width);
     });
   }
 

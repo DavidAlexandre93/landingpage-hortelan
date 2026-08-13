@@ -29,23 +29,71 @@ jobs:
   it("requires ordered promotion of one immutable artifact", () => {
     const valid = parse(`
 jobs:
+  validate-package:
+    steps:
+      - uses: actions/upload-artifact@v7
+        with: { name: "frontend-dist-\${{ github.sha }}", path: dist-subpath }
   deploy-development:
     steps:
       - uses: actions/download-artifact@v8
-        with: { name: "frontend-dist-\${{ github.sha }}" }
+        with: { name: "frontend-dist-\${{ github.sha }}", path: dist-subpath }
+      - uses: peaceiris/actions-gh-pages@v4
+        with: { publish_dir: dist-subpath }
   deploy-staging:
     needs: deploy-development
     steps:
       - uses: actions/download-artifact@v8
-        with: { name: "frontend-dist-\${{ github.sha }}" }
+        with: { name: "frontend-dist-\${{ github.sha }}", path: dist-subpath }
+      - uses: peaceiris/actions-gh-pages@v4
+        with: { publish_dir: dist-subpath }
   deploy-production:
     needs: deploy-staging
     if: startsWith(github.ref, 'refs/tags/v')
     steps:
       - uses: actions/download-artifact@v8
-        with: { name: "frontend-dist-\${{ github.sha }}" }
+        with: { name: "frontend-dist-\${{ github.sha }}", path: dist-subpath }
+      - uses: peaceiris/actions-gh-pages@v4
+        with: { publish_dir: dist-subpath }
 `);
     expect(validatePromotionWorkflow(valid)).toEqual([]);
-    expect(validatePromotionWorkflow({ jobs: {} })).toHaveLength(2);
+    expect(validatePromotionWorkflow({ jobs: {} })).toHaveLength(3);
+  });
+
+  it("rejects promotion of a root build to GitHub Pages", () => {
+    const invalid = parse(`
+jobs:
+  validate-package:
+    steps:
+      - uses: actions/upload-artifact@v7
+        with: { name: artifact, path: dist }
+  deploy-development:
+    steps:
+      - uses: actions/download-artifact@v8
+        with: { name: "frontend-dist-\${{ github.sha }}", path: dist }
+      - uses: peaceiris/actions-gh-pages@v4
+        with: { publish_dir: dist }
+  deploy-staging:
+    needs: deploy-development
+    steps:
+      - uses: actions/download-artifact@v8
+        with: { name: "frontend-dist-\${{ github.sha }}", path: dist }
+      - uses: peaceiris/actions-gh-pages@v4
+        with: { publish_dir: dist }
+  deploy-production:
+    needs: deploy-staging
+    if: startsWith(github.ref, 'refs/tags/v')
+    steps:
+      - uses: actions/download-artifact@v8
+        with: { name: "frontend-dist-\${{ github.sha }}", path: dist }
+      - uses: peaceiris/actions-gh-pages@v4
+        with: { publish_dir: dist }
+`);
+
+    expect(validatePromotionWorkflow(invalid)).toEqual(
+      expect.arrayContaining([
+        expect.stringContaining("subpath build"),
+        expect.stringContaining("subpath artifact"),
+      ])
+    );
   });
 });

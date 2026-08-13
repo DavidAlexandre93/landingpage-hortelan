@@ -129,7 +129,7 @@ export function WorkflowSection({ copy }) {
                 <h3>{item.title}</h3>
                 <p>{item.description}</p>
               </div>
-              <Icon name="arrow" aria-hidden="true" />
+              <Icon name="arrow" />
             </li>
           ))}
         </ol>

@@ -36,8 +36,8 @@ jobs:
       - name: Install locked dependencies
         run: npm ci --no-fund --ignore-scripts
 
-      - name: Verify engine and repository contracts
-        run: npm run engine:check && npm run repo:check
+      - name: Verify SDD, engine and repository contracts
+        run: npm run sdd:check && npm run engine:check && npm run repo:check
 
       - name: Unit compatibility
         run: npm run test:unit

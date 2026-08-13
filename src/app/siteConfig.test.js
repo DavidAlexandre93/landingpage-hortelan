@@ -1,11 +1,7 @@
 import { describe, expect, it, vi } from "vitest";
-import {
-  LEGACY_PATHS,
-  SITE_LINKS,
-  normalizeBasePath,
-  normalizeLegacyRoute,
-  withBasePath,
-} from "./siteConfig.js";
+import { SITE_LINKS, normalizeLegacyRoute } from "./siteConfig.js";
+
+const LEGACY_PATHS = ["/home", "/splash", "/index.min.html"];
 
 describe("site configuration", () => {
   it("keeps trusted external links on HTTPS", () => {
@@ -14,7 +10,11 @@ describe("site configuration", () => {
       .forEach(([, value]) => expect(value).toMatch(/^https:\/\//u));
   });
 
-  it.each([...LEGACY_PATHS])("normalizes legacy path %s", (pathname) => {
+  it("keeps the product demonstration on its trusted host", () => {
+    expect(SITE_LINKS.demo).toBe("https://hortelanagtech.vercel.app/");
+  });
+
+  it.each(LEGACY_PATHS)("normalizes legacy path %s", (pathname) => {
     const history = { replaceState: vi.fn() };
     normalizeLegacyRoute({ pathname, search: "?ref=old", hash: "#plans" }, history);
     expect(history.replaceState).toHaveBeenCalledWith({}, "", "/?ref=old#plans");
@@ -24,14 +24,6 @@ describe("site configuration", () => {
     const history = { replaceState: vi.fn() };
     normalizeLegacyRoute({ pathname: "/", search: "", hash: "" }, history);
     expect(history.replaceState).not.toHaveBeenCalled();
-  });
-
-  it("normalizes root and repository base paths", () => {
-    expect(normalizeBasePath("/")).toBe("/");
-    expect(normalizeBasePath("landingpage-hortelan")).toBe("/landingpage-hortelan/");
-    expect(normalizeBasePath("/landingpage-hortelan/")).toBe("/landingpage-hortelan/");
-    expect(withBasePath("img/logo.svg", "/landingpage-hortelan/")).toBe("/landingpage-hortelan/img/logo.svg");
-    expect(withBasePath("/img/logo.svg", "/")).toBe("/img/logo.svg");
   });
 
   it("normalizes legacy routes inside a repository subpath", () => {

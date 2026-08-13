@@ -28,17 +28,10 @@ const ICON_PATHS = {
   menu: ["M4 7h16", "M4 12h16", "M4 17h16"],
   moon: ["M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8Z"],
   sensor: ["M12 22a5 5 0 0 0 5-5c0-2.4-1.7-4.4-4-4.9V5a1 1 0 0 0-2 0v7.1A5 5 0 0 0 12 22Z", "M9 9h4"],
-  shield: ["M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z", "m9 12 2 2 4-4"],
   sparkles: [
     "m12 3 1.3 3.7L17 8l-3.7 1.3L12 13l-1.3-3.7L7 8l3.7-1.3L12 3Z",
     "m19 14 .8 2.2L22 17l-2.2.8L19 20l-.8-2.2L16 17l2.2-.8L19 14Z",
     "m5 13 1 3 3 1-3 1-1 3-1-3-3-1 3-1 1-3Z",
-  ],
-  store: [
-    "M3 9l2-5h14l2 5",
-    "M5 13v8h14v-8",
-    "M9 21v-6h6v6",
-    "M3 9a3 3 0 0 0 6 0 3 3 0 0 0 6 0 3 3 0 0 0 6 0",
   ],
   sun: [
     "M12 3v2",
@@ -55,7 +48,7 @@ const ICON_PATHS = {
   water: ["M12 2s6 7 6 12a6 6 0 0 1-12 0c0-5 6-12 6-12Z", "M9 15a3 3 0 0 0 3 3"],
 };
 
-export function Icon({ name, className = "", title }) {
+export function Icon({ name, className = "" }) {
   const paths = ICON_PATHS[name] ?? ICON_PATHS.leaf;
   return (
     <svg
@@ -66,11 +59,9 @@ export function Icon({ name, className = "", title }) {
       strokeWidth="1.8"
       strokeLinecap="round"
       strokeLinejoin="round"
-      aria-hidden={title ? undefined : "true"}
-      role={title ? "img" : undefined}
+      aria-hidden="true"
       focusable="false"
     >
-      {title ? <title>{title}</title> : null}
       {paths.map((path) => (
         <path key={path} d={path} />
       ))}

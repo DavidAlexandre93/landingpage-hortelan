@@ -1,5 +1,3 @@
-export const SITE_URL = "https://hortelan.vercel.app/";
-
 export const SITE_LINKS = Object.freeze({
   demo: "https://hortelanagtech.vercel.app/",
   docs: "https://docs.google.com/presentation/d/1BpvxRFnMVgAnUO2XeYl6Q6Yads8sWMLKgpi-b2snJ1Y/edit?slide=id.p#slide=id.p",
@@ -10,15 +8,11 @@ export const SITE_LINKS = Object.freeze({
   email: "davidalexandrefernandes@outlook.com",
 });
 
-export const LEGACY_PATHS = new Set(["/home", "/splash", "/index.min.html"]);
+const LEGACY_PATHS = new Set(["/home", "/splash", "/index.min.html"]);
 
-export function normalizeBasePath(baseUrl = import.meta.env.BASE_URL) {
+function normalizeBasePath(baseUrl) {
   const normalized = `/${String(baseUrl || "/").replace(/^\/+|\/+$/gu, "")}/`;
   return normalized === "//" ? "/" : normalized;
-}
-
-export function withBasePath(path, baseUrl = import.meta.env.BASE_URL) {
-  return `${normalizeBasePath(baseUrl)}${String(path).replace(/^\/+/, "")}`;
 }
 
 export function normalizeLegacyRoute(

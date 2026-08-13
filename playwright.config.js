@@ -17,15 +17,31 @@ export default defineConfig({
     trace: "retain-on-failure",
     video: "retain-on-failure",
   },
-  webServer: {
-    command: "npm run preview",
-    url: "http://127.0.0.1:4173",
-    reuseExistingServer: !process.env.CI,
-    timeout: 120_000,
-  },
+  webServer: [
+    {
+      command: "npm run preview",
+      url: "http://127.0.0.1:4173",
+      reuseExistingServer: !process.env.CI,
+      timeout: 120_000,
+    },
+    {
+      command: "npm run preview:subpath",
+      url: "http://127.0.0.1:4174/landingpage-hortelan/",
+      reuseExistingServer: !process.env.CI,
+      timeout: 120_000,
+    },
+  ],
   projects: [
-    { name: "chromium", use: { ...devices["Desktop Chrome"] } },
-    { name: "firefox", use: { ...devices["Desktop Firefox"] } },
-    { name: "webkit", use: { ...devices["Desktop Safari"] } },
+    { name: "chromium", testIgnore: /subpath\.spec\.js/u, use: { ...devices["Desktop Chrome"] } },
+    { name: "firefox", testIgnore: /subpath\.spec\.js/u, use: { ...devices["Desktop Firefox"] } },
+    { name: "webkit", testIgnore: /subpath\.spec\.js/u, use: { ...devices["Desktop Safari"] } },
+    {
+      name: "subpath-chromium",
+      testMatch: /subpath\.spec\.js/u,
+      use: {
+        ...devices["Desktop Chrome"],
+        baseURL: "http://127.0.0.1:4174/landingpage-hortelan/",
+      },
+    },
   ],
 });
