@@ -15,6 +15,12 @@ function normalizeBasePath(baseUrl) {
   return normalized === "//" ? "/" : normalized;
 }
 
+function normalizeRoutePath(value) {
+  const normalized = String(value || "/").replace(/\/+$|^\/+$/gu, "/");
+  const trimmed = normalized.replace(/^\/+|\/+$/gu, "");
+  return trimmed ? `/${trimmed}` : "/";
+}
+
 export function normalizeLegacyRoute(
   locationRef = window.location,
   historyRef = window.history,
@@ -23,8 +29,9 @@ export function normalizeLegacyRoute(
   const basePath = normalizeBasePath(baseUrl);
   const routePath =
     basePath === "/" || !locationRef.pathname.startsWith(basePath)
-      ? locationRef.pathname
-      : `/${locationRef.pathname.slice(basePath.length)}`;
+      ? normalizeRoutePath(locationRef.pathname)
+      : normalizeRoutePath(`/${locationRef.pathname.slice(basePath.length)}`);
+
   if (LEGACY_PATHS.has(routePath)) {
     historyRef.replaceState({}, "", `${basePath}${locationRef.search}${locationRef.hash}`);
   }

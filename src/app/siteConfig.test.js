@@ -20,6 +20,19 @@ describe("site configuration", () => {
     expect(history.replaceState).toHaveBeenCalledWith({}, "", "/?ref=old#plans");
   });
 
+  it("normalizes legacy paths with trailing slashes", () => {
+    const history = { replaceState: vi.fn() };
+    normalizeLegacyRoute({ pathname: "/home/", search: "?ref=old", hash: "#plans" }, history);
+    expect(history.replaceState).toHaveBeenCalledWith({}, "", "/?ref=old#plans");
+
+    normalizeLegacyRoute(
+      { pathname: "/landingpage-hortelan/splash/", search: "?ref=old", hash: "#plans" },
+      history,
+      "/landingpage-hortelan/"
+    );
+    expect(history.replaceState).toHaveBeenLastCalledWith({}, "", "/landingpage-hortelan/?ref=old#plans");
+  });
+
   it("leaves unknown paths untouched", () => {
     const history = { replaceState: vi.fn() };
     normalizeLegacyRoute({ pathname: "/", search: "", hash: "" }, history);
