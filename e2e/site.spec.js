@@ -72,6 +72,35 @@ test.describe("Hortelan production experience", () => {
     }
   });
 
+  test("loads the self-hosted variable type system", async ({ page }) => {
+    await page.goto("/");
+    await page.evaluate(() => document.fonts.ready);
+
+    const typography = await page.evaluate(() => {
+      const body = getComputedStyle(document.body);
+      const heading = getComputedStyle(document.querySelector(".hero h1"));
+      const fontResources = performance
+        .getEntriesByType("resource")
+        .map(({ name }) => name)
+        .filter((name) => name.endsWith(".woff2"));
+
+      return {
+        bodyFamily: body.fontFamily,
+        bodyWeight: body.fontWeight,
+        headingFamily: heading.fontFamily,
+        headingWeight: heading.fontWeight,
+        fontResources,
+      };
+    });
+
+    expect(typography.bodyFamily).toContain("Manrope Variable");
+    expect(typography.bodyWeight).toBe("450");
+    expect(typography.headingFamily).toContain("Sora Variable");
+    expect(typography.headingWeight).toBe("720");
+    expect(typography.fontResources).toHaveLength(2);
+    expect(typography.fontResources.every((url) => url.startsWith("http://127.0.0.1:4173"))).toBe(true);
+  });
+
   test("validates contact and keeps mural content local and inert", async ({ page }) => {
     await page.goto("/");
     const contact = page.locator("#contact");

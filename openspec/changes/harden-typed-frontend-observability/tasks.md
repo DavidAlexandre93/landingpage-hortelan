@@ -56,6 +56,7 @@
 - [ ] 7.3 Add restrained CSS scroll-driven enhancement to selected marketing sections without altering content order, layout stability, focus or no-JavaScript readability.
 - [ ] 7.4 Review every component and viewport for spacing, typography, contrast, affordance, state consistency, content density, CLS and high-zoom/long-translation resilience; resolve all accepted visual findings.
 - [ ] 7.5 Verify forced colors, 200%/400% zoom, reduced motion, keyboard focus, coarse pointer targets, portrait/landscape mobile and no-horizontal-overflow behavior for new and existing states.
+- [x] 7.6 Replace system-dependent typography with self-hosted variable display/body families, correct inherited font cascading, tune the responsive type hierarchy and verify loading, browser compatibility and artifact budgets.
 
 ## 8. Quality governance and project documentation
 

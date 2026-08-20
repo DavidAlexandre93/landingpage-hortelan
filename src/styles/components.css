@@ -60,14 +60,16 @@
 .brand-copy strong {
   font-family: var(--font-display);
   font-size: 1.12rem;
-  letter-spacing: -0.03em;
+  font-weight: 700;
+  letter-spacing: -0.045em;
 }
 
 .brand-copy small {
   margin-top: 0.3rem;
   color: var(--color-ink-soft);
   font-size: 0.68rem;
-  letter-spacing: 0.04em;
+  font-weight: 560;
+  letter-spacing: 0.015em;
 }
 
 .header-panel {
@@ -93,7 +95,8 @@
   padding-block: 0.75rem;
   color: var(--color-ink-soft);
   font-size: 0.91rem;
-  font-weight: 680;
+  font-weight: 620;
+  letter-spacing: -0.012em;
 }
 
 .primary-navigation a::after {
@@ -208,7 +211,8 @@
   margin-top: 1.65rem;
   color: var(--color-ink-soft);
   font-size: clamp(1.1rem, 1.8vw, 1.28rem);
-  line-height: 1.75;
+  letter-spacing: -0.018em;
+  line-height: 1.72;
 }
 
 .hero-actions,
@@ -260,8 +264,8 @@
 .signal-list dt {
   font-family: var(--font-display);
   font-size: 1.45rem;
-  font-weight: 760;
-  letter-spacing: -0.04em;
+  font-weight: 700;
+  letter-spacing: -0.05em;
 }
 
 .signal-list dd {
