@@ -20,6 +20,7 @@ body {
   font-weight: var(--font-weight-body);
   font-kerning: normal;
   font-variant-ligatures: common-ligatures contextual;
+  font-feature-settings: "cv11" 1, "ss01" 1;
   line-height: var(--leading-body);
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -119,19 +120,19 @@ h3 {
 
 h1 {
   font-size: clamp(2.7rem, 6vw, 5.35rem);
-  font-weight: 720;
-  letter-spacing: -0.06em;
+  font-weight: 700;
+  letter-spacing: -0.045em;
 }
 
 h2 {
   font-size: clamp(2.15rem, 4.4vw, 3.7rem);
-  letter-spacing: -0.052em;
+  letter-spacing: -0.04em;
 }
 
 h3 {
   font-size: clamp(1.25rem, 2vw, 1.55rem);
-  font-weight: 640;
-  letter-spacing: -0.035em;
+  font-weight: 620;
+  letter-spacing: -0.025em;
 }
 
 ::selection {
