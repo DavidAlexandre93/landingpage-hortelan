@@ -30,8 +30,15 @@
   --container: 1180px;
   --header-height: 5.25rem;
   --font-body:
-    "Aptos", "Segoe UI Variable", "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-  --font-display: "Aptos Display", "Segoe UI Variable Display", "Segoe UI", system-ui, sans-serif;
+    "Manrope Variable", "Manrope", "Segoe UI Variable", "Segoe UI", system-ui, -apple-system,
+    BlinkMacSystemFont, sans-serif;
+  --font-display:
+    "Sora Variable", "Sora", "Aptos Display", "Segoe UI Variable Display", "Segoe UI", system-ui, sans-serif;
+  --font-weight-body: 450;
+  --font-weight-display: 680;
+  --tracking-display: -0.045em;
+  --leading-body: 1.65;
+  --leading-display: 1.04;
   --transition: 180ms cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 

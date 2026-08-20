@@ -16,12 +16,13 @@ Nenhuma caixa da mudança original deve ser marcada por similaridade visual. Cad
 
 ## Mudanças ativas e ordem de reconciliação
 
-| Ordem | Mudança                             | Relação e estado esperado antes do archive                                                                                                       |
-| ----- | ----------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
-| 1     | `complete-hortelan-quality-audit`   | Garantias de qualidade já implementadas; revisar sync da baseline e evidência final sem descartar o histórico da modernização.                   |
-| 2     | `modernize-hortelan-landing`        | Origem funcional sobreposta; as tarefas 7.3 e 7.4 permanecem abertas até sync/archive explícito seguido do gate final.                           |
-| 3     | `formalize-openspec-sdd-governance` | Governança transversal; sincronizar `sdd-governance` somente após implementação, validação estrita e reconciliação das duas mudanças anteriores. |
-| 4     | `clean-codebase-maintenance`        | Refatoração interna com `skip_specs`; comprovar cada remoção e validar comportamento antes de revisão e archive explícito.                       |
+| Ordem | Mudança                               | Relação e estado esperado antes do archive                                                                                                       |
+| ----- | ------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
+| 1     | `complete-hortelan-quality-audit`     | Garantias de qualidade já implementadas; revisar sync da baseline e evidência final sem descartar o histórico da modernização.                   |
+| 2     | `modernize-hortelan-landing`          | Origem funcional sobreposta; as tarefas 7.3 e 7.4 permanecem abertas até sync/archive explícito seguido do gate final.                           |
+| 3     | `formalize-openspec-sdd-governance`   | Governança transversal; sincronizar `sdd-governance` somente após implementação, validação estrita e reconciliação das duas mudanças anteriores. |
+| 4     | `clean-codebase-maintenance`          | Refatoração interna com `skip_specs`; comprovar cada remoção e validar comportamento antes de revisão e archive explícito.                       |
+| 5     | `harden-typed-frontend-observability` | Evolução tipada e resiliente; aplicar após reconciliar os deltas anteriores e sincronizar seus requisitos mais estritos por último.              |
 
 As mudanças compartilham arquivos de tooling, documentação e release, embora suas capabilities delta sejam distintas. A ordem acima preserva a evolução funcional, depois suas garantias, o contrato do processo e por fim a manutenção interna. Nenhuma delas é arquivada automaticamente pelo verificador.
 
@@ -48,3 +49,16 @@ Refatorações de Clean Code, SOLID proporcional, KISS, DRY e YAGNI permanecem s
 | DRY/KISS/YAGNI   | nenhuma abstração ou dependência permanente adicionada                                                                                            | jscpd: 0 clones em 36 arquivos; análise de arquivos/exports/dependências: 0 achados |
 
 A remoção de assets-fonte totaliza 2.450.294 bytes. Como a mudança usa `skip_specs: true`, seu aceite é a preservação dos requisitos existentes comprovada pelo gate completo, não uma nova capability.
+
+## `harden-typed-frontend-observability`
+
+| Grupo                   | Capabilities/área principal                                      | Evidência planejada                                                           |
+| ----------------------- | ---------------------------------------------------------------- | ----------------------------------------------------------------------------- |
+| Contratos tipados       | `typed-runtime-contracts`, TypeScript estrito, DTOs e schemas    | typecheck negativo/positivo, testes de schema e configuração                  |
+| Observabilidade         | `structured-observability`, JSON, redaction e OTel opcional      | sinks determinísticos, canários de PII e zero request quando desabilitado     |
+| Resiliência             | `runtime-resilience`, Error Boundary e health local              | falhas injetadas, a11y, quatro locales e recuperação em navegadores reais     |
+| Qualidade e arquitetura | `frontend-quality`, boundaries, coverage e commits convencionais | gate com 100% do código executável, grafo/ciclos e commitlint                 |
+| Persistência local      | `community-feedback`, transações e idempotência                  | commit/abort/replay, migração legada, quota/negação e concorrência entre abas |
+| Test plan e entrega     | `test-plan.md`, tarefas 9–11                                     | matriz requisito→teste, visual regression, budgets, auditoria e release gate  |
+
+As sobreposições em `frontend-quality` e `community-feedback` com `modernize-hortelan-landing` são deliberadas e sequenciais: a modernização define a baseline funcional atual; esta mudança acrescenta contratos estritos, transações/idempotência e critérios de qualidade mais fortes. No sync/archive, a mudança anterior deve ser reconciliada primeiro e esta mudança por último, preservando os requisitos mais restritivos e executando o gate completo após cada etapa. A sobreposição não autoriza archive automático nem implementação antes da revisão dos artefatos.
