@@ -20,7 +20,9 @@ body {
   font-weight: var(--font-weight-body);
   font-kerning: normal;
   font-variant-ligatures: common-ligatures contextual;
-  font-feature-settings: "cv11" 1, "ss01" 1;
+  font-feature-settings:
+    "cv11" 1,
+    "ss01" 1;
   line-height: var(--leading-body);
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
