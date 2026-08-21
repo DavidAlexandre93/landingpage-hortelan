@@ -47,6 +47,8 @@ git push origin vX.Y.Z
 
 A tag dispara validação, gera os builds canônico e secundário uma única vez e promove exatamente o `dist-subpath` validado por development, staging e production no GitHub Pages. O `dist` permanece o artefato canônico para a Vercel. Para rollback, reverta o commit defeituoso, execute novamente o gate e publique uma nova tag de correção; para emergência, republique pela interface do provedor o deployment associado ao SHA saudável anterior. Nunca mova ou reutilize uma tag publicada.
 
+A Vercel deve usar `main` como Production Branch. Os branches `gh-pages-development`, `gh-pages-staging` e `gh-pages` contêm somente artefatos estáticos e não possuem `package.json`; o `ignoreCommand` em `vercel.json`, incluído no artefato publicado, cancela deployments acidentais nesses branches antes do build.
+
 ## Segurança de resposta
 
 `vercel.json` define CSP, Permissions-Policy, Referrer-Policy, `X-Content-Type-Options` e `X-Frame-Options`. O HTML mantém apenas metadados com suporte real no documento. O CSP libera frames exclusivamente para `youtube-nocookie.com`, e esse domínio não entra na rede inicial porque o iframe é criado somente depois do clique.

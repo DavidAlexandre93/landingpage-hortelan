@@ -38,6 +38,9 @@ jobs:
       - name: Run authoritative release gate
         run: npm run release:gate
 
+      - name: Include Vercel branch guard in artifact
+        run: cp vercel.json dist-subpath/vercel.json
+
       - name: Upload immutable deploy artifact
         uses: actions/upload-artifact@v7
         with:
